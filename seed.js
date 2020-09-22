@@ -333,6 +333,16 @@ const users= [
         address:"321 Main Street, New York, NY 10004"
         }
 ]
+
+const reviews = [
+    {
+        content:"This is awesome"
+    },
+    {
+        content:"This is terrible!"
+    }
+]
+
 const seed = async () => {
     try {
         await db.sync({force: true});
@@ -349,10 +359,26 @@ const seed = async () => {
             })
         )
 
+        const usersArr = await Promise.all(
+            users.map((user)=>{
+                return User.create(user)
+            })
+        )
+
+        const reviewsArr = await Promise.all(
+            reviews.map((review)=>{
+                return Review.create(review)
+            })
+        )
+
         booksArr.forEach((book,idx)=>{
             await book.setAuthors(authorsArr[idx]);
         })
 
+        reviewsArr.forEach((review,idx)=>{
+
+            await review.setUsers(usersArr[idx]);
+        })
 
 
     } catch (error) {
