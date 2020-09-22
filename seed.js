@@ -250,8 +250,73 @@ const books = [
 
 const authors = [
     {
+        firstName: "Terry",
+        lastName: "Hudson"
+    },
+    {
+        firstName: "Henry",
+        lastName: "Hudson"
+    },
+    {
+        firstName: "Judith",
+        lastName: "Amery"
+    },
+    {
+        firstName: "Larry",
+        lastName: "Hudson"
+    },
+    {
+        firstName: "Barry",
+        lastName: "Hudson"
+    },
+    {
+        firstName: "Gary",
+        lastName: "Hudson"
+    },
+    {
+        firstName: "Khalilah",
+        lastName: "Hudson"
+    },{
+        firstName: "Harris",
+        lastName: "Hudson"
+    },{
+        firstName: "Orlando",
+        lastName: "Hudson"
+    },{
+        firstName: "Celine",
+        lastName: "Hudson"
+    },{
+        firstName: "Mac",
+        lastName: "Hudson"
+    },{
+        firstName: "Hedra",
+        lastName: "Hudson"
+    },{
+        firstName: "Jess",
+        lastName: "Hudson"
+    },{
+        firstName: "Melody",
+        lastName: "Hudson"
+    },{
+        firstName: "Kathryn",
+        lastName: "Hudson"
+    },{
+        firstName: "Yoon",
+        lastName: "Hudson"
+    },{
+        firstName: "Sara",
+        lastName: "Hudson"
+    },{
+        firstName: "Alison",
+        lastName: "Hudson"
+    },{
+        firstName: "Elle",
+        lastName: "Hudson"
+    },{
+        firstName: "Mary",
+        lastName: "Hudson"
+    },
 
-    }
 ]
 
 const seed = async () => {
@@ -263,6 +328,16 @@ const seed = async () => {
                 return Book.create(book)
             })
         )
+
+        const authorsArr = await Promise.all(
+            authors.map((author)=>{
+                return Author.create(author)
+            })
+        )
+
+        booksArr.forEach((book,idx)=>{
+            await book.setAuthors(authorsArr[idx]);
+        })
 
 
 
