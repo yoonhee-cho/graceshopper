@@ -124,12 +124,126 @@ const books = [
 
     },
 
-    
 
-    
-    
+    {
+        title: `Oxford International Primary Science: Workbook 2`,
+        shortdDescription: 'additional practice materials for classroom or home study',
+        category: 'Science',
+        ISBN: '978-0-19-837643-9',
+        Pages: 96,
+        imageUrl: 'https://global.oup.com/education/covers/oxed/medium/9780198376439.jpg',
+        price: 6.99,
+        qty: 10, 
 
+    },
 
+    {
+        title: `Oxford International Primary Science: Workbook 4`,
+        shortdDescription: 'additional practice materials for classroom or home study',
+        category: 'Science',
+        ISBN: '978-0-19-837645-3',
+        Pages: 96,
+        imageUrl: 'https://global.oup.com/education/covers/oxed/medium/9780198376453.jpg',
+        price: 6.99,
+        qty: 10, 
+
+    },
+
+    {
+        title: `Oxford International Primary Science: Workbook 6`,
+        shortdDescription: 'additional practice materials for classroom or home study',
+        category: 'Science',
+        ISBN: '978-0-19-837647-7',
+        Pages: 96,
+        imageUrl: 'https://global.oup.com/education/covers/oxed/medium/9780198376477.jpg',
+        price: 7.50,
+        qty: 10, 
+
+    },
+
+    {
+        title: `Oxford International Primary Science: Workbook 5`,
+        shortdDescription: 'additional practice materials for classroom or home study',
+        category: 'Science',
+        ISBN: '978-0-19-837646-0',
+        Pages: 96,
+        imageUrl: 'https://global.oup.com/education/covers/oxed/medium/9780198376460.jpg',
+        price: 7.50,
+        qty: 10, 
+
+    },
+
+    {
+        title: `Oxford International Primary Science: Workbook 1`,
+        shortdDescription: 'additional practice materials for classroom or home study',
+        category: 'Science',
+        ISBN: '978-0-19-837642-2',
+        Pages: 96,
+        imageUrl: 'https://global.oup.com/education/covers/oxed/medium/9780198376422.jpg',
+        price: 6.99,
+        qty: 10, 
+
+    },
+
+    {
+        title: `Oxford International Primary Science: Workbook 3`,
+        shortdDescription: 'additional practice materials for classroom or home study',
+        category: 'Science',
+        ISBN: '978-0-19-837644-6',
+        Pages: 96,
+        imageUrl: 'https://global.oup.com/education/covers/oxed/medium/9780198376446.jpg',
+        price: 6.99,
+        qty: 10, 
+
+    },
+
+    {
+        title: `Oxford International Primary Science: Assessment`,
+        shortdDescription: 'The complete test kit for Oxford International Primary Science',
+        category: 'Science',
+        ISBN: '978-0-19-836533-4',
+        Pages: 500,
+        imageUrl: 'https://global.oup.com/education/covers/oxed/medium/9780198365334.jpg',
+        price: 71.99,
+        qty: 10, 
+
+    },
+
+    {
+        title: `Oxford International Primary Science: Digital Resource Pack 4`,
+        shortdDescription: 'An enquiry-based approach to primary science',
+        category: 'Science',
+        ISBN: '978-0-19-839492-1',
+        Pages: 500,
+        imageUrl: 'https://global.oup.com/education/covers/oxed/medium/9780198394921.jpg',
+        price: 112.99,
+        qty: 10, 
+
+    },
+
+    {
+        title: `Oxford International Primary Science: Digital Resource Pack 1`,
+        shortdDescription: 'An enquiry-based approach to primary science',
+        category: 'Science',
+        ISBN: '978-0-19-839489-1',
+        Pages: 500,
+        imageUrl: 'https://global.oup.com/education/covers/oxed/medium/9780198394891.jpg',
+        price: 112.99,
+        qty: 10, 
+
+    },
+
+    {
+        title: `Oxford International Primary Science: Digital Resource Pack 2`,
+        shortdDescription: 'An enquiry-based approach to primary science',
+        category: 'Science',
+        ISBN: '978-0-19-839490',
+        Pages: 500,
+        imageUrl: 'https://global.oup.com/education/covers/oxed/medium/9780198394907.jpg',
+        price: 112.99,
+        qty: 10, 
+
+    },
     
 
 ]
@@ -144,7 +258,11 @@ const seed = async () => {
     try {
         await db.sync({force: true});
 
-        const 
+        const booksArr = await Promise.all(
+            books.map((book) => {
+                return Book.create(book)
+            })
+        )
     
         
         
