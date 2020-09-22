@@ -14,7 +14,8 @@ const User = db.define('user', {
     // This is a hack to get around Sequelize's lack of a "private" option.
     get() {
       return () => this.getDataValue('password')
-    }
+    },
+    allowNull: false
   },
   salt: {
     type: Sequelize.STRING,
@@ -25,6 +26,9 @@ const User = db.define('user', {
     }
   },
   googleId: {
+    type: Sequelize.STRING
+  },
+  address: {
     type: Sequelize.STRING
   }
 })
