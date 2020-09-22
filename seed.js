@@ -3,7 +3,7 @@ const test1;
 const books = [
     {
         title: `Oxford International Primary Maths: Stage 4: Teacher's Guide 4`,
-        shortdDescription: 'A problem solving approach to primary maths',
+        shortDescription: 'A problem solving approach to primary maths',
         category: 'Math',
         ISBN: '978-0-19-841803-0',
         Pages: 256,
@@ -14,7 +14,7 @@ const books = [
     },
     {
         title: `Oxford International Primary Maths: Stage 5: Teacher's Guide 5`,
-        shortdDescription: 'A problem solving approach to primary maths',
+        shortDescription: 'A problem solving approach to primary maths',
         category: 'Math',
         ISBN: '978-0-19-841805-4',
         Pages: 272,
@@ -27,7 +27,7 @@ const books = [
 
 {
         title: `Oxford International Primary Maths: Stage 6: Teacher's Guide 6`,
-        shortdDescription: 'A problem solving approach to primary maths',
+        shortDescription: 'A problem solving approach to primary maths',
         category: 'Math',
         ISBN: '978-0-19-841807-8',
         Pages: 224,
@@ -39,7 +39,7 @@ const books = [
 
     {
         title: `Oxford International Primary Maths: Stage 1: Teacher's Guide 1`,
-        shortdDescription: 'A problem solving approach to primary maths',
+        shortDescription: 'A problem solving approach to primary maths',
         category: 'Math',
         ISBN: '978-0-19-841796-5',
         Pages: 232,
@@ -51,7 +51,7 @@ const books = [
 
     {
         title: `Oxford International Primary Maths: Stage 2: Teacher's Guide 2`,
-        shortdDescription: 'A problem solving approach to primary maths',
+        shortDescription: 'A problem solving approach to primary maths',
         category: 'Math',
         ISBN: '978-0-19-841799-6',
         Pages: 256,
@@ -63,7 +63,7 @@ const books = [
 
     {
         title: `Oxford International Primary Maths: Stage 3: Teacher's Guide 3`,
-        shortdDescription: 'A problem solving approach to primary maths',
+        shortDescription: 'A problem solving approach to primary maths',
         category: 'Math',
         ISBN: '978-0-19-841801-6',
         Pages: 184,
@@ -75,7 +75,7 @@ const books = [
 
     {
         title: `Oxford International Primary Maths: Grade 4: Workbook 4`,
-        shortdDescription: 'additional practice materials for classroom or home study',
+        shortDescription: 'additional practice materials for classroom or home study',
         category: 'Math',
         ISBN: '978-0-19-836529-7',
         Pages: 96,
@@ -88,7 +88,7 @@ const books = [
 
     {
         title: `Oxford International Primary Maths: Grade 3: Workbook 3`,
-        shortdDescription: 'additional practice materials for classroom or home study',
+        shortDescription: 'additional practice materials for classroom or home study',
         category: 'Math',
         ISBN: '978-0-19-836528-0',
         Pages: 88,
@@ -101,7 +101,7 @@ const books = [
 
     {
         title: `Oxford International Primary Maths: Grade 5: Workbook 5`,
-        shortdDescription: 'additional practice materials for classroom or home study',
+        shortDescription: 'additional practice materials for classroom or home study',
         category: 'Math',
         ISBN: '978-0-19-836530-3',
         Pages: 96,
@@ -114,7 +114,7 @@ const books = [
 
     {
         title: `Oxford International Primary Maths: Grade 1: Workbook 1`,
-        shortdDescription: 'additional practice materials for classroom or home study',
+        shortDescription: 'additional practice materials for classroom or home study',
         category: 'Math',
         ISBN: '978-0-19-836526-6',
         Pages: 96,
@@ -127,7 +127,7 @@ const books = [
 
     {
         title: `Oxford International Primary Science: Workbook 2`,
-        shortdDescription: 'additional practice materials for classroom or home study',
+        shortDescription: 'additional practice materials for classroom or home study',
         category: 'Science',
         ISBN: '978-0-19-837643-9',
         Pages: 96,
@@ -139,7 +139,7 @@ const books = [
 
     {
         title: `Oxford International Primary Science: Workbook 4`,
-        shortdDescription: 'additional practice materials for classroom or home study',
+        shortDescription: 'additional practice materials for classroom or home study',
         category: 'Science',
         ISBN: '978-0-19-837645-3',
         Pages: 96,
@@ -151,7 +151,7 @@ const books = [
 
     {
         title: `Oxford International Primary Science: Workbook 6`,
-        shortdDescription: 'additional practice materials for classroom or home study',
+        shortDescription: 'additional practice materials for classroom or home study',
         category: 'Science',
         ISBN: '978-0-19-837647-7',
         Pages: 96,
@@ -163,7 +163,7 @@ const books = [
 
     {
         title: `Oxford International Primary Science: Workbook 5`,
-        shortdDescription: 'additional practice materials for classroom or home study',
+        shortDescription: 'additional practice materials for classroom or home study',
         category: 'Science',
         ISBN: '978-0-19-837646-0',
         Pages: 96,
@@ -175,7 +175,7 @@ const books = [
 
     {
         title: `Oxford International Primary Science: Workbook 1`,
-        shortdDescription: 'additional practice materials for classroom or home study',
+        shortDescription: 'additional practice materials for classroom or home study',
         category: 'Science',
         ISBN: '978-0-19-837642-2',
         Pages: 96,
@@ -187,7 +187,7 @@ const books = [
 
     {
         title: `Oxford International Primary Science: Workbook 3`,
-        shortdDescription: 'additional practice materials for classroom or home study',
+        shortDescription: 'additional practice materials for classroom or home study',
         category: 'Science',
         ISBN: '978-0-19-837644-6',
         Pages: 96,
@@ -199,7 +199,7 @@ const books = [
 
     {
         title: `Oxford International Primary Science: Assessment`,
-        shortdDescription: 'The complete test kit for Oxford International Primary Science',
+        shortDescription: 'The complete test kit for Oxford International Primary Science',
         category: 'Science',
         ISBN: '978-0-19-836533-4',
         Pages: 500,
@@ -211,7 +211,7 @@ const books = [
 
     {
         title: `Oxford International Primary Science: Digital Resource Pack 4`,
-        shortdDescription: 'An enquiry-based approach to primary science',
+        shortDescription: 'An enquiry-based approach to primary science',
         category: 'Science',
         ISBN: '978-0-19-839492-1',
         Pages: 500,
@@ -223,7 +223,7 @@ const books = [
 
     {
         title: `Oxford International Primary Science: Digital Resource Pack 1`,
-        shortdDescription: 'An enquiry-based approach to primary science',
+        shortDescription: 'An enquiry-based approach to primary science',
         category: 'Science',
         ISBN: '978-0-19-839489-1',
         Pages: 500,
@@ -235,7 +235,7 @@ const books = [
 
     {
         title: `Oxford International Primary Science: Digital Resource Pack 2`,
-        shortdDescription: 'An enquiry-based approach to primary science',
+        shortDescription: 'An enquiry-based approach to primary science',
         category: 'Science',
         ISBN: '978-0-19-839490',
         Pages: 500,
@@ -319,6 +319,20 @@ const authors = [
 
 ]
 
+const users= [
+    {
+    email: "123@gmail.com",
+    password:"123456",
+    salt: "1233456",
+    address:"123 Main Street, New York, NY 10004"
+    },
+    {
+        email: "321@gmail.com",
+        password:"123456",
+        salt: "1233456",
+        address:"321 Main Street, New York, NY 10004"
+        }
+]
 const seed = async () => {
     try {
         await db.sync({force: true});
