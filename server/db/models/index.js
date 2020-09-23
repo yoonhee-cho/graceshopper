@@ -1,6 +1,7 @@
 const User = require('../models/user')
 const Book = require('../models/book')
 const Author = require('../models/author')
+const Cart = require('../models/cart')
 // const Review = require('../models/review')
 
 // book table
@@ -9,6 +10,10 @@ const Author = require('../models/author')
 
 Author.belongsToMany(Book, {through: 'Book_Author'})
 Book.belongsToMany(Author, {through: 'Book_Author'})
+
+// cart through table
+Book.belongsToMany(User, {through: Cart})
+User.belongsToMany(Book, {through: Cart})
 
 //  review table
 // User.hasMany(Review)
@@ -20,5 +25,6 @@ Book.belongsToMany(Author, {through: 'Book_Author'})
 module.exports = {
   User,
   Book,
-  Author
+  Author,
+  Cart
 }
