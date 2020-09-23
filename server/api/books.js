@@ -2,6 +2,7 @@ const router = require('express').Router()
 const {Book, Author} = require('../db/models')
 module.exports = router
 
+//GET api/books
 router.get('/', async (req, res, next) => {
   try {
     const books = await Book.findAll({

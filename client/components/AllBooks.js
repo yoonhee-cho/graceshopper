@@ -13,6 +13,7 @@ export class AllBooks extends React.Component {
 
   render() {
     const books = this.props.books
+
     console.log(books)
     return (
       <div className="books-list">
@@ -22,6 +23,15 @@ export class AllBooks extends React.Component {
             <div key={book.id}>
               <li className="single-book">
                 <h4>{book.title}</h4>
+                <div>
+                  by{' '}
+                  {book.authors.map(
+                    (author, idx) =>
+                      idx === book.authors.length - 1
+                        ? `${author.firstName} ${author.lastName} `
+                        : `${author.firstName} ${author.lastName} , `
+                  )}
+                </div>
                 <div>
                   <i>{book.shortDescription}</i>
                 </div>
