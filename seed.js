@@ -408,6 +408,15 @@ const seed = async () => {
 
     await book4.addAuthors([author4, author3])
 
+    const user1 = usersArr[0]
+    const user2 = usersArr[1]
+
+    await user1.addBooks(book1)
+    await user2.addBooks([book1, book2, book3, book4])
+
+    // setBooks will overwrite
+    // await user2.setBooks([book3, book4])
+
     // booksArr.map(async (book,idx)=>{
     //     try {
     //         console.log(Object.keys(Book.prototype));
