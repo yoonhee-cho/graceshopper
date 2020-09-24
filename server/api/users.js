@@ -46,8 +46,22 @@ router.get('/:userId/cart', async (req, res, next) => {
 
 router.post('/:userId/cart', async (req, res, next) => {
   try {
-    const bookId = req.body
-    const newBookInCart = await new BookInOrder(bookId)
+    const bookId = req.body.id
+    const userId = req.params.userId
+
+    const orderId = await Order.findOrCreate({
+      where: {
+        userId: userId,
+        status: 'in progress'
+      },
+      attributes: ['id']
+    })
+    // console.log('LOOK HERE: ', orderId[0].id)
+    const newBookInCart = await BookInOrder.create({
+      bookId: bookId,
+      orderId: orderId[0].id
+    })
+    // console.log('this is newBookInCart: ', newBookInCart)
     await res.send(newBookInCart)
   } catch (err) {
     next(err)

@@ -1,8 +1,9 @@
 import React from 'react'
+import {addBookToCart} from '../store/cart'
 
-// import {connect} from 'react-redux'
+import {connect} from 'react-redux'
 
-export default class AddToCart extends React.Component {
+export class AddToCart extends React.Component {
   constructor(props) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
@@ -12,7 +13,8 @@ export default class AddToCart extends React.Component {
 
   handleClick(event) {
     event.preventDefault()
-    console.log('hello i got clicked')
+    const book = this.props.book
+    this.props.addBook(book)
   }
 
   render() {
@@ -25,3 +27,15 @@ export default class AddToCart extends React.Component {
     )
   }
 }
+
+// const mapStateToProps = state => {
+//   return {}
+// }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addBook: bookObj => dispatch(addBookToCart(bookObj))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(AddToCart)
