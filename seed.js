@@ -411,8 +411,8 @@ const seed = async () => {
     const user1 = usersArr[0]
     const user2 = usersArr[1]
 
-    await user1.addBooks(book1)
-    await user2.addBooks([book1, book2, book3, book4])
+    // await user1.addBooks(book1)
+    // await user2.addBooks([book1, book2, book3, book4])
 
     // setBooks will overwrite
     // await user2.setBooks([book3, book4])
