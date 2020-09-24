@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User, Book, Cart} = require('../db/models')
+const {User, Book, BookInOrder, Order} = require('../db/models')
 module.exports = router
 
 //GET api/:userId/cart
@@ -7,16 +7,26 @@ router.get('/:userId/cart', async (req, res, next) => {
   try {
     const userIdFromLink = req.params.userId
 
-    const findBooksInCart = await Cart.findAll({
+    const orderIdFromOrders = await Order.findAll({
       where: {
-        userId: userIdFromLink
+        userId: userIdFromLink,
+        status: 'in progress'
       },
+
+      attributes: ['id']
+    })
+
+    const findBooksIdInCart = await BookInOrder.findAll({
+      where: {
+        orderId: orderIdFromOrders[0].id
+      },
+
       attributes: ['bookId']
     })
 
     const getBooks = async () => {
       return Promise.all(
-        findBooksInCart.map(async book => {
+        findBooksIdInCart.map(async book => {
           const bookId = book.bookId
           const bookGetter = await Book.findByPk(bookId)
           return bookGetter

@@ -10,7 +10,7 @@ const books = [
     Pages: 256,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198418030.jpg',
-    price: 31.99,
+    price: 3199,
     qty: 10
   },
   {
@@ -21,7 +21,7 @@ const books = [
     Pages: 272,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198418054.jpg',
-    price: 30.99,
+    price: 3099,
     qty: 10
   },
 
@@ -33,7 +33,7 @@ const books = [
     Pages: 224,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198418078.jpg',
-    price: 30.99,
+    price: 3099,
     qty: 10
   },
 
@@ -45,7 +45,7 @@ const books = [
     Pages: 232,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198417965.jpg',
-    price: 30.99,
+    price: 3099,
     qty: 10
   },
 
@@ -57,7 +57,7 @@ const books = [
     Pages: 256,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198417996.jpg',
-    price: 30.99,
+    price: 3099,
     qty: 10
   },
 
@@ -69,7 +69,7 @@ const books = [
     Pages: 184,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198418016.jpg',
-    price: 33.99,
+    price: 3399,
     qty: 10
   },
 
@@ -82,7 +82,7 @@ const books = [
     Pages: 96,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198365297.jpg',
-    price: 7.99,
+    price: 799,
     qty: 10
   },
 
@@ -95,7 +95,7 @@ const books = [
     Pages: 88,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198365280.jpg',
-    price: 7.99,
+    price: 799,
     qty: 10
   },
 
@@ -108,7 +108,7 @@ const books = [
     Pages: 96,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198365303.jpg',
-    price: 8.99,
+    price: 899,
     qty: 10
   },
 
@@ -121,7 +121,7 @@ const books = [
     Pages: 96,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198365266.jpg',
-    price: 6.99,
+    price: 699,
     qty: 10
   },
 
@@ -134,7 +134,7 @@ const books = [
     Pages: 96,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198376439.jpg',
-    price: 6.99,
+    price: 699,
     qty: 10
   },
 
@@ -147,7 +147,7 @@ const books = [
     Pages: 96,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198376453.jpg',
-    price: 6.99,
+    price: 699,
     qty: 10
   },
 
@@ -160,7 +160,7 @@ const books = [
     Pages: 96,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198376477.jpg',
-    price: 7.5,
+    price: 75,
     qty: 10
   },
 
@@ -173,7 +173,7 @@ const books = [
     Pages: 96,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198376460.jpg',
-    price: 7.5,
+    price: 75,
     qty: 10
   },
 
@@ -186,7 +186,7 @@ const books = [
     Pages: 96,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198376422.jpg',
-    price: 6.99,
+    price: 699,
     qty: 10
   },
 
@@ -199,7 +199,7 @@ const books = [
     Pages: 96,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198376446.jpg',
-    price: 6.99,
+    price: 699,
     qty: 10
   },
 
@@ -212,7 +212,7 @@ const books = [
     Pages: 500,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198365334.jpg',
-    price: 71.99,
+    price: 7199,
     qty: 10
   },
 
@@ -224,7 +224,7 @@ const books = [
     Pages: 500,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198394921.jpg',
-    price: 112.99,
+    price: 11299,
     qty: 10
   },
 
@@ -236,7 +236,7 @@ const books = [
     Pages: 500,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198394891.jpg',
-    price: 112.99,
+    price: 11299,
     qty: 10
   },
 
@@ -248,7 +248,7 @@ const books = [
     Pages: 500,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198394907.jpg',
-    price: 112.99,
+    price: 11299,
     qty: 10
   }
 ]

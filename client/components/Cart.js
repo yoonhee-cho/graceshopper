@@ -33,7 +33,7 @@ export class Cart extends React.Component {
                     <i>{book.shortDescription}</i>
                   </div>
                   <div>Genre:{book.category}</div>
-                  <div>Price: {book.price}</div>
+                  <div>Price: {book.price / 100}</div>
 
                   <img src={book.imageUrl} />
                 </li>
