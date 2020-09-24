@@ -41,3 +41,15 @@ router.get('/:userId/cart', async (req, res, next) => {
     next(err)
   }
 })
+
+//Post Route /api/users/:userId/cart
+
+router.post('/:userId/cart', async (req, res, next) => {
+  try {
+    const bookId = req.body
+    const newBookInCart = await new BookInOrder(bookId)
+    await res.send(newBookInCart)
+  } catch (err) {
+    next(err)
+  }
+})

@@ -3,12 +3,20 @@ import thunkMiddleware from 'redux-thunk'
 
 //action constant
 const GET_CART = 'GET_CART'
+const ADD_BOOK = 'ADD_BOOK'
 
 //action creator
 const getCart = cart => {
   return {
     type: GET_CART,
     cart: cart
+  }
+}
+
+const addBook = book => {
+  return {
+    type: ADD_BOOK,
+    book: book
   }
 }
 
@@ -26,12 +34,27 @@ export function fetchCart(userId) {
     }
   }
 }
+/// need to write a post route to a users cart
+
+export function addBookToCart(bookId, userId) {
+  return async dispatch => {
+    try {
+      // const book = axios.get(//book by bookId//)
+      await axios.post(`/api/users/${userId}/cart`, bookId)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
 //initial State
 const initialState = []
 //reducer func
 
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
+    case ADD_BOOK:
+      const bookToAdd = action.book
+      return [...state, bookToAdd]
     case GET_CART:
       return action.cart
     default:
