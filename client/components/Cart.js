@@ -26,24 +26,56 @@ export class Cart extends React.Component {
     this.setState({
       quantities: quantityInCart
     })
-    console.log(this.state.quantities, 'QUANTITIES')
   }
 
-  handleClick(event) {
-    event.preventDefault()
-    const currentQty = this.state.quantities
-    console.log(currentQty)
-    this.setState({quantity: currentQty + 1})
+  handleClick(bookId, event) {
+    let index = 0
+
+    this.state.quantities.map((item, idx) => {
+      if (item[0].bookId === bookId) {
+        index = idx
+      }
+    })
+
+    const currentQuantitiesObject = this.state.quantities[index]
+    const restOfQuantities = this.state.quantities.slice()
+
+    restOfQuantities.splice(index, 1)
+    currentQuantitiesObject[0].quantity++
+    restOfQuantities.push(currentQuantitiesObject)
+
+    this.setState({
+      quantities: restOfQuantities
+    })
   }
 
-  handleClickMinus(event) {
-    event.preventDefault()
-    const currentQty = this.state.quantities
-    if (currentQty > 0) {
-      this.setState({quantity: currentQty - 1})
+  handleClickMinus(bookId, event) {
+    let index = 0
+
+    this.state.quantities.map((item, idx) => {
+      console.log(item[0].bookId, idx, bookId)
+      if (item[0].bookId === bookId) {
+        index = idx
+      }
+    })
+
+    const currentQuantitiesObject = this.state.quantities[index]
+
+    const restOfQuantities = this.state.quantities.slice()
+
+    restOfQuantities.splice(index, 1)
+
+    if (currentQuantitiesObject[0].quantity < 1) {
+      currentQuantitiesObject[0].quantity = 0
     } else {
-      this.setState({quantity: 0})
+      currentQuantitiesObject[0].quantity--
     }
+
+    restOfQuantities.push(currentQuantitiesObject)
+
+    this.setState({
+      quantities: restOfQuantities
+    })
   }
 
   render() {
@@ -51,8 +83,6 @@ export class Cart extends React.Component {
       return <h1>cart is empty</h1>
     } else {
       const books = this.props.cart
-      console.log('books', books)
-      // console.log('this.props.cart', this.props.cart)
 
       return (
         <div className="books-list">
@@ -70,17 +100,21 @@ export class Cart extends React.Component {
                   <div>Price: $ {book.price / 100}</div>
                   <div>
                     Quantity:
-                    <button onClick={this.handleClickMinus}>-</button>
+                    <button onClick={this.handleClickMinus.bind(this, book.id)}>
+                      -
+                    </button>
                     {this.state.quantities.map(item => {
                       if (Array.isArray(item)) {
                         if (item[0].bookId === book.id) {
                           return item[0].quantity
                         }
                       } else if (item.bookId === book.id) {
-                          return item.quantity
-                        }
+                        return item.quantity
+                      }
                     })}
-                    <button onClick={this.handleClick}>+</button>
+                    <button onClick={this.handleClick.bind(this, book.id)}>
+                      +
+                    </button>
                   </div>
 
                   <img src={book.imageUrl} />
