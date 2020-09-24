@@ -1,5 +1,5 @@
 const db = require('./server/db/db')
-const {Book, Author, User} = require('./server/db/models')
+const {Book, Author, User, Order, BookInOrder} = require('./server/db/models')
 
 const books = [
   {
@@ -351,6 +351,26 @@ const users = [
   }
 ]
 
+const orders = [
+  {
+    status: 'in progress'
+  },
+
+  {
+    status: 'in progress'
+  }
+]
+
+const booksInOrder = [
+  {
+    quantity: 3
+  },
+
+  {
+    quantity: 4
+  }
+]
+
 // const reviews = [
 //     {
 //         content:"This is awesome"
@@ -382,6 +402,18 @@ const seed = async () => {
       })
     )
 
+    const ordersArr = await Promise.all(
+      orders.map(order => {
+        return Order.create(order)
+      })
+    )
+
+    const booksInOrderArr = await Promise.all(
+      booksInOrder.map(book => {
+        return BookInOrder.create(book)
+      })
+    )
+
     // const reviewsArr = await Promise.all(
     //     reviews.map((review)=>{
     //         return Review.create(review)
@@ -410,6 +442,24 @@ const seed = async () => {
 
     const user1 = usersArr[0]
     const user2 = usersArr[1]
+
+    const order1 = ordersArr[0]
+    const order2 = ordersArr[1]
+
+    await user1.addOrders(order1)
+    await user2.addOrders(order2)
+
+    const bookInOrder1 = booksInOrderArr[0]
+    const bookInOrder2 = booksInOrderArr[1]
+
+    // await book4.addBookInOrder(bookInOrder1)
+    // await book3.addBookInOrder(bookInOrder2)
+
+    await bookInOrder1.setBook(book4)
+    await bookInOrder2.setBook(book3)
+
+    await bookInOrder1.setOrder(order1)
+    await bookInOrder2.setOrder(order2)
 
     // await user1.addBooks(book1)
     // await user2.addBooks([book1, book2, book3, book4])
