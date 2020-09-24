@@ -6,7 +6,12 @@ export class Cart extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      quantity: 1
+      quantities: [
+        {
+          bookId: 0,
+          quantity: 6
+        }
+      ]
     }
     this.handleClick = this.handleClick.bind(this)
     this.handleClickMinus = this.handleClickMinus.bind(this)
@@ -15,17 +20,25 @@ export class Cart extends React.Component {
   async componentDidMount() {
     const userId = Number(this.props.match.params.userId)
     await this.props.getCart(userId)
+    const quantityInCart = this.props.cart.map(book => {
+      return book.book_in_orders
+    })
+    this.setState({
+      quantities: quantityInCart
+    })
+    console.log(this.state.quantities, 'QUANTITIES')
   }
 
   handleClick(event) {
     event.preventDefault()
-    const currentQty = this.state.quantity
+    const currentQty = this.state.quantities
+    console.log(currentQty)
     this.setState({quantity: currentQty + 1})
   }
 
   handleClickMinus(event) {
     event.preventDefault()
-    const currentQty = this.state.quantity
+    const currentQty = this.state.quantities
     if (currentQty > 0) {
       this.setState({quantity: currentQty - 1})
     } else {
@@ -58,7 +71,15 @@ export class Cart extends React.Component {
                   <div>
                     Quantity:
                     <button onClick={this.handleClickMinus}>-</button>
-                    {this.state.quantity}
+                    {this.state.quantities.map(item => {
+                      if (Array.isArray(item)) {
+                        if (item[0].bookId === book.id) {
+                          return item[0].quantity
+                        }
+                      } else if (item.bookId === book.id) {
+                          return item.quantity
+                        }
+                    })}
                     <button onClick={this.handleClick}>+</button>
                   </div>
 

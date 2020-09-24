@@ -28,7 +28,22 @@ router.get('/:userId/cart', async (req, res, next) => {
       return Promise.all(
         findBooksIdInCart.map(async book => {
           const bookId = book.bookId
-          const bookGetter = await Book.findByPk(bookId)
+          const bookGetter = await Book.findOne({
+            where: {
+              id: bookId
+            },
+
+            include: [
+              {
+                model: BookInOrder,
+                where: {
+                  orderId: orderIdFromOrders[0].id
+                },
+
+                attributes: ['bookId', 'quantity']
+              }
+            ]
+          })
           return bookGetter
         })
       )
@@ -61,6 +76,8 @@ router.post('/:userId/cart', async (req, res, next) => {
       bookId: bookId,
       orderId: orderId[0].id
     })
+
+    newBookInCart.quantity = req.body.qty
     // console.log('this is newBookInCart: ', newBookInCart)
     await res.send(newBookInCart)
   } catch (err) {
