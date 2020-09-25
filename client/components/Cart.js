@@ -1,5 +1,6 @@
 import React from 'react'
-import {fetchCart} from '../store/cart'
+import {fetchCart, updateBook} from '../store/cart'
+
 import {connect} from 'react-redux'
 
 export class Cart extends React.Component {
@@ -15,6 +16,7 @@ export class Cart extends React.Component {
     }
     this.handleClick = this.handleClick.bind(this)
     this.handleClickMinus = this.handleClickMinus.bind(this)
+    this.handleUpdate = this.handleUpdate.bind(this)
   }
 
   async componentDidMount() {
@@ -78,6 +80,14 @@ export class Cart extends React.Component {
     })
   }
 
+  async handleUpdate(book, event) {
+    event.preventDefault()
+
+    this.props.update(book)
+    const userId = Number(this.props.match.params.userId)
+    this.props.getCart(userId)
+  }
+
   render() {
     if (this.props.cart.length === 0 || this.props.cart === undefined) {
       return <h1>cart is empty</h1>
@@ -115,6 +125,9 @@ export class Cart extends React.Component {
                     <button onClick={this.handleClick.bind(this, book.id)}>
                       +
                     </button>
+                    <button onClick={this.handleUpdate.bind(this, book)}>
+                      Update Quantity
+                    </button>
                   </div>
 
                   <img src={book.imageUrl} />
@@ -133,7 +146,10 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-  return {getCart: userId => dispatch(fetchCart(userId))}
+  return {
+    getCart: userId => dispatch(fetchCart(userId)),
+    update: bookObj => dispatch(updateBook(bookObj))
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart)

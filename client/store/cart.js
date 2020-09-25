@@ -4,6 +4,7 @@ import thunkMiddleware from 'redux-thunk'
 //action constant
 const GET_CART = 'GET_CART'
 const ADD_BOOK = 'ADD_BOOK'
+const UPDATE_CART = 'UPDATE_CART'
 
 //action creator
 const getCart = cart => {
@@ -17,6 +18,13 @@ const addBook = book => {
   return {
     type: ADD_BOOK,
     book: book
+  }
+}
+
+const updateCart = books => {
+  return {
+    type: UPDATE_CART,
+    books: books
   }
 }
 
@@ -46,12 +54,27 @@ export function addBookToCart(bookObj) {
     }
   }
 }
+
+export function updateBook(book) {
+  return async dispatch => {
+    try {
+      await axios.put(`/api/users/1/cart`, book)
+      console.log(books, 'BOOKS IN THE THUNK')
+      await dispatch(updateCart(books))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
 //initial State
 const initialState = []
 //reducer func
 
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
+    case UPDATE_CART:
+      return action.books
+
     case ADD_BOOK:
       const bookToAdd = action.book
       return [...state, bookToAdd]

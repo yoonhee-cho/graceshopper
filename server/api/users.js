@@ -84,3 +84,56 @@ router.post('/:userId/cart', async (req, res, next) => {
     next(err)
   }
 })
+
+// //put route api/users/:userId/cart
+
+// router.put('/:userId/cart', async (req, res, next) => {
+//   try {
+
+//   } catch (error) {
+//     console.log(error)
+//   }
+// })
+
+router.put('/:userId/cart', async (req, res, next) => {
+  try {
+    const bookId = req.body.id
+
+    const userId = req.params.userId
+
+    const orderId = await Order.findOne({
+      where: {
+        userId: userId,
+        status: 'in progress'
+      },
+      attributes: ['id']
+    })
+
+    const quantityInCart = req.body.book_in_orders[0].quantity
+    const bookInOrder = await BookInOrder.findOne({
+      where: {
+        bookId: bookId,
+        orderId: orderId.id
+      }
+    })
+    console.log('BOOK IN ORDER:', bookInOrder)
+    bookInOrder.quantity = quantityInCart
+    await bookInOrder.save()
+    return res.status(201).end
+    //  console.log(bookInOrder.quantity)
+
+    // // const book = req.body[1].book_in_orders
+    // // const newBookInOrder = await BookInOrder.build(book)
+
+    // await bookInOrder.update(
+    //   {quantity: 9},
+
+    // )
+    // .then(res.json('HELLO'))
+    // console.log('HERE is the Object', newBookInOrder, "Here ends the object")
+    // // await bookInOrder.update(newBookInOrder)
+    // res.status(200).end()
+  } catch (error) {
+    console.log(error)
+  }
+})
