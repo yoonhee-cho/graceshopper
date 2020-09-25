@@ -116,23 +116,10 @@ router.put('/:userId/cart', async (req, res, next) => {
         orderId: orderId.id
       }
     })
-    console.log('BOOK IN ORDER:', bookInOrder)
+
     bookInOrder.quantity = quantityInCart
     await bookInOrder.save()
     return res.status(201).end
-    //  console.log(bookInOrder.quantity)
-
-    // // const book = req.body[1].book_in_orders
-    // // const newBookInOrder = await BookInOrder.build(book)
-
-    // await bookInOrder.update(
-    //   {quantity: 9},
-
-    // )
-    // .then(res.json('HELLO'))
-    // console.log('HERE is the Object', newBookInOrder, "Here ends the object")
-    // // await bookInOrder.update(newBookInOrder)
-    // res.status(200).end()
   } catch (error) {
     console.log(error)
   }
