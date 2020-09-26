@@ -13,27 +13,39 @@ export class SingleBook extends React.Component {
 
   render() {
     const singleBook = this.props.singleBookInReact.singleBook
+    const authors = this.props.singleBookInReact.singleBook.authors
 
     return (
       <div className="books-list">
         <p>Book Details</p>
-        {singleBook && (
-          <div>
-            <ul>
-              <div key={singleBook.id}>
-                <li className="single-book">
-                  <h4>{singleBook.title}</h4>
-                  <div>Price: {singleBook.price}</div>
-                  <div>
-                    <i>{singleBook.shortDescription}</i>
-                  </div>
-                  <div>Genre:{singleBook.category}</div>
-                  <img src={singleBook.imageUrl} />
-                </li>
-              </div>
-            </ul>
-          </div>
-        )}
+        {singleBook &&
+          authors && (
+            <div>
+              <ul>
+                <div key={singleBook.id}>
+                  <li className="single-book">
+                    <h4>{singleBook.title}</h4>
+                    <div>
+                      by{' '}
+                      {authors.map(
+                        (author, idx) =>
+                          idx === authors.length - 1
+                            ? `${author.firstName} ${author.lastName} `
+                            : `${author.firstName} ${author.lastName} , `
+                      )}
+                    </div>
+                    <div>Price: {singleBook.price}</div>
+                    <div>
+                      <i>{singleBook.shortDescription}</i>
+                    </div>
+                    <div>Genre:{singleBook.category}</div>
+                    <img src={singleBook.imageUrl} />
+                    {/* <AddToCart book={singleBook} /> */}
+                  </li>
+                </div>
+              </ul>
+            </div>
+          )}
       </div>
     )
   }
