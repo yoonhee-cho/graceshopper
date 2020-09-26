@@ -2,7 +2,7 @@ const router = require('express').Router()
 const {User, Book, Cart} = require('../db/models')
 module.exports = router
 
-//GET api/:userId/cart
+//GET api/users/:userId/cart
 router.get('/:userId/cart', async (req, res, next) => {
   try {
     const userIdFromLink = req.params.userId

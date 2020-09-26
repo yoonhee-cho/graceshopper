@@ -1,6 +1,7 @@
 import React from 'react'
 import {fetchBooks} from '../store/books'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 
 export class AllBooks extends React.Component {
   constructor(props) {
@@ -8,21 +9,21 @@ export class AllBooks extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getBooks()
+    this.props.loadBooksInReact()
   }
 
   render() {
-    const books = this.props.books
-
-    console.log(books)
+    // const books = this.props.books
+    console.log('this.props.booksInReact.books', this.props.booksInReact.books)
     return (
       <div className="books-list">
         <h3>Books</h3>
-        <ul>
-          {books.map(book => (
+
+        {this.props.booksInReact.books &&
+          this.props.booksInReact.books.map(book => (
             <div key={book.id}>
-              <li className="single-book">
-                <h4>{book.title}</h4>
+              <Link to={`/books/${book.id}`}>
+                <h4>Book Title : {book.title}</h4>
                 <div>
                   by{' '}
                   {book.authors.map(
@@ -32,27 +33,28 @@ export class AllBooks extends React.Component {
                         : `${author.firstName} ${author.lastName} , `
                   )}
                 </div>
+                <div>Price: {book.price}</div>
                 <div>
                   <i>{book.shortDescription}</i>
                 </div>
                 <div>Genre:{book.category}</div>
-                <div>Price: {book.price}</div>
-
                 <img src={book.imageUrl} />
-              </li>
+              </Link>
             </div>
           ))}
-        </ul>
       </div>
     )
   }
 }
 
 const mapStateToProps = state => {
-  return {books: state.books}
+  return {
+    booksInReact: state.books
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-  return {getBooks: () => dispatch(fetchBooks())}
+  return {loadBooksInReact: () => dispatch(fetchBooks())}
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(AllBooks)

@@ -16,7 +16,7 @@ const getBooks = books => {
 export function fetchBooks() {
   return async dispatch => {
     try {
-      const res = await axios.get('/api/books')
+      const res = await axios.get('/api/books/')
       const books = res.data
       await dispatch(getBooks(books))
     } catch (err) {
@@ -31,7 +31,7 @@ const initialState = []
 export default function booksReducer(state = initialState, action) {
   switch (action.type) {
     case GET_BOOKS:
-      return action.books
+      return {...state, books: action.books}
     default:
       return state
   }
