@@ -10,7 +10,7 @@ import cartReducer from './cart'
 const reducer = combineReducers({
   user: user,
   books: booksReducer,
-  singleRobot: singleBookReducer,
+  singleBook: singleBookReducer,
   cart: cartReducer
 })
 

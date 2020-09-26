@@ -21,7 +21,14 @@ router.get('/', async (req, res, next) => {
 //GET api/books/:bookId
 router.get('/:bookId', async (req, res, next) => {
   try {
-    const singleBook = await Book.findByPk(req.params.bookId)
+    const bookId = req.params.bookId
+    const singleBook = await Book.findByPk(bookId, {
+      include: [
+        {
+          model: Author
+        }
+      ]
+    })
     res.send(singleBook)
   } catch (err) {
     next(err)

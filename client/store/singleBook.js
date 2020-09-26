@@ -14,7 +14,7 @@ export const setSingleBook = data => {
 export const fetchSingleBook = id => {
   return async dispatch => {
     const {data} = await axios.get(`/api/books/${id}`)
-    // console.log('data', data)
+    //console.log('data', data)
     await dispatch(setSingleBook(data))
   }
 }
@@ -26,7 +26,7 @@ const initialState = {
 export default function singleBookReducer(state = initialState, action) {
   switch (action.type) {
     case SET_SINGLE_BOOK:
-      return {...state, singleRobot: action.singleBook}
+      return {...state, singleBook: action.singleBook}
     default:
       return state
   }

@@ -12,41 +12,28 @@ export class SingleBook extends React.Component {
   }
 
   render() {
-    console.log('this.props.singleBookInReact', this.props.singleBookInReact)
-    // const singleBook = this.props.singleBookInReact.singleBook
-    // console.log('this.props.singleBookInReact', this.props)
+    const singleBook = this.props.singleBookInReact.singleBook
 
     return (
       <div className="books-list">
-        <p>hello</p>
-        {/* {singleBook && (
-                    <div>
-                        <ul>
-                            <div key={singleBook.id}>
-                                <li className="single-book">
-                                    <h4>{singleBook.title}</h4>
-                                    {/* <div>
-                                    by{' '}
-                                    {book.authors.map(
-                                        (author, idx) =>
-                                        idx === book.authors.length - 1
-                                            ? `${author.firstName} ${author.lastName} `
-                                            : `${author.firstName} ${author.lastName} , `
-                                    )}
-                                    </div> */}
-        {/* <div>
-                                    <i>{book.shortDescription}</i>
-                                    </div>
-                                    <div>Genre:{book.category}</div>
-                                    <div>Price: {book.price}</div>
-                    
-                                    <img src={book.imageUrl} /> */}
-        {/* </li>
-                            </div>
-                        
-                        </ul>
-                    </div>
-                )} */}
+        <p>Book Details</p>
+        {singleBook && (
+          <div>
+            <ul>
+              <div key={singleBook.id}>
+                <li className="single-book">
+                  <h4>{singleBook.title}</h4>
+                  <div>Price: {singleBook.price}</div>
+                  <div>
+                    <i>{singleBook.shortDescription}</i>
+                  </div>
+                  <div>Genre:{singleBook.category}</div>
+                  <img src={singleBook.imageUrl} />
+                </li>
+              </div>
+            </ul>
+          </div>
+        )}
       </div>
     )
   }
