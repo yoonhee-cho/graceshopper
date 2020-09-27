@@ -1,3 +1,6 @@
+
+/* global describe beforeEach it */
+
 const {expect} = require('chai')
 const request = require('supertest')
 const db = require('../db')
@@ -8,6 +11,7 @@ describe('Book routes', () => {
   beforeEach(async () => {
     await db.sync({force: true})
     const books = await Promise.all([
+
       Book.create({id: 1, title: 'book1', price: 2000}),
       Book.create({id: 2, title: 'book2', price: 1200})
     ])
@@ -29,3 +33,4 @@ describe('Book routes', () => {
   })
 })
 // end describe('/api/books')
+

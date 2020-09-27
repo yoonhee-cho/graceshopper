@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchSingleBook} from '../store/singleBook'
+import AddToCart from './AddToCart'
 
 export class SingleBook extends React.Component {
   constructor(props) {
@@ -34,13 +35,13 @@ export class SingleBook extends React.Component {
                             : `${author.firstName} ${author.lastName} , `
                       )}
                     </div>
-                    <div>Price: {singleBook.price}</div>
+                    <div>Price: $ {singleBook.price / 100}</div>
                     <div>
                       <i>{singleBook.shortDescription}</i>
                     </div>
                     <div>Genre:{singleBook.category}</div>
                     <img src={singleBook.imageUrl} />
-                    {/* <AddToCart book={singleBook} /> */}
+                    <AddToCart book={singleBook} />
                   </li>
                 </div>
               </ul>

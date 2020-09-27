@@ -1,5 +1,5 @@
 const db = require('./server/db/db')
-const {Book, Author, User} = require('./server/db/models')
+const {Book, Author, User, Order, BookInOrder} = require('./server/db/models')
 
 const books = [
   {
@@ -10,7 +10,7 @@ const books = [
     Pages: 256,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198418030.jpg',
-    price: 31.99,
+    price: 3199,
     qty: 10
   },
   {
@@ -21,7 +21,7 @@ const books = [
     Pages: 272,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198418054.jpg',
-    price: 30.99,
+    price: 3099,
     qty: 10
   },
 
@@ -33,7 +33,7 @@ const books = [
     Pages: 224,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198418078.jpg',
-    price: 30.99,
+    price: 3099,
     qty: 10
   },
 
@@ -45,7 +45,7 @@ const books = [
     Pages: 232,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198417965.jpg',
-    price: 30.99,
+    price: 3099,
     qty: 10
   },
 
@@ -57,7 +57,7 @@ const books = [
     Pages: 256,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198417996.jpg',
-    price: 30.99,
+    price: 3099,
     qty: 10
   },
 
@@ -69,7 +69,7 @@ const books = [
     Pages: 184,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198418016.jpg',
-    price: 33.99,
+    price: 3399,
     qty: 10
   },
 
@@ -82,7 +82,7 @@ const books = [
     Pages: 96,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198365297.jpg',
-    price: 7.99,
+    price: 799,
     qty: 10
   },
 
@@ -95,7 +95,7 @@ const books = [
     Pages: 88,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198365280.jpg',
-    price: 7.99,
+    price: 799,
     qty: 10
   },
 
@@ -108,7 +108,7 @@ const books = [
     Pages: 96,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198365303.jpg',
-    price: 8.99,
+    price: 899,
     qty: 10
   },
 
@@ -121,7 +121,7 @@ const books = [
     Pages: 96,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198365266.jpg',
-    price: 6.99,
+    price: 699,
     qty: 10
   },
 
@@ -134,7 +134,7 @@ const books = [
     Pages: 96,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198376439.jpg',
-    price: 6.99,
+    price: 699,
     qty: 10
   },
 
@@ -147,7 +147,7 @@ const books = [
     Pages: 96,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198376453.jpg',
-    price: 6.99,
+    price: 699,
     qty: 10
   },
 
@@ -160,7 +160,7 @@ const books = [
     Pages: 96,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198376477.jpg',
-    price: 7.5,
+    price: 75,
     qty: 10
   },
 
@@ -173,7 +173,7 @@ const books = [
     Pages: 96,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198376460.jpg',
-    price: 7.5,
+    price: 75,
     qty: 10
   },
 
@@ -186,7 +186,7 @@ const books = [
     Pages: 96,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198376422.jpg',
-    price: 6.99,
+    price: 699,
     qty: 10
   },
 
@@ -199,7 +199,7 @@ const books = [
     Pages: 96,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198376446.jpg',
-    price: 6.99,
+    price: 699,
     qty: 10
   },
 
@@ -212,7 +212,7 @@ const books = [
     Pages: 500,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198365334.jpg',
-    price: 71.99,
+    price: 7199,
     qty: 10
   },
 
@@ -224,7 +224,7 @@ const books = [
     Pages: 500,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198394921.jpg',
-    price: 112.99,
+    price: 11299,
     qty: 10
   },
 
@@ -236,7 +236,7 @@ const books = [
     Pages: 500,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198394891.jpg',
-    price: 112.99,
+    price: 11299,
     qty: 10
   },
 
@@ -248,7 +248,7 @@ const books = [
     Pages: 500,
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198394907.jpg',
-    price: 112.99,
+    price: 11299,
     qty: 10
   }
 ]
@@ -351,14 +351,27 @@ const users = [
   }
 ]
 
-// const reviews = [
-//     {
-//         content:"This is awesome"
-//     },
-//     {
-//         content:"This is terrible!"
-//     }
-// ]
+const orders = [
+  {
+    status: 'in progress'
+  },
+
+  {
+    status: 'in progress'
+  }
+]
+
+const booksInOrder = [
+  {
+    quantity: 3,
+    totalPrice: 9297
+  },
+
+  {
+    quantity: 4,
+    totalPrice: 12396
+  }
+]
 
 const seed = async () => {
   try {
@@ -379,6 +392,18 @@ const seed = async () => {
     const usersArr = await Promise.all(
       users.map(user => {
         return User.create(user)
+      })
+    )
+
+    const ordersArr = await Promise.all(
+      orders.map(order => {
+        return Order.create(order)
+      })
+    )
+
+    const booksInOrderArr = await Promise.all(
+      booksInOrder.map(book => {
+        return BookInOrder.create(book)
       })
     )
 
@@ -411,8 +436,26 @@ const seed = async () => {
     const user1 = usersArr[0]
     const user2 = usersArr[1]
 
-    await user1.addBooks(book1)
-    await user2.addBooks([book1, book2, book3, book4])
+    const order1 = ordersArr[0]
+    const order2 = ordersArr[1]
+
+    await user1.addOrders(order1)
+    await user2.addOrders(order2)
+
+    const bookInOrder1 = booksInOrderArr[0]
+    const bookInOrder2 = booksInOrderArr[1]
+
+    // await book4.addBookInOrder(bookInOrder1)
+    // await book3.addBookInOrder(bookInOrder2)
+
+    await bookInOrder1.setBook(book4)
+    await bookInOrder2.setBook(book3)
+
+    await bookInOrder1.setOrder(order1)
+    await bookInOrder2.setOrder(order2)
+
+    // await user1.addBooks(book1)
+    // await user2.addBooks([book1, book2, book3, book4])
 
     // setBooks will overwrite
     // await user2.setBooks([book3, book4])
