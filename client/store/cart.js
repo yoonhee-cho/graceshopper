@@ -60,12 +60,12 @@ export function addBookToCart(bookObj) {
   }
 }
 
-export function updateBook(book) {
+export function updateBook(book, userId) {
   return async dispatch => {
     try {
-      await axios.put(`/api/users/1/cart`, book)
+      await axios.put(`/api/users/${userId}/cart`, book)
 
-      const res = await axios.get(`/api/users/1/cart`)
+      const res = await axios.get(`/api/users/${userId}/cart`)
       await dispatch(updateCart(res.data))
     } catch (error) {
       console.log(error)

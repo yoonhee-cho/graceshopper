@@ -91,8 +91,9 @@ export class Cart extends React.Component {
   async handleUpdate(book, event) {
     event.preventDefault()
     await this.setState({loading: true})
-    await this.props.update(book)
     const userId = Number(this.props.match.params.userId)
+    await this.props.update(book, userId)
+
     // this.setState({loading: true}, () => {
     //   this.props.getCart(userId)
     //     .then(result => {
@@ -192,7 +193,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getCart: userId => dispatch(fetchCart(userId)),
-    update: bookObj => dispatch(updateBook(bookObj))
+    update: (bookObj, userId) => dispatch(updateBook(bookObj, userId))
   }
 }
 
