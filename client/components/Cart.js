@@ -2,6 +2,7 @@ import React from 'react'
 import {fetchCart, updateBook} from '../store/cart'
 
 import {connect} from 'react-redux'
+import DeleteAllBooksFromCart from './DeleteAllBooksFromCart'
 
 export class Cart extends React.Component {
   constructor(props) {
@@ -91,6 +92,8 @@ export class Cart extends React.Component {
   }
 
   render() {
+    const userId = Number(this.props.match.params.userId)
+
     if (this.props.cart.length === 0 || this.props.cart === undefined) {
       return <h1>cart is empty</h1>
     } else {
@@ -148,6 +151,7 @@ export class Cart extends React.Component {
                 </li>
               </div>
             ))}
+            <DeleteAllBooksFromCart userId={userId} />
           </ul>
         </div>
       )

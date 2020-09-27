@@ -5,6 +5,7 @@ import thunkMiddleware from 'redux-thunk'
 const GET_CART = 'GET_CART'
 const ADD_BOOK = 'ADD_BOOK'
 const UPDATE_CART = 'UPDATE_CART'
+const EMPTY_CART = 'EMPTY_CART'
 
 //action creator
 const getCart = cart => {
@@ -25,6 +26,13 @@ const updateCart = books => {
   return {
     type: UPDATE_CART,
     books: books
+  }
+}
+
+const emptyCart = userId => {
+  return {
+    type: EMPTY_CART,
+    userId: userId
   }
 }
 
@@ -66,6 +74,15 @@ export function updateBook(book) {
     }
   }
 }
+
+//Thunk Creator for DELETE ALL items in cart
+export const emptyCartThunk = userId => {
+  return async dispatch => {
+    await axios.delete(`/api/users/${userId}/cart`)
+    const {data} = await axios.get(`/api/users/${userId}/cart`)
+    await dispatch(getCart(data))
+  }
+}
 //initial State
 const initialState = []
 //reducer func
@@ -80,6 +97,7 @@ export default function cartReducer(state = initialState, action) {
       return [...state, bookToAdd]
     case GET_CART:
       return action.cart
+
     default:
       return state
   }
