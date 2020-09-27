@@ -24,7 +24,7 @@ const Book = db.define('book', {
       'https://global.oup.com/education/covers/oxed/medium/9780198418054.jpg'
   },
   price: {
-    type: Sequelize.DECIMAL,
+    type: Sequelize.INTEGER,
     allowNull: false
   },
   qty: {
