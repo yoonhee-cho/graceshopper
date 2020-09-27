@@ -1,6 +1,7 @@
 import React from 'react'
 import {fetchBooks} from '../store/books'
 import {connect} from 'react-redux'
+import AddToCart from './AddToCart'
 
 export class AllBooks extends React.Component {
   constructor(props) {
@@ -36,7 +37,8 @@ export class AllBooks extends React.Component {
                   <i>{book.shortDescription}</i>
                 </div>
                 <div>Genre:{book.category}</div>
-                <div>Price: {book.price}</div>
+                <div>Price: {book.price / 100}</div>
+                <AddToCart book={book} />
 
                 <img src={book.imageUrl} />
               </li>
