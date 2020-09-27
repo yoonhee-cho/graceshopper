@@ -5,6 +5,7 @@ import thunkMiddleware from 'redux-thunk'
 const GET_CART = 'GET_CART'
 const ADD_BOOK = 'ADD_BOOK'
 const UPDATE_CART = 'UPDATE_CART'
+const EMPTY_CART = 'EMPTY_CART'
 
 //action creator
 const getCart = cart => {
@@ -28,6 +29,13 @@ const updateCart = books => {
   }
 }
 
+const emptyCart = userId => {
+  return {
+    type: EMPTY_CART,
+    userId: userId
+  }
+}
+
 //thunk
 export function fetchCart(userId) {
   return async dispatch => {
@@ -44,13 +52,14 @@ export function fetchCart(userId) {
 }
 /// need to write a post route to a users cart
 
-export function addBookToCart(bookObj) {
+export function addBookToCart(bookObj, userId) {
   return async dispatch => {
     try {
+      console.log('>>>>>>>', typeof userId)
       // const book = axios.get(//book by bookId//)
-      await axios.post(`/api/users/1/cart`, bookObj)
 
-      // await dispatch(addBook(bookObj))
+      await axios.post(`/api/users/${userId}/cart`, bookObj)
+
     } catch (error) {
       alert(
         'This item is already in your cart. If you wish to update the quantity, please visit your cart. :) '
@@ -64,12 +73,20 @@ export function updateBook(book, userId) {
   return async dispatch => {
     try {
       await axios.put(`/api/users/${userId}/cart`, book)
-
       const res = await axios.get(`/api/users/${userId}/cart`)
       await dispatch(updateCart(res.data))
     } catch (error) {
       console.log(error)
     }
+  }
+}
+
+//Thunk Creator for DELETE ALL items in cart
+export const emptyCartThunk = userId => {
+  return async dispatch => {
+    await axios.delete(`/api/users/${userId}/cart`)
+    const {data} = await axios.get(`/api/users/${userId}/cart`)
+    await dispatch(getCart(data))
   }
 }
 //initial State
@@ -86,6 +103,7 @@ export default function cartReducer(state = initialState, action) {
       return [...state, bookToAdd]
     case GET_CART:
       return action.cart
+
     default:
       return state
   }

@@ -141,3 +141,27 @@ router.put('/:userId/cart', async (req, res, next) => {
     console.log(error)
   }
 })
+
+//DELETE /api/users/:userId/cart
+router.delete('/:userId/cart', async (req, res, next) => {
+  try {
+    const userId = req.params.userId
+    const orderIdToBeDeleted = await Order.findOne({
+      where: {
+        userId: userId,
+        status: 'in progress'
+      },
+      attributes: ['id']
+    })
+
+    await BookInOrder.destroy({
+      where: {
+        orderId: orderIdToBeDeleted.id
+      }
+    })
+
+    res.status(204).end()
+  } catch (err) {
+    next(err)
+  }
+})
