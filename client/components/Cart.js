@@ -10,7 +10,8 @@ export class Cart extends React.Component {
       quantities: [
         {
           bookId: 0,
-          quantity: 6
+          quantity: 6,
+          totalPrice: 6
         }
       ]
     }
@@ -93,7 +94,7 @@ export class Cart extends React.Component {
       return <h1>cart is empty</h1>
     } else {
       const books = this.props.cart
-
+      console.log(this.state)
       return (
         <div className="books-list">
           <h3>Cart</h3>
@@ -107,7 +108,19 @@ export class Cart extends React.Component {
                     <i>{book.shortDescription}</i>
                   </div>
                   <div>Genre:{book.category}</div>
-                  <div>Price: $ {book.price / 100}</div>
+                  <div>Unit Price: $ {book.price / 100}</div>
+                  <div>
+                    Total Price: ${' '}
+                    {this.state.quantities.map(item => {
+                      if (Array.isArray(item)) {
+                        if (item[0].bookId === book.id) {
+                          return item[0].totalPrice / 100
+                        }
+                      } else if (item.bookId === book.id) {
+                        return item.totalPrice / 100
+                      }
+                    })}
+                  </div>
                   <div>
                     Quantity:
                     <button onClick={this.handleClickMinus.bind(this, book.id)}>

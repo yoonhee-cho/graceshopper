@@ -40,7 +40,7 @@ router.get('/:userId/cart', async (req, res, next) => {
                   orderId: orderIdFromOrders[0].id
                 },
 
-                attributes: ['bookId', 'quantity']
+                attributes: ['bookId', 'quantity', 'totalPrice']
               }
             ]
           })
@@ -117,7 +117,12 @@ router.put('/:userId/cart', async (req, res, next) => {
       }
     })
 
+    const subtotal = req.body.price * quantityInCart
+
     bookInOrder.quantity = quantityInCart
+    await bookInOrder.save()
+    bookInOrder.totalPrice = subtotal
+
     await bookInOrder.save()
     return res.status(201).end
   } catch (error) {
