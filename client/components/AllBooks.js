@@ -3,9 +3,8 @@ import {fetchBooks} from '../store/books'
 import {connect} from 'react-redux'
 
 import AddToCart from './AddToCart'
-
+import GuestCart from './GuestCart'
 import {Link} from 'react-router-dom'
-
 
 export class AllBooks extends React.Component {
   constructor(props) {
@@ -45,7 +44,6 @@ export class AllBooks extends React.Component {
 
                 <div>Price: {book.price / 100}</div>
                 <AddToCart book={book} />
-
 
                 <img src={book.imageUrl} />
               </Link>
