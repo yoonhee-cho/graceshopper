@@ -2,11 +2,13 @@ import React from 'react'
 import {fetchCart, updateBook} from '../store/cart'
 
 import {connect} from 'react-redux'
+import LoadingSpinner from './loadingSpinner'
 
 export class Cart extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      loading: false,
       quantities: [
         {
           bookId: 0,
@@ -29,7 +31,6 @@ export class Cart extends React.Component {
     this.setState({
       quantities: quantityInCart
     })
-    console.log(this.state, 'is it working?')
   }
 
   handleClick(bookId, event) {
@@ -47,6 +48,9 @@ export class Cart extends React.Component {
     restOfQuantities.splice(index, 1)
     currentQuantitiesObject[0].quantity++
     restOfQuantities.push(currentQuantitiesObject)
+    restOfQuantities.sort(function(a, b) {
+      return a.id - b.id
+    })
 
     this.setState({
       quantities: restOfQuantities
@@ -57,7 +61,6 @@ export class Cart extends React.Component {
     let index = 0
 
     this.state.quantities.map((item, idx) => {
-      console.log(item[0].bookId, idx, bookId)
       if (item[0].bookId === bookId) {
         index = idx
       }
@@ -76,6 +79,9 @@ export class Cart extends React.Component {
     }
 
     restOfQuantities.push(currentQuantitiesObject)
+    restOfQuantities.sort(function(a, b) {
+      return a.id - b.id
+    })
 
     this.setState({
       quantities: restOfQuantities
@@ -84,10 +90,30 @@ export class Cart extends React.Component {
 
   async handleUpdate(book, event) {
     event.preventDefault()
-
-    this.props.update(book)
+    await this.setState({loading: true})
+    await this.props.update(book)
     const userId = Number(this.props.match.params.userId)
-    this.props.getCart(userId)
+    // this.setState({loading: true}, () => {
+    //   this.props.getCart(userId)
+    //     .then(result => {
+    //       console.log(result, 'RESULT')
+    //       this.setState({
+    //       loading: false,
+
+    //     })})
+    // })
+
+    await this.props.getCart(userId)
+    const quantityInCart = this.props.cart.map(book => {
+      return book.book_in_orders
+    })
+    this.setState({
+      quantities: quantityInCart
+    })
+
+    await this.setState({
+      loading: false
+    })
   }
 
   render() {
@@ -95,7 +121,7 @@ export class Cart extends React.Component {
       return <h1>cart is empty</h1>
     } else {
       const books = this.props.cart
-      console.log(this.state)
+
       return (
         <div className="books-list">
           <h3>Cart</h3>
@@ -127,15 +153,19 @@ export class Cart extends React.Component {
                     <button onClick={this.handleClickMinus.bind(this, book.id)}>
                       -
                     </button>
-                    {this.state.quantities.map(item => {
-                      if (Array.isArray(item)) {
-                        if (item[0].bookId === book.id) {
-                          return item[0].quantity
+                    {this.state.loading ? (
+                      <LoadingSpinner />
+                    ) : (
+                      this.state.quantities.map(item => {
+                        if (Array.isArray(item)) {
+                          if (item[0].bookId === book.id) {
+                            return item[0].quantity
+                          }
+                        } else if (item.bookId === book.id) {
+                          return item.quantity
                         }
-                      } else if (item.bookId === book.id) {
-                        return item.quantity
-                      }
-                    })}
+                      })
+                    )}
                     <button onClick={this.handleClick.bind(this, book.id)}>
                       +
                     </button>

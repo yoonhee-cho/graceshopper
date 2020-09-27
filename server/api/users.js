@@ -71,18 +71,15 @@ router.post('/:userId/cart', async (req, res, next) => {
       },
       attributes: ['id']
     })
-    // console.log('LOOK HERE: ', orderId[0].id)
+
     const newBookInCart = await BookInOrder.create({
       bookId: bookId,
       orderId: orderId[0].id
     })
 
-    // newBookInCart.quantity = req.body.qty
-
     newBookInCart.totalPrice = req.body.price
     await newBookInCart.save()
 
-    // console.log('this is newBookInCart: ', newBookInCart)
     await res.send(newBookInCart)
   } catch (err) {
     next(err)
@@ -128,7 +125,8 @@ router.put('/:userId/cart', async (req, res, next) => {
     bookInOrder.totalPrice = subtotal
 
     await bookInOrder.save()
-    return res.status(201).end
+
+    await res.status(201).end()
   } catch (error) {
     console.log(error)
   }

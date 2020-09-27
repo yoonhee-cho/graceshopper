@@ -59,8 +59,9 @@ export function updateBook(book) {
   return async dispatch => {
     try {
       await axios.put(`/api/users/1/cart`, book)
-      console.log(books, 'BOOKS IN THE THUNK')
-      await dispatch(updateCart(books))
+
+      const res = await axios.get(`/api/users/1/cart`)
+      await dispatch(updateCart(res.data))
     } catch (error) {
       console.log(error)
     }
