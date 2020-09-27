@@ -29,6 +29,7 @@ export class Cart extends React.Component {
     this.setState({
       quantities: quantityInCart
     })
+    console.log(this.state, 'is it working?')
   }
 
   handleClick(bookId, event) {

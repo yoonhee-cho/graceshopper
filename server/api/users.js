@@ -77,7 +77,11 @@ router.post('/:userId/cart', async (req, res, next) => {
       orderId: orderId[0].id
     })
 
-    newBookInCart.quantity = req.body.qty
+    // newBookInCart.quantity = req.body.qty
+
+    newBookInCart.totalPrice = req.body.price
+    await newBookInCart.save()
+
     // console.log('this is newBookInCart: ', newBookInCart)
     await res.send(newBookInCart)
   } catch (err) {

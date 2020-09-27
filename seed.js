@@ -363,22 +363,15 @@ const orders = [
 
 const booksInOrder = [
   {
-    quantity: 3
+    quantity: 3,
+    totalPrice: 9297
   },
 
   {
-    quantity: 4
+    quantity: 4,
+    totalPrice: 12396
   }
 ]
-
-// const reviews = [
-//     {
-//         content:"This is awesome"
-//     },
-//     {
-//         content:"This is terrible!"
-//     }
-// ]
 
 const seed = async () => {
   try {
