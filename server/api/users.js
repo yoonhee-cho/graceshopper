@@ -71,16 +71,26 @@ router.post('/:userId/cart', async (req, res, next) => {
       },
       attributes: ['id']
     })
-
-    const newBookInCart = await BookInOrder.create({
-      bookId: bookId,
-      orderId: orderId[0].id
+    const bookAlreadyInOrder = await BookInOrder.findOne({
+      where: {
+        bookId: bookId,
+        orderId: orderId[0].id
+      }
     })
 
-    newBookInCart.totalPrice = req.body.price
-    await newBookInCart.save()
+    if (bookAlreadyInOrder) {
+      res.status(500).send('This book is already in your cart')
+    } else {
+      const newBookInCart = await BookInOrder.create({
+        bookId: bookId,
+        orderId: orderId[0].id
+      })
 
-    await res.send(newBookInCart)
+      newBookInCart.totalPrice = req.body.price
+      await newBookInCart.save()
+
+      await res.send(newBookInCart)
+    }
   } catch (err) {
     next(err)
   }

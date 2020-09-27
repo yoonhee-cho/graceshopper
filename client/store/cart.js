@@ -49,7 +49,12 @@ export function addBookToCart(bookObj) {
     try {
       // const book = axios.get(//book by bookId//)
       await axios.post(`/api/users/1/cart`, bookObj)
+
+      // await dispatch(addBook(bookObj))
     } catch (error) {
+      alert(
+        'This item is already in your cart. If you wish to update the quantity, please visit your cart. :) '
+      )
       console.log(error)
     }
   }
