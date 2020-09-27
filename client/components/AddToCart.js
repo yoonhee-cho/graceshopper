@@ -9,12 +9,13 @@ export class AddToCart extends React.Component {
     this.handleClick = this.handleClick.bind(this)
   }
 
-  componentDidMount() {}
-
   handleClick(event) {
     event.preventDefault()
+
+    const userId = this.props.user.id
+
     const book = this.props.book
-    this.props.addBook(book)
+    this.props.addBook(book, userId)
   }
 
   render() {
@@ -28,14 +29,16 @@ export class AddToCart extends React.Component {
   }
 }
 
-// const mapStateToProps = state => {
-//   return {}
-// }
-
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
   return {
-    addBook: bookObj => dispatch(addBookToCart(bookObj))
+    user: state.user
   }
 }
 
-export default connect(null, mapDispatchToProps)(AddToCart)
+const mapDispatchToProps = dispatch => {
+  return {
+    addBook: (bookObj, userId) => dispatch(addBookToCart(bookObj, userId))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddToCart)

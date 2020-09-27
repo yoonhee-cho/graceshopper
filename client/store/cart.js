@@ -52,21 +52,22 @@ export function fetchCart(userId) {
 }
 /// need to write a post route to a users cart
 
-export function addBookToCart(bookObj) {
+export function addBookToCart(bookObj, userId) {
   return async dispatch => {
     try {
+      console.log('>>>>>>>', typeof userId)
       // const book = axios.get(//book by bookId//)
-      await axios.post(`/api/users/1/cart`, bookObj)
+      await axios.post(`/api/users/${userId}/cart`, bookObj)
     } catch (error) {
       console.log(error)
     }
   }
 }
 
-export function updateBook(book) {
+export function updateBook(book, userId) {
   return async dispatch => {
     try {
-      await axios.put(`/api/users/1/cart`, book)
+      await axios.put(`/api/users/${userId}/cart`, book)
       console.log(books, 'BOOKS IN THE THUNK')
       await dispatch(updateCart(books))
     } catch (error) {

@@ -85,9 +85,9 @@ export class Cart extends React.Component {
 
   async handleUpdate(book, event) {
     event.preventDefault()
-
-    this.props.update(book)
     const userId = Number(this.props.match.params.userId)
+    this.props.update(book, userId)
+
     this.props.getCart(userId)
   }
 
@@ -166,7 +166,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getCart: userId => dispatch(fetchCart(userId)),
-    update: bookObj => dispatch(updateBook(bookObj))
+    update: (bookObj, userId) => dispatch(updateBook(bookObj, userId))
   }
 }
 

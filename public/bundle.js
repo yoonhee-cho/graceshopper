@@ -166,14 +166,12 @@ var AddToCart = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(AddToCart, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {}
-  }, {
     key: "handleClick",
     value: function handleClick(event) {
       event.preventDefault();
+      var userId = this.props.user.id;
       var book = this.props.book;
-      this.props.addBook(book);
+      this.props.addBook(book, userId);
     }
   }, {
     key: "render",
@@ -188,19 +186,23 @@ var AddToCart = /*#__PURE__*/function (_React$Component) {
   }]);
 
   return AddToCart;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component); // const mapStateToProps = state => {
-//   return {}
-// }
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    user: state.user
+  };
+};
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    addBook: function addBook(bookObj) {
-      return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_1__["addBookToCart"])(bookObj));
+    addBook: function addBook(bookObj, userId) {
+      return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_1__["addBookToCart"])(bookObj, userId));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(null, mapDispatchToProps)(AddToCart));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(AddToCart));
 
 /***/ }),
 
@@ -466,8 +468,8 @@ var Cart = /*#__PURE__*/function (_React$Component) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 event.preventDefault();
-                this.props.update(book);
                 userId = Number(this.props.match.params.userId);
+                this.props.update(book, userId);
                 this.props.getCart(userId);
 
               case 4:
@@ -549,8 +551,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     getCart: function getCart(userId) {
       return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_1__["fetchCart"])(userId));
     },
-    update: function update(bookObj) {
-      return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_1__["updateBook"])(bookObj));
+    update: function update(bookObj, userId) {
+      return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_1__["updateBook"])(bookObj, userId));
     }
   };
 };
@@ -1133,9 +1135,6 @@ var Routes = /*#__PURE__*/function (_Component) {
         path: "/signup",
         component: _components__WEBPACK_IMPORTED_MODULE_4__["Signup"]
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-        path: "/:userId/cart",
-        component: _components_Cart__WEBPACK_IMPORTED_MODULE_8__["default"]
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         exact: true,
         path: "/books",
         component: _components_AllBooks__WEBPACK_IMPORTED_MODULE_6__["default"]
@@ -1145,6 +1144,9 @@ var Routes = /*#__PURE__*/function (_Component) {
       }), isLoggedIn && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/home",
         component: _components__WEBPACK_IMPORTED_MODULE_4__["UserHome"]
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        path: "/:userId/cart",
+        component: _components_Cart__WEBPACK_IMPORTED_MODULE_8__["default"]
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         component: _components__WEBPACK_IMPORTED_MODULE_4__["Login"]
       }));
@@ -1334,6 +1336,8 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -1420,7 +1424,7 @@ function fetchCart(userId) {
   }();
 } /// need to write a post route to a users cart
 
-function addBookToCart(bookObj) {
+function addBookToCart(bookObj, userId) {
   return /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch) {
       return regeneratorRuntime.wrap(function _callee2$(_context2) {
@@ -1428,24 +1432,26 @@ function addBookToCart(bookObj) {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.prev = 0;
-              _context2.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/users/1/cart", bookObj);
+              console.log('>>>>>>>', _typeof(userId)); // const book = axios.get(//book by bookId//)
 
-            case 3:
-              _context2.next = 8;
+              _context2.next = 4;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/users/".concat(userId, "/cart"), bookObj);
+
+            case 4:
+              _context2.next = 9;
               break;
 
-            case 5:
-              _context2.prev = 5;
+            case 6:
+              _context2.prev = 6;
               _context2.t0 = _context2["catch"](0);
               console.log(_context2.t0);
 
-            case 8:
+            case 9:
             case "end":
               return _context2.stop();
           }
         }
-      }, _callee2, null, [[0, 5]]);
+      }, _callee2, null, [[0, 6]]);
     }));
 
     return function (_x2) {
@@ -1453,7 +1459,7 @@ function addBookToCart(bookObj) {
     };
   }();
 }
-function updateBook(book) {
+function updateBook(book, userId) {
   return /*#__PURE__*/function () {
     var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(dispatch) {
       return regeneratorRuntime.wrap(function _callee3$(_context3) {
@@ -1462,7 +1468,7 @@ function updateBook(book) {
             case 0:
               _context3.prev = 0;
               _context3.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("/api/users/1/cart", book);
+              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("/api/users/".concat(userId, "/cart"), book);
 
             case 3:
               console.log(books, 'BOOKS IN THE THUNK');
