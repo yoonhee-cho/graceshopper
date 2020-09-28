@@ -15,7 +15,7 @@ const User = db.define('user', {
     get() {
       return () => this.getDataValue('password')
     },
-    allowNull: false
+    defaultValue: 'randompasswordpleasereset'
   },
   salt: {
     type: Sequelize.STRING,
