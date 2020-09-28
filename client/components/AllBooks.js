@@ -6,7 +6,6 @@ import AddToCart from './AddToCart'
 
 import {Link} from 'react-router-dom'
 
-
 export class AllBooks extends React.Component {
   constructor(props) {
     super(props)
@@ -18,7 +17,8 @@ export class AllBooks extends React.Component {
 
   render() {
     // const books = this.props.books
-    console.log('this.props.booksInReact.books', this.props.booksInReact.books)
+    const loggedUserId = this.props.loggedUserId
+
     return (
       <div className="books-list">
         <h3>Books</h3>
@@ -44,8 +44,7 @@ export class AllBooks extends React.Component {
                 <div>Genre:{book.category}</div>
 
                 <div>Price: {book.price / 100}</div>
-                <AddToCart book={book} />
-
+                <AddToCart book={book} loggedUserId={loggedUserId} />
 
                 <img src={book.imageUrl} />
               </Link>
