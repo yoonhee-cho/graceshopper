@@ -7,7 +7,6 @@ import DeleteAllBooksFromCart from './DeleteAllBooksFromCart'
 
 import LoadingSpinner from './loadingSpinner'
 
-
 export class Cart extends React.Component {
   constructor(props) {
     super(props)
@@ -195,7 +194,9 @@ export class Cart extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return {cart: state.cart}
+  return {
+    cart: state.cart
+  }
 }
 
 const mapDispatchToProps = dispatch => {

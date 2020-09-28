@@ -46,6 +46,7 @@ export function fetchCart(userId) {
       // console.log('cart', cart)
       await dispatch(getCart(cart))
     } catch (err) {
+      alert('You are not an authorized user to make changes to this account')
       console.log(err)
     }
   }
@@ -59,7 +60,6 @@ export function addBookToCart(bookObj, userId) {
       // const book = axios.get(//book by bookId//)
 
       await axios.post(`/api/users/${userId}/cart`, bookObj)
-
     } catch (error) {
       alert(
         'This item is already in your cart. If you wish to update the quantity, please visit your cart. :) '

@@ -19,6 +19,7 @@ export class AddToCart extends React.Component {
   }
 
   render() {
+    const loggedUserId = this.props.loggedUserId
     return (
       <div className="addToCart">
         <button type="click" onClick={this.handleClick}>
