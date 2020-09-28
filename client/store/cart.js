@@ -6,6 +6,7 @@ const GET_CART = 'GET_CART'
 const ADD_BOOK = 'ADD_BOOK'
 const UPDATE_CART = 'UPDATE_CART'
 const EMPTY_CART = 'EMPTY_CART'
+const DELETE_SINGLEBOOK = 'DELETE_SINGLEBOOK'
 
 //action creator
 const getCart = cart => {
@@ -29,22 +30,13 @@ const updateCart = books => {
   }
 }
 
-const emptyCart = userId => {
-  return {
-    type: EMPTY_CART,
-    userId: userId
-  }
-}
-
 //thunk
 export function fetchCart(userId) {
   return async dispatch => {
     try {
       const res = await axios.get(`/api/users/${userId}/cart`)
       const cart = await res.data
-      // console.log('i am here at fetchCart thunk')
-      // console.log('cart', cart)
-      await dispatch(getCart(cart))
+      dispatch(getCart(cart))
     } catch (err) {
       alert('You are not an authorized user to make changes to this account')
       console.log(err)
@@ -56,9 +48,6 @@ export function fetchCart(userId) {
 export function addBookToCart(bookObj, userId) {
   return async dispatch => {
     try {
-      console.log('>>>>>>>', typeof userId)
-      // const book = axios.get(//book by bookId//)
-
       await axios.post(`/api/users/${userId}/cart`, bookObj)
     } catch (error) {
       alert(
@@ -74,7 +63,7 @@ export function updateBook(book, userId) {
     try {
       await axios.put(`/api/users/${userId}/cart`, book)
       const res = await axios.get(`/api/users/${userId}/cart`)
-      await dispatch(updateCart(res.data))
+      dispatch(updateCart(res.data))
     } catch (error) {
       console.log(error)
     }
@@ -86,7 +75,17 @@ export const emptyCartThunk = userId => {
   return async dispatch => {
     await axios.delete(`/api/users/${userId}/cart`)
     const {data} = await axios.get(`/api/users/${userId}/cart`)
-    await dispatch(getCart(data))
+    dispatch(getCart(data))
+  }
+}
+
+//Thunk Creator for DELETE ONE ITEM FROM CART
+export const deleteOneThunk = (userId, bookObj) => {
+  return async dispatch => {
+    console.log('from think delete ONE ', bookObj)
+    await axios.delete(`/api/users/${userId}/cart`, {data: bookObj})
+    const {data} = await axios.get(`/api/users/${userId}/cart`)
+    dispatch(getCart(data))
   }
 }
 //initial State
@@ -101,6 +100,7 @@ export default function cartReducer(state = initialState, action) {
     case ADD_BOOK:
       const bookToAdd = action.book
       return [...state, bookToAdd]
+
     case GET_CART:
       return action.cart
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import {fetchCart, updateBook} from '../store/cart'
+import {deleteOneThunk, fetchCart, updateBook} from '../store/cart'
 
 import {connect} from 'react-redux'
 
@@ -23,6 +23,7 @@ export class Cart extends React.Component {
     this.handleClick = this.handleClick.bind(this)
     this.handleClickMinus = this.handleClickMinus.bind(this)
     this.handleUpdate = this.handleUpdate.bind(this)
+    this.handleRemove = this.handleRemove.bind(this)
   }
 
   async componentDidMount() {
@@ -121,6 +122,14 @@ export class Cart extends React.Component {
     })
   }
 
+  handleRemove = bookObj => event => {
+    event.preventDefault()
+    const userId = Number(this.props.match.params.userId)
+
+    console.log('From handle remove Iam clicked', bookObj)
+    this.props.deleteOneBook(userId, bookObj)
+  }
+
   render() {
     const userId = Number(this.props.match.params.userId)
 
@@ -179,6 +188,12 @@ export class Cart extends React.Component {
                     <button onClick={this.handleUpdate.bind(this, book)}>
                       Update Quantity
                     </button>
+                    <button
+                      className="deleteButton2"
+                      onClick={this.handleRemove(book)}
+                    >
+                      Remove from Cart
+                    </button>
                   </div>
 
                   <img src={book.imageUrl} />
@@ -202,7 +217,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getCart: userId => dispatch(fetchCart(userId)),
-    update: (bookObj, userId) => dispatch(updateBook(bookObj, userId))
+    update: (bookObj, userId) => dispatch(updateBook(bookObj, userId)),
+    deleteOneBook: (userId, bookId) => dispatch(deleteOneThunk(userId, bookId))
   }
 }
 

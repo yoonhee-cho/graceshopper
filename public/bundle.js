@@ -353,6 +353,8 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -369,6 +371,17 @@ var Cart = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, Cart);
 
     _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "handleRemove", function (bookObj) {
+      return function (event) {
+        event.preventDefault();
+        var userId = Number(_this.props.match.params.userId);
+        console.log('From handle remove Iam clicked', bookObj);
+
+        _this.props.deleteOneBook(userId, bookObj);
+      };
+    });
+
     _this.state = {
       loading: false,
       quantities: [{
@@ -380,6 +393,7 @@ var Cart = /*#__PURE__*/function (_React$Component) {
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
     _this.handleClickMinus = _this.handleClickMinus.bind(_assertThisInitialized(_this));
     _this.handleUpdate = _this.handleUpdate.bind(_assertThisInitialized(_this));
+    _this.handleRemove = _this.handleRemove.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -556,7 +570,10 @@ var Cart = /*#__PURE__*/function (_React$Component) {
             onClick: _this2.handleClick.bind(_this2, book.id)
           }, "+"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
             onClick: _this2.handleUpdate.bind(_this2, book)
-          }, "Update Quantity")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          }, "Update Quantity"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+            className: "deleteButton2",
+            onClick: _this2.handleRemove(book)
+          }, "Remove from Cart")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
             src: book.imageUrl
           })));
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DeleteAllBooksFromCart__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -582,6 +599,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     update: function update(bookObj, userId) {
       return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_1__["updateBook"])(bookObj, userId));
+    },
+    deleteOneBook: function deleteOneBook(userId, bookId) {
+      return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_1__["deleteOneThunk"])(userId, bookId));
     }
   };
 };
@@ -1377,7 +1397,7 @@ function booksReducer() {
 /*!******************************!*\
   !*** ./client/store/cart.js ***!
   \******************************/
-/*! exports provided: fetchCart, addBookToCart, updateBook, emptyCartThunk, default */
+/*! exports provided: fetchCart, addBookToCart, updateBook, emptyCartThunk, deleteOneThunk, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1386,6 +1406,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addBookToCart", function() { return addBookToCart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateBook", function() { return updateBook; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "emptyCartThunk", function() { return emptyCartThunk; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteOneThunk", function() { return deleteOneThunk; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return cartReducer; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
@@ -1402,8 +1423,6 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -1414,7 +1433,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var GET_CART = 'GET_CART';
 var ADD_BOOK = 'ADD_BOOK';
 var UPDATE_CART = 'UPDATE_CART';
-var EMPTY_CART = 'EMPTY_CART'; //action creator
+var EMPTY_CART = 'EMPTY_CART';
+var DELETE_SINGLEBOOK = 'DELETE_SINGLEBOOK'; //action creator
 
 var getCart = function getCart(cart) {
   return {
@@ -1434,13 +1454,6 @@ var updateCart = function updateCart(books) {
   return {
     type: UPDATE_CART,
     books: books
-  };
-};
-
-var emptyCart = function emptyCart(userId) {
-  return {
-    type: EMPTY_CART,
-    userId: userId
   };
 }; //thunk
 
@@ -1464,25 +1477,22 @@ function fetchCart(userId) {
 
             case 6:
               cart = _context.sent;
-              _context.next = 9;
-              return dispatch(getCart(cart));
-
-            case 9:
-              _context.next = 15;
+              dispatch(getCart(cart));
+              _context.next = 14;
               break;
 
-            case 11:
-              _context.prev = 11;
+            case 10:
+              _context.prev = 10;
               _context.t0 = _context["catch"](0);
               alert('You are not an authorized user to make changes to this account');
               console.log(_context.t0);
 
-            case 15:
+            case 14:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 11]]);
+      }, _callee, null, [[0, 10]]);
     }));
 
     return function (_x) {
@@ -1499,27 +1509,25 @@ function addBookToCart(bookObj, userId) {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.prev = 0;
-              console.log('>>>>>>>', _typeof(userId)); // const book = axios.get(//book by bookId//)
-
-              _context2.next = 4;
+              _context2.next = 3;
               return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/users/".concat(userId, "/cart"), bookObj);
 
-            case 4:
-              _context2.next = 10;
+            case 3:
+              _context2.next = 9;
               break;
 
-            case 6:
-              _context2.prev = 6;
+            case 5:
+              _context2.prev = 5;
               _context2.t0 = _context2["catch"](0);
               alert('This item is already in your cart. If you wish to update the quantity, please visit your cart. :) ');
               console.log(_context2.t0);
 
-            case 10:
+            case 9:
             case "end":
               return _context2.stop();
           }
         }
-      }, _callee2, null, [[0, 6]]);
+      }, _callee2, null, [[0, 5]]);
     }));
 
     return function (_x2) {
@@ -1545,24 +1553,21 @@ function updateBook(book, userId) {
 
             case 5:
               res = _context3.sent;
-              _context3.next = 8;
-              return dispatch(updateCart(res.data));
-
-            case 8:
-              _context3.next = 13;
+              dispatch(updateCart(res.data));
+              _context3.next = 12;
               break;
 
-            case 10:
-              _context3.prev = 10;
+            case 9:
+              _context3.prev = 9;
               _context3.t0 = _context3["catch"](0);
               console.log(_context3.t0);
 
-            case 13:
+            case 12:
             case "end":
               return _context3.stop();
           }
         }
-      }, _callee3, null, [[0, 10]]);
+      }, _callee3, null, [[0, 9]]);
     }));
 
     return function (_x3) {
@@ -1590,10 +1595,9 @@ var emptyCartThunk = function emptyCartThunk(userId) {
             case 4:
               _yield$axios$get = _context4.sent;
               data = _yield$axios$get.data;
-              _context4.next = 8;
-              return dispatch(getCart(data));
+              dispatch(getCart(data));
 
-            case 8:
+            case 7:
             case "end":
               return _context4.stop();
           }
@@ -1603,6 +1607,44 @@ var emptyCartThunk = function emptyCartThunk(userId) {
 
     return function (_x4) {
       return _ref4.apply(this, arguments);
+    };
+  }();
+}; //Thunk Creator for DELETE ONE ITEM FROM CART
+
+var deleteOneThunk = function deleteOneThunk(userId, bookObj) {
+  return /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(dispatch) {
+      var _yield$axios$get2, data;
+
+      return regeneratorRuntime.wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              console.log('from think delete ONE ', bookObj);
+              _context5.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/users/".concat(userId, "/cart"), {
+                data: bookObj
+              });
+
+            case 3:
+              _context5.next = 5;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/users/".concat(userId, "/cart"));
+
+            case 5:
+              _yield$axios$get2 = _context5.sent;
+              data = _yield$axios$get2.data;
+              dispatch(getCart(data));
+
+            case 8:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      }, _callee5);
+    }));
+
+    return function (_x5) {
+      return _ref5.apply(this, arguments);
     };
   }();
 }; //initial State

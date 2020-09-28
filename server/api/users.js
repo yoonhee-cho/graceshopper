@@ -147,22 +147,31 @@ router.put('/:userId/cart', isUserMiddleWare, async (req, res, next) => {
 router.delete('/:userId/cart', isUserMiddleWare, async (req, res, next) => {
   try {
     const userId = req.params.userId
-    console.log(req.user.id, 'req.user.id')
-    const orderIdToBeDeleted = await Order.findOne({
-      where: {
-        userId: userId,
-        status: 'in progress'
-      },
-      attributes: ['id']
-    })
+    const bookIdToBeRmoved = req.body.id
+    if (!req.body.id) {
+      const orderIdToBeDeleted = await Order.findOne({
+        where: {
+          userId: userId,
+          status: 'in progress'
+        },
+        attributes: ['id']
+      })
 
-    await BookInOrder.destroy({
-      where: {
-        orderId: orderIdToBeDeleted.id
-      }
-    })
+      await BookInOrder.destroy({
+        where: {
+          orderId: orderIdToBeDeleted.id
+        }
+      })
 
-    res.status(204).end()
+      return res.status(204).end()
+    } else {
+      await BookInOrder.destroy({
+        where: {
+          bookId: bookIdToBeRmoved
+        }
+      })
+      return res.status(204).end()
+    }
   } catch (err) {
     next(err)
   }
