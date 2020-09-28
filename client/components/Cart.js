@@ -182,11 +182,11 @@ export class Cart extends React.Component {
               <NavLink
                 to={{
                   pathname: '/checkout',
-                  prices: subtotal
+                  prices: subtotal,
+                  userId: Number(this.props.match.params.userId)
                 }}
               >
-                {' '}
-                Continue to Checkout{' '}
+                Continue to Checkout
               </NavLink>
             </div>
             <DeleteAllBooksFromCart userId={userId} />

@@ -8,6 +8,7 @@ import AllBooks from './components/AllBooks'
 import SingleBook from './components/SingleBook'
 import Cart from './components/Cart'
 import Checkout from './components/Checkout'
+import Confirmation from './components/Confirmation'
 
 /**
  * COMPONENT
@@ -36,6 +37,7 @@ class Routes extends Component {
             <Route path="/home" component={UserHome} />
             <Route path="/:userId/cart" component={Cart} />
             <Route path="/checkout" component={Checkout} />
+            <Route path="/confirmation" component={Confirmation} />
           </Switch>
         )}
 

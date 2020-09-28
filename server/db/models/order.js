@@ -3,10 +3,7 @@ const db = require('../db')
 
 const Order = db.define('order', {
   status: {
-    type: Sequelize.STRING,
-    validate: {
-      isIn: ['in progress', 'ordered']
-    },
+    type: Sequelize.ENUM('in progress', 'ordered'),
     defaultValue: 'in progress'
   },
 

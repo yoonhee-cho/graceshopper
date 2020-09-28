@@ -1,14 +1,21 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchSingleBook} from '../store/singleBook'
+
+import {NavLink} from 'react-router-dom'
+import {updateOrderStatus} from '../store/cart.js'
 
 export class Checkout extends React.Component {
   constructor(props) {
     super(props)
+    this.handleClick = this.handleClick.bind(this)
   }
 
-  componentDidMount() {
-    console.log(this.props.location.prices)
+  componentDidMount() {}
+
+  handleClick(event) {
+    const userId = this.props.location.userId
+
+    this.props.update(userId)
   }
 
   render() {
@@ -23,6 +30,14 @@ export class Checkout extends React.Component {
       <div className="books-list">
         <p>Order Details</p>
         <div>Order Total: $ {orderTotal}</div>
+        <NavLink
+          to={{
+            pathname: '/confirmation'
+          }}
+          onClick={this.handleClick}
+        >
+          Place Order
+        </NavLink>
       </div>
     )
   }
@@ -34,8 +49,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    loadSingleBookInReact: id => {
-      dispatch(fetchSingleBook(id))
+    update: id => {
+      dispatch(updateOrderStatus(id))
     }
   }
 }

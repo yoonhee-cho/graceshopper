@@ -6,7 +6,7 @@ const GET_CART = 'GET_CART'
 const ADD_BOOK = 'ADD_BOOK'
 const UPDATE_CART = 'UPDATE_CART'
 const EMPTY_CART = 'EMPTY_CART'
-
+const ADD_TO_COMPLETED = 'ADD_TO_COMPLETED'
 //action creator
 const getCart = cart => {
   return {
@@ -36,6 +36,14 @@ const emptyCart = userId => {
   }
 }
 
+const addToCompleted = (order, completedOrders) => {
+  return {
+    type: ADD_TO_COMPLETED,
+    completed: completedOrders,
+    order: order
+  }
+}
+
 //thunk
 export function fetchCart(userId) {
   return async dispatch => {
@@ -56,7 +64,6 @@ export function fetchCart(userId) {
 export function addBookToCart(bookObj, userId) {
   return async dispatch => {
     try {
-      console.log('>>>>>>>', typeof userId)
       // const book = axios.get(//book by bookId//)
 
       await axios.post(`/api/users/${userId}/cart`, bookObj)
@@ -72,15 +79,28 @@ export function addBookToCart(bookObj, userId) {
 export function updateBook(book, userId) {
   return async dispatch => {
     try {
+      console.log('HELLLLLooo')
       await axios.put(`/api/users/${userId}/cart`, book)
       const res = await axios.get(`/api/users/${userId}/cart`)
       await dispatch(updateCart(res.data))
     } catch (error) {
+      console.log('OOOUCH')
       console.log(error)
     }
   }
 }
 
+export function updateOrderStatus(userId) {
+  return async dispatch => {
+    try {
+      const completed = await axios.get(`/api/users/${userId}/completed`)
+      const completedOrders = completed.data
+      const res = await axios.post(`/api/users/${userId}/completed`)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
 //Thunk Creator for DELETE ALL items in cart
 export const emptyCartThunk = userId => {
   return async dispatch => {
