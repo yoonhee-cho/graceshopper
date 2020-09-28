@@ -1,4 +1,3 @@
-
 /* global describe beforeEach it */
 
 const {expect} = require('chai')
@@ -11,7 +10,6 @@ describe('Book routes', () => {
   beforeEach(async () => {
     await db.sync({force: true})
     const books = await Promise.all([
-
       Book.create({id: 1, title: 'book1', price: 2000}),
       Book.create({id: 2, title: 'book2', price: 1200})
     ])
@@ -31,6 +29,15 @@ describe('Book routes', () => {
       expect(titles).to.include('book2')
     })
   })
+
+  describe('GET /api/books/1/', () => {
+    it('responds with a single book', async () => {
+      const res = await request(app)
+        .get('/api/books/1')
+        .expect(200)
+      expect(res.body).to.be.an('object')
+      expect(res.body.title).to.equal('book1')
+    })
+  })
 })
 // end describe('/api/books')
-
