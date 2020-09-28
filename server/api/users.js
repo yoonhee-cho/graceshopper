@@ -1,9 +1,10 @@
 const router = require('express').Router()
 const {User, Book, BookInOrder, Order} = require('../db/models')
 module.exports = router
+const isUserMiddleWare = require('../app/userPrivileges')
 
 //GET api/users/:userId/cart
-router.get('/:userId/cart', async (req, res, next) => {
+router.get('/:userId/cart', isUserMiddleWare, async (req, res, next) => {
   try {
     const userIdFromLink = req.params.userId
 
@@ -106,7 +107,7 @@ router.post('/:userId/cart', async (req, res, next) => {
 //   }
 // })
 
-router.put('/:userId/cart', async (req, res, next) => {
+router.put('/:userId/cart', isUserMiddleWare, async (req, res, next) => {
   try {
     const bookId = req.body.id
 
@@ -143,9 +144,10 @@ router.put('/:userId/cart', async (req, res, next) => {
 })
 
 //DELETE /api/users/:userId/cart
-router.delete('/:userId/cart', async (req, res, next) => {
+router.delete('/:userId/cart', isUserMiddleWare, async (req, res, next) => {
   try {
     const userId = req.params.userId
+    console.log(req.user.id, 'req.user.id')
     const orderIdToBeDeleted = await Order.findOne({
       where: {
         userId: userId,
