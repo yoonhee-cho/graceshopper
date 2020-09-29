@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchSingleBook} from '../store/singleBook'
 import AddToCart from './AddToCart'
+import {Link} from 'react-router-dom'
 
 export class SingleBook extends React.Component {
   constructor(props) {
@@ -15,7 +16,7 @@ export class SingleBook extends React.Component {
   render() {
     const singleBook = this.props.singleBookInReact.singleBook
     const authors = this.props.singleBookInReact.singleBook.authors
-
+    const loggedUserId = this.props.location.loggedUserId
     return (
       <div className="books-list">
         <p className="title">
@@ -43,7 +44,11 @@ export class SingleBook extends React.Component {
                     </div>
                     <div>Genre:{singleBook.category}</div>
                     <img src={singleBook.imageUrl} />
-                    <AddToCart book={singleBook} />
+                    {loggedUserId ? (
+                      <AddToCart book={singleBook} />
+                    ) : (
+                      <Link to="/login">Login to Add to Cart</Link>
+                    )}
                   </li>
                 </div>
               </ul>

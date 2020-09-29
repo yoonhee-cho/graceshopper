@@ -426,6 +426,14 @@ const users = [
     password: '123456',
     salt: '123456',
     address: '324 W 27th street, New York, NY 10006'
+  },
+
+  {
+    email: 'admin@gmail.com',
+    password: '123456',
+    salt: '1233456',
+    address: '111 homeOffice, New York, NY 10004',
+    isAdmin: true
   }
 ]
 
@@ -451,6 +459,7 @@ const booksInOrder = [
   }
 ]
 
+// eslint-disable-next-line max-statements
 const seed = async () => {
   try {
     await db.sync({force: true})

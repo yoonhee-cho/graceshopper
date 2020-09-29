@@ -4,9 +4,11 @@ import {connect} from 'react-redux'
 
 import AddToCart from './AddToCart'
 
-import {Link, Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
+import EditBook from './EditBook'
 
 export class AllBooks extends React.Component {
+  // eslint-disable-next-line no-useless-constructor
   constructor(props) {
     super(props)
   }
@@ -18,6 +20,11 @@ export class AllBooks extends React.Component {
   render() {
     // const books = this.props.books
     const loggedUserId = this.props.loggedUserId
+    const isAdmin = this.props.isAdmin
+    const isLoggedIn = this.props.isLoggedIn
+
+    console.log('HELLLLO:props ', this.props)
+    console.log('this is admin ', isAdmin)
 
     return (
       <div className="books-list">
@@ -28,27 +35,57 @@ export class AllBooks extends React.Component {
         {this.props.booksInReact.books &&
           this.props.booksInReact.books.map(book => (
             <div key={book.id} className="individual-book">
-              <Link to={`/books/${book.id}`}>
-                <h4>Book Title : {book.title}</h4>
-                <div>
-                  by{' '}
-                  {book.authors.map(
-                    (author, idx) =>
-                      idx === book.authors.length - 1
-                        ? `${author.firstName} ${author.lastName} `
-                        : `${author.firstName} ${author.lastName} , `
-                  )}
-                </div>
-                <div>
-                  <i>{book.shortDescription}</i>
-                </div>
-                <div>Genre:{book.category}</div>
+              {loggedUserId ? (
+                isAdmin ? (
+                  <Link
+                    to={`/books/${book.id}`}
+                    loggedUserId={loggedUserId}
+                    isAdmin={isAdmin}
+                  >
+                    <h4>Book Title : {book.title}</h4>
+                  </Link>
+                ) : (
+                  <Link to={`/books/${book.id}`} loggedUserId={loggedUserId}>
+                    <h4>Book Title : {book.title}</h4>
+                  </Link>
+                )
+              ) : (
+                <Link to={`/books/${book.id}`}>
+                  <h4>Book Title : {book.title}</h4>
+                </Link>
+              )}
 
-                <div>Price: ${book.price / 100}</div>
-                <AddToCart book={book} loggedUserId={loggedUserId} />
+              <div>
+                by{' '}
+                {book.authors.map(
+                  (author, idx) =>
+                    idx === book.authors.length - 1
+                      ? `${author.firstName} ${author.lastName} `
+                      : `${author.firstName} ${author.lastName} , `
+                )}
+              </div>
+              <div>
+                <i>{book.shortDescription}</i>
+              </div>
+              <div>Genre:{book.category}</div>
 
-                <img src={book.imageUrl} />
-              </Link>
+              <div>Price: ${book.price / 100}</div>
+
+              <img src={book.imageUrl} />
+              {/* <div>{isAdmin ? <EditBook book={book} /> : null}</div> */}
+              <br />
+              {loggedUserId || isLoggedIn ? (
+                isAdmin ? (
+                  <div>
+                    <AddToCart book={book} loggedUserId={loggedUserId} />
+                    <EditBook book={book} />
+                  </div>
+                ) : (
+                  <AddToCart book={book} loggedUserId={loggedUserId} />
+                )
+              ) : (
+                <Link to="/login">Log in to add to cart</Link>
+              )}
             </div>
           ))}
       </div>

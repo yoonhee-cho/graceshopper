@@ -7,15 +7,19 @@ import AllBooks from './AllBooks'
  * COMPONENT
  */
 export const UserHome = props => {
-  const {email, userId} = props
-
+  const {email, userId, isAdmin, isLoggedIn} = props
+  console.log('what is props here', props)
   return (
     <div>
       <h3 className="title">
         {' '}
         <i>Welcome, {email}!</i>
       </h3>
-      <AllBooks loggedUserId={userId} />
+      <AllBooks
+        loggedUserId={userId}
+        isAdmin={isAdmin}
+        isLoggedIn={isLoggedIn}
+      />
     </div>
   )
 }
@@ -26,7 +30,8 @@ export const UserHome = props => {
 const mapState = state => {
   return {
     email: state.user.email,
-    userId: state.user.id
+    userId: state.user.id,
+    isAdmin: state.user.isAdmin
   }
 }
 
