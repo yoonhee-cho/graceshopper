@@ -9,6 +9,8 @@ import SingleBook from './components/SingleBook'
 import Cart from './components/Cart'
 import Checkout from './components/Checkout'
 import Confirmation from './components/Confirmation'
+import Admin from './components/Admin'
+import AllUsers from './components/AllUsers'
 
 /**
  * COMPONENT
@@ -20,6 +22,7 @@ class Routes extends Component {
 
   render() {
     const {isLoggedIn} = this.props
+    const {isAdmin} = this.props
 
     return (
       <Switch>
@@ -30,6 +33,14 @@ class Routes extends Component {
         {/* <Route path='/guest/cart' component={} */}
         <Route exact path="/books" component={AllBooks} />
         <Route path="/books/:bookId" component={SingleBook} />
+
+        {isLoggedIn && isAdmin && (
+          <Switch>
+            {/* Only for admin */}
+            <Route exact path="/admin/users" component={AllUsers} />
+            <Route exact path="/admin" component={Admin} />
+          </Switch>
+        )}
 
         {isLoggedIn && (
           <Switch>
@@ -51,19 +62,20 @@ class Routes extends Component {
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    isAdmin: state.user.isAdmin,
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     loadInitialData() {
       dispatch(me())
-    }
+    },
   }
 }
 
@@ -76,5 +88,5 @@ export default withRouter(connect(mapState, mapDispatch)(Routes))
  */
 Routes.propTypes = {
   loadInitialData: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired,
 }
