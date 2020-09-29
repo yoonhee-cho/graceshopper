@@ -153,7 +153,9 @@ export class Cart extends React.Component {
       const subtotal = []
       return (
         <div className="books-list">
-          <h3>Cart</h3>
+          <h3 className="title">
+            <i>Cart</i>
+          </h3>
           <ul>
             {books.map(book => (
               <div key={book.id}>
@@ -181,7 +183,10 @@ export class Cart extends React.Component {
                   </div>
                   <div>
                     Quantity:
-                    <button onClick={this.handleClickMinus.bind(this, book.id)}>
+                    <button
+                      className="minusplus"
+                      onClick={this.handleClickMinus.bind(this, book.id)}
+                    >
                       -
                     </button>
                     {this.state.loading ? (
@@ -197,10 +202,16 @@ export class Cart extends React.Component {
                         }
                       })
                     )}
-                    <button onClick={this.handleClick.bind(this, book.id)}>
+                    <button
+                      className="minusplus"
+                      onClick={this.handleClick.bind(this, book.id)}
+                    >
                       +
                     </button>
-                    <button onClick={this.handleUpdate.bind(this, book)}>
+                    <button
+                      className="deleteButton2"
+                      onClick={this.handleUpdate.bind(this, book)}
+                    >
                       Update Quantity
                     </button>
                     <button
@@ -220,10 +231,12 @@ export class Cart extends React.Component {
                 to={{
                   pathname: '/checkout',
                   prices: subtotal,
+                  books: books,
                   userId: Number(this.props.match.params.userId)
                 }}
+                className="minusplus"
               >
-                Continue to Checkout
+                <button className="minusplus">Continue to Checkout</button>
               </NavLink>
             </div>
             <DeleteAllBooksFromCart userId={userId} />

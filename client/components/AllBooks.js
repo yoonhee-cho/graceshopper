@@ -21,11 +21,13 @@ export class AllBooks extends React.Component {
 
     return (
       <div className="books-list">
-        <h3>Books</h3>
+        <h3 className="title">
+          <i>Books</i>
+        </h3>
 
         {this.props.booksInReact.books &&
           this.props.booksInReact.books.map(book => (
-            <div key={book.id}>
+            <div key={book.id} className="individual-book">
               <Link to={`/books/${book.id}`}>
                 <h4>Book Title : {book.title}</h4>
                 <div>
@@ -42,7 +44,7 @@ export class AllBooks extends React.Component {
                 </div>
                 <div>Genre:{book.category}</div>
 
-                <div>Price: {book.price / 100}</div>
+                <div>Price: ${book.price / 100}</div>
                 <AddToCart book={book} loggedUserId={loggedUserId} />
 
                 <img src={book.imageUrl} />

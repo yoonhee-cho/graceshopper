@@ -84,7 +84,7 @@ export function addBookToCart(bookObj, userId) {
         text: `${
           bookObj.title
         } is already in your cart. If you wish to update the quantity, please visit your cart. :) `,
-        duration: 3000,
+        duration: 5000,
         destination: 'https://github.com/apvarun/toastify-js',
         newWindow: true,
         close: true,

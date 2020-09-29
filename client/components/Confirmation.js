@@ -12,7 +12,7 @@ export class Checkout extends React.Component {
 
   render() {
     return (
-      <div className="confirmation-page">
+      <div className="title">
         <p>OMG THANK YOU SOOO MUCH FOR YOUR ORDER!!!</p>
         <div>
           <i>one order of textbooks coming right up!</i>

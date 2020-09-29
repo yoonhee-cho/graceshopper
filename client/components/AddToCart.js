@@ -33,7 +33,7 @@ export class AddToCart extends React.Component {
     return (
       <div className="addToCart">
         <i className="fas fa-shopping-cart" />
-        <button type="click" onClick={this.handleClick}>
+        <button className="minusplus" type="click" onClick={this.handleClick}>
           Add To Cart
         </button>
       </div>
