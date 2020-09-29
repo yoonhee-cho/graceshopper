@@ -5,7 +5,6 @@ import DeleteAllBooksFromCart from './DeleteAllBooksFromCart'
 import LoadingSpinner from './loadingSpinner'
 import Toastify from 'toastify-js'
 import Checkout from './Checkout'
-import LoadingSpinner from './loadingSpinner'
 import {NavLink} from 'react-router-dom'
 
 export class Cart extends React.Component {

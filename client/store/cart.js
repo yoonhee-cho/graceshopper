@@ -96,19 +96,6 @@ export function updateOrderStatus(userId) {
       const completedOrders = completed.data
       const res = await axios.post(`/api/users/${userId}/completed`)
     } catch (error) {
-      console.log('OOOUCH')
-      console.log(error)
-    }
-  }
-}
-
-export function updateOrderStatus(userId) {
-  return async dispatch => {
-    try {
-      const completed = await axios.get(`/api/users/${userId}/completed`)
-      const completedOrders = completed.data
-      const res = await axios.post(`/api/users/${userId}/completed`)
-    } catch (error) {
       console.log(error)
     }
   }
