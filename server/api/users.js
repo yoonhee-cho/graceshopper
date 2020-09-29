@@ -61,7 +61,7 @@ router.get('/:userId/cart', isUserMiddleWare, async (req, res, next) => {
 })
 
 //Get Route for api/users/:userId/cart/completed(for completed order)
-router.get('/:userId/completed', async (req, res, next) => {
+router.get('/:userId/completed', isUserMiddleWare, async (req, res, next) => {
   try {
     const userIdFromLink = req.params.userId
 
@@ -118,7 +118,7 @@ router.post('/:userId/cart', async (req, res, next) => {
 
 //post route for updating order status
 
-router.post('/:userId/completed', async (req, res, next) => {
+router.post('/:userId/completed', isUserMiddleWare, async (req, res, next) => {
   try {
     const userId = req.params.userId
 
