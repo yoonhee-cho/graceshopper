@@ -58,6 +58,23 @@ router.get('/:userId/cart', isUserMiddleWare, async (req, res, next) => {
   }
 })
 
+//Get Route for api/users/:userId/cart/completed(for completed order)
+router.get('/:userId/completed', async (req, res, next) => {
+  try {
+    const userIdFromLink = req.params.userId
+
+    const completedOrders = await Order.findAll({
+      where: {
+        userId: userIdFromLink,
+        status: 'ordered'
+      }
+    })
+
+    await res.send(completedOrders)
+  } catch (err) {
+    next(err)
+  }
+})
 //Post Route /api/users/:userId/cart
 
 router.post('/:userId/cart', async (req, res, next) => {
@@ -97,6 +114,30 @@ router.post('/:userId/cart', async (req, res, next) => {
   }
 })
 
+//post route for updating order status
+
+router.post('/:userId/completed', async (req, res, next) => {
+  try {
+    const userId = req.params.userId
+
+    const order = await Order.findOne({
+      where: {
+        userId: userId,
+        status: 'in progress'
+      }
+    })
+    const ordered = 'ordered'
+
+    console.log(order.status, 'STATUS')
+    order.status = ordered
+
+    await order.save()
+
+    await res.status(201).end()
+  } catch (error) {
+    console.log(error)
+  }
+})
 // //put route api/users/:userId/cart
 
 // router.put('/:userId/cart', async (req, res, next) => {
