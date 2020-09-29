@@ -13,7 +13,7 @@ const reducer = combineReducers({
   books: booksReducer,
   singleBook: singleBookReducer,
   cart: cartReducer,
-  allUsers: usersReducer
+  users: usersReducer
 })
 
 const middleware = composeWithDevTools(

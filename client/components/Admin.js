@@ -22,7 +22,6 @@ export default class Admin extends Component {
       <div>
         <h3>Hello Admin </h3>
         <AllBooks />
-        <AllUsers />
       </div>
     )
   }

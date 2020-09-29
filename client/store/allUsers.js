@@ -3,14 +3,17 @@ import history from '../history'
 
 const GET_ALL_USERS = 'GET_ALL_USERS'
 
-const getAllUsers = users => ({type: GET_ALL_USERS, users})
+const getAllUsers = users => ({
+  type: GET_ALL_USERS,
+  users: users
+})
 
 export function fetchUsers() {
   return async dispatch => {
     try {
       const res = await axios.get('/api/admin/users')
       const users = res.data
-      await dispatch(getAllUsers(users))
+      dispatch(getAllUsers(users))
     } catch (error) {
       console.log('fetchUsers has error: ', error)
     }

@@ -8,6 +8,7 @@ import AllBooks from './components/AllBooks'
 import SingleBook from './components/SingleBook'
 import Cart from './components/Cart'
 import Admin from './components/Admin'
+import AllUsers from './components/AllUsers'
 
 /**
  * COMPONENT
@@ -35,7 +36,8 @@ class Routes extends Component {
           isAdmin && (
             <Switch>
               {/* Only for admin */}
-              <Route path="/admin" component={Admin} />
+              <Route exact path="/admin/users" component={AllUsers} />
+              <Route exact path="/admin" component={Admin} />
             </Switch>
           )}
 

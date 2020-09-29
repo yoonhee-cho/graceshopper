@@ -280,7 +280,7 @@ var Admin = /*#__PURE__*/function (_Component) {
     //   }
     value: function render() {
       // const {isAdmin} = this.props
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Hello Admin "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AllBooks__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AllUsers__WEBPACK_IMPORTED_MODULE_7__["default"], null));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Hello Admin "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AllBooks__WEBPACK_IMPORTED_MODULE_4__["default"], null));
     }
   }]);
 
@@ -426,18 +426,15 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 /*!***************************************!*\
   !*** ./client/components/AllUsers.js ***!
   \***************************************/
-/*! exports provided: AllUsers, default */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AllUsers", function() { return AllUsers; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _store_allUsers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store/allUsers */ "./client/store/allUsers.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _AddToCart__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AddToCart */ "./client/components/AddToCart.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -460,10 +457,12 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
-
+ // import AddToCart from './AddToCart'
+// import {Link} from 'react-router-dom'
 
 var AllUsers = /*#__PURE__*/function (_React$Component) {
   _inherits(AllUsers, _React$Component);
@@ -471,22 +470,45 @@ var AllUsers = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(AllUsers);
 
   function AllUsers(props) {
+    var _this;
+
     _classCallCheck(this, AllUsers);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "handleClick", function (userId) {
+      return function (event) {
+        event.preventDefault();
+        console.log('I am in handleClick AllUser', userId);
+      };
+    });
+
+    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(AllUsers, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.loadUsersInReact();
-    }
+    } //NEED TO ADD the single user product
+
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
+      var usersInReact = this.props.usersInReact.users;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "users-list"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "All Users"));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Hello from All Users"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, usersInReact && usersInReact.map(function (user) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: user.id
+        }, "User Email: ", user.email, "User Order History:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "editButton",
+          onClick: _this2.handleClick(user.id)
+        }, "Edit User"));
+      })));
     }
   }]);
 
@@ -507,7 +529,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(AllUsers));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(AllUsers)); //export default AllUsers
 
 /***/ }),
 
@@ -1168,7 +1190,7 @@ var Navbar = function Navbar(_ref) {
       userId = _ref.userId;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "HYKM's Book Store"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", null, isLoggedIn ? isAdmin ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
     to: "/admin/books"
-  }, "All Product"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+  }, "All Books"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
     to: "/admin/users"
   }, "All Users"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "#",
@@ -1349,6 +1371,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_SingleBook__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/SingleBook */ "./client/components/SingleBook.js");
 /* harmony import */ var _components_Cart__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Cart */ "./client/components/Cart.js");
 /* harmony import */ var _components_Admin__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Admin */ "./client/components/Admin.js");
+/* harmony import */ var _components_AllUsers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/AllUsers */ "./client/components/AllUsers.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1370,6 +1393,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -1420,6 +1444,11 @@ var Routes = /*#__PURE__*/function (_Component) {
         path: "/books/:bookId",
         component: _components_SingleBook__WEBPACK_IMPORTED_MODULE_7__["default"]
       }), isLoggedIn && isAdmin && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        exact: true,
+        path: "/admin/users",
+        component: _components_AllUsers__WEBPACK_IMPORTED_MODULE_10__["default"]
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        exact: true,
         path: "/admin",
         component: _components_Admin__WEBPACK_IMPORTED_MODULE_9__["default"]
       })), isLoggedIn && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
@@ -1542,24 +1571,21 @@ function fetchUsers() {
             case 3:
               res = _context.sent;
               users = res.data;
-              _context.next = 7;
-              return dispatch(getAllUsers(users));
-
-            case 7:
-              _context.next = 12;
+              dispatch(getAllUsers(users));
+              _context.next = 11;
               break;
 
-            case 9:
-              _context.prev = 9;
+            case 8:
+              _context.prev = 8;
               _context.t0 = _context["catch"](0);
               console.log('fetchUsers has error: ', _context.t0);
 
-            case 12:
+            case 11:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 9]]);
+      }, _callee, null, [[0, 8]]);
     }));
 
     return function (_x) {
@@ -1984,7 +2010,7 @@ var reducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   books: _books__WEBPACK_IMPORTED_MODULE_5__["default"],
   singleBook: _singleBook__WEBPACK_IMPORTED_MODULE_6__["default"],
   cart: _cart__WEBPACK_IMPORTED_MODULE_7__["default"],
-  allUsers: _allUsers__WEBPACK_IMPORTED_MODULE_8__["default"]
+  users: _allUsers__WEBPACK_IMPORTED_MODULE_8__["default"]
 });
 var middleware = Object(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3__["composeWithDevTools"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"], Object(redux_logger__WEBPACK_IMPORTED_MODULE_1__["createLogger"])({
   collapsed: true
