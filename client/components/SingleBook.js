@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {fetchSingleBook} from '../store/singleBook'
 import AddToCart from './AddToCart'
 import {Link} from 'react-router-dom'
+import UpdateBook from './UpdateBook'
 
 export class SingleBook extends React.Component {
   constructor(props) {
@@ -49,6 +50,7 @@ export class SingleBook extends React.Component {
                     ) : (
                       <Link to="/login">Login to Add to Cart</Link>
                     )}
+                    <UpdateBook book={singleBook} />
                   </li>
                 </div>
               </ul>

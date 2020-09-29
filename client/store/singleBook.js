@@ -19,6 +19,14 @@ export const fetchSingleBook = id => {
   }
 }
 
+// thunk for editing a book
+export const editABook = updatedBook => {
+  return async dispatch => {
+    await axios.put(`/api/admin/books/${updatedBook.id}`, updatedBook)
+    dispatch(setSingleBook(updatedBook))
+  }
+}
+
 const initialState = {
   singleBook: {}
 }
