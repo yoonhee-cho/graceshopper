@@ -45,9 +45,13 @@ export class AllBooks extends React.Component {
                 <div>Genre:{book.category}</div>
 
                 <div>Price: ${book.price / 100}</div>
-                <AddToCart book={book} loggedUserId={loggedUserId} />
 
                 <img src={book.imageUrl} />
+                {loggedUserId ? (
+                  <AddToCart book={book} loggedUserId={loggedUserId} />
+                ) : (
+                  <Link to="/login">Log in to add to cart</Link>
+                )}
               </Link>
             </div>
           ))}
