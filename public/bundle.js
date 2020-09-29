@@ -213,9 +213,8 @@ var AddToCart = /*#__PURE__*/function (_React$Component) {
         }
 
         return accum;
-      }, []);
-      console.log('bookInCart', bookInCart);
-      console.log('cart', this.props.cart);
+      }, []); // console.log('bookInCart', bookInCart)
+      // console.log('cart', this.props.cart)
 
       if (bookInCart.length === 1) {
         toastify_js__WEBPACK_IMPORTED_MODULE_3___default()({
@@ -250,7 +249,7 @@ var AddToCart = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "addToCart"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        "class": "fas fa-shopping-cart"
+        className: "fas fa-shopping-cart"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "click",
         onClick: this.handleClick
@@ -356,7 +355,7 @@ var AllBooks = /*#__PURE__*/function (_React$Component) {
           to: "/books/".concat(book.id)
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Book Title : ", book.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "by", ' ', book.authors.map(function (author, idx) {
           return idx === book.authors.length - 1 ? "".concat(author.firstName, " ").concat(author.lastName, " ") : "".concat(author.firstName, " ").concat(author.lastName, " , ");
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Price: ", book.price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, book.shortDescription)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Genre:", book.category), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Price: ", book.price / 100), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AddToCart__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, book.shortDescription)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Genre:", book.category), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Price: ", book.price / 100), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AddToCart__WEBPACK_IMPORTED_MODULE_3__["default"], {
           book: book,
           loggedUserId: loggedUserId
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -1515,7 +1514,7 @@ function booksReducer() {
 /*!******************************!*\
   !*** ./client/store/cart.js ***!
   \******************************/
-/*! exports provided: fetchCart, addBookToCart, updateBook, emptyCartThunk, deleteOneThunk, default */
+/*! exports provided: fetchCart, addBookToCart, updateBook, updateOrderStatus, emptyCartThunk, deleteOneThunk, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1523,6 +1522,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCart", function() { return fetchCart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addBookToCart", function() { return addBookToCart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateBook", function() { return updateBook; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateOrderStatus", function() { return updateOrderStatus; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "emptyCartThunk", function() { return emptyCartThunk; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteOneThunk", function() { return deleteOneThunk; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return cartReducer; });
@@ -1552,6 +1552,7 @@ var GET_CART = 'GET_CART';
 var ADD_BOOK = 'ADD_BOOK';
 var UPDATE_CART = 'UPDATE_CART';
 var EMPTY_CART = 'EMPTY_CART';
+var ADD_TO_COMPLETED = 'ADD_TO_COMPLETED';
 var DELETE_SINGLEBOOK = 'DELETE_SINGLEBOOK'; //action creator
 
 var getCart = function getCart(cart) {
@@ -1572,6 +1573,21 @@ var updateCart = function updateCart(books) {
   return {
     type: UPDATE_CART,
     books: books
+  };
+};
+
+var emptyCart = function emptyCart(userId) {
+  return {
+    type: EMPTY_CART,
+    userId: userId
+  };
+};
+
+var addToCompleted = function addToCompleted(order, completedOrders) {
+  return {
+    type: ADD_TO_COMPLETED,
+    completed: completedOrders,
+    order: order
   };
 }; //thunk
 
@@ -1631,18 +1647,16 @@ function addBookToCart(bookObj, userId) {
               return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/users/".concat(userId, "/cart"), bookObj);
 
             case 3:
-              _context2.next = 8;
+              _context2.next = 9;
               break;
 
             case 5:
               _context2.prev = 5;
               _context2.t0 = _context2["catch"](0);
-              // alert(
-              //   'This item is already in your cart. If you wish to update the quantity, please visit your cart. :) '
-              // )
+              alert('This item is already in your cart. If you wish to update the quantity, please visit your cart. :) ');
               console.log(_context2.t0);
 
-            case 8:
+            case 9:
             case "end":
               return _context2.stop();
           }
@@ -1694,68 +1708,71 @@ function updateBook(book, userId) {
       return _ref3.apply(this, arguments);
     };
   }();
-} //Thunk Creator for DELETE ALL items in cart
-
-var emptyCartThunk = function emptyCartThunk(userId) {
+}
+function updateOrderStatus(userId) {
   return /*#__PURE__*/function () {
     var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(dispatch) {
-      var _yield$axios$get, data;
-
+      var completed, completedOrders, res;
       return regeneratorRuntime.wrap(function _callee4$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              _context4.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/users/".concat(userId, "/cart"));
+              _context4.prev = 0;
+              _context4.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/users/".concat(userId, "/completed"));
 
-            case 2:
-              _context4.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/users/".concat(userId, "/cart"));
-
-            case 4:
-              _yield$axios$get = _context4.sent;
-              data = _yield$axios$get.data;
-              dispatch(getCart(data));
+            case 3:
+              completed = _context4.sent;
+              completedOrders = completed.data;
+              _context4.next = 7;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/users/".concat(userId, "/completed"));
 
             case 7:
+              res = _context4.sent;
+              _context4.next = 13;
+              break;
+
+            case 10:
+              _context4.prev = 10;
+              _context4.t0 = _context4["catch"](0);
+              console.log(_context4.t0);
+
+            case 13:
             case "end":
               return _context4.stop();
           }
         }
-      }, _callee4);
+      }, _callee4, null, [[0, 10]]);
     }));
 
     return function (_x4) {
       return _ref4.apply(this, arguments);
     };
   }();
-}; //Thunk Creator for DELETE ONE ITEM FROM CART
+} //Thunk Creator for DELETE ALL items in cart
 
-var deleteOneThunk = function deleteOneThunk(userId, bookObj) {
+var emptyCartThunk = function emptyCartThunk(userId) {
   return /*#__PURE__*/function () {
     var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(dispatch) {
-      var _yield$axios$get2, data;
+      var _yield$axios$get, data;
 
       return regeneratorRuntime.wrap(function _callee5$(_context5) {
         while (1) {
           switch (_context5.prev = _context5.next) {
             case 0:
-              console.log('from think delete ONE ', bookObj);
-              _context5.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/users/".concat(userId, "/cart"), {
-                data: bookObj
-              });
+              _context5.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/users/".concat(userId, "/cart"));
 
-            case 3:
-              _context5.next = 5;
+            case 2:
+              _context5.next = 4;
               return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/users/".concat(userId, "/cart"));
 
-            case 5:
-              _yield$axios$get2 = _context5.sent;
-              data = _yield$axios$get2.data;
+            case 4:
+              _yield$axios$get = _context5.sent;
+              data = _yield$axios$get.data;
               dispatch(getCart(data));
 
-            case 8:
+            case 7:
             case "end":
               return _context5.stop();
           }
@@ -1765,6 +1782,44 @@ var deleteOneThunk = function deleteOneThunk(userId, bookObj) {
 
     return function (_x5) {
       return _ref5.apply(this, arguments);
+    };
+  }();
+}; //Thunk Creator for DELETE ONE ITEM FROM CART
+
+var deleteOneThunk = function deleteOneThunk(userId, bookObj) {
+  return /*#__PURE__*/function () {
+    var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(dispatch) {
+      var _yield$axios$get2, data;
+
+      return regeneratorRuntime.wrap(function _callee6$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              console.log('from think delete ONE ', bookObj);
+              _context6.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/users/".concat(userId, "/cart"), {
+                data: bookObj
+              });
+
+            case 3:
+              _context6.next = 5;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/users/".concat(userId, "/cart"));
+
+            case 5:
+              _yield$axios$get2 = _context6.sent;
+              data = _yield$axios$get2.data;
+              dispatch(getCart(data));
+
+            case 8:
+            case "end":
+              return _context6.stop();
+          }
+        }
+      }, _callee6);
+    }));
+
+    return function (_x6) {
+      return _ref6.apply(this, arguments);
     };
   }();
 }; //initial State

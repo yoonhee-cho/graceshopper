@@ -1,12 +1,8 @@
 import React from 'react'
 import {deleteOneThunk, fetchCart, updateBook} from '../store/cart'
-
 import {connect} from 'react-redux'
-
 import DeleteAllBooksFromCart from './DeleteAllBooksFromCart'
-
 import LoadingSpinner from './loadingSpinner'
-
 import Toastify from 'toastify-js'
 
 export class Cart extends React.Component {

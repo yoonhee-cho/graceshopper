@@ -37,7 +37,6 @@ export class AllBooks extends React.Component {
                         : `${author.firstName} ${author.lastName} , `
                   )}
                 </div>
-                <div>Price: {book.price}</div>
                 <div>
                   <i>{book.shortDescription}</i>
                 </div>

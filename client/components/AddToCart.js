@@ -26,8 +26,8 @@ export class AddToCart extends React.Component {
       }
       return accum
     }, [])
-    console.log('bookInCart', bookInCart)
-    console.log('cart', this.props.cart)
+    // console.log('bookInCart', bookInCart)
+    // console.log('cart', this.props.cart)
 
     if (bookInCart.length === 1) {
       Toastify({

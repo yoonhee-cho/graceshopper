@@ -13,7 +13,6 @@ router.get('/:userId/cart', isUserMiddleWare, async (req, res, next) => {
         userId: userIdFromLink,
         status: 'in progress'
       },
-
       attributes: ['id']
     })
 
@@ -21,7 +20,6 @@ router.get('/:userId/cart', isUserMiddleWare, async (req, res, next) => {
       where: {
         orderId: orderIdFromOrders[0].id
       },
-
       attributes: ['bookId']
     })
 
@@ -59,7 +57,6 @@ router.get('/:userId/cart', isUserMiddleWare, async (req, res, next) => {
 })
 
 //Post Route /api/users/:userId/cart
-
 router.post('/:userId/cart', async (req, res, next) => {
   try {
     const bookId = req.body.id
@@ -72,6 +69,7 @@ router.post('/:userId/cart', async (req, res, next) => {
       },
       attributes: ['id']
     })
+
     const bookAlreadyInOrder = await BookInOrder.findOne({
       where: {
         bookId: bookId,
@@ -122,6 +120,7 @@ router.put('/:userId/cart', isUserMiddleWare, async (req, res, next) => {
     })
 
     const quantityInCart = req.body.book_in_orders[0].quantity
+
     const bookInOrder = await BookInOrder.findOne({
       where: {
         bookId: bookId,
