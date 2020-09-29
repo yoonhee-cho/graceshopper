@@ -69,7 +69,6 @@ router.get('/:userId/completed', async (req, res, next) => {
         status: 'ordered'
       }
     })
-    console.log(completedOrders, 'HELLLOOOOO')
 
     await res.send(completedOrders)
   } catch (err) {
