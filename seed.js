@@ -11,7 +11,7 @@ const books = [
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198418030.jpg',
     price: 3199,
-    qty: 10,
+    qty: 10
   },
   {
     title: `Oxford International Primary Maths: Stage 5: Teacher's Guide 5`,
@@ -22,7 +22,7 @@ const books = [
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198418054.jpg',
     price: 3099,
-    qty: 10,
+    qty: 10
   },
 
   {
@@ -34,7 +34,7 @@ const books = [
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198418078.jpg',
     price: 3099,
-    qty: 10,
+    qty: 10
   },
 
   {
@@ -46,7 +46,7 @@ const books = [
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198417965.jpg',
     price: 3099,
-    qty: 10,
+    qty: 10
   },
 
   {
@@ -58,7 +58,7 @@ const books = [
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198417996.jpg',
     price: 3099,
-    qty: 10,
+    qty: 10
   },
 
   {
@@ -70,7 +70,7 @@ const books = [
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198418016.jpg',
     price: 3399,
-    qty: 10,
+    qty: 10
   },
 
   {
@@ -83,7 +83,7 @@ const books = [
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198365297.jpg',
     price: 799,
-    qty: 10,
+    qty: 10
   },
 
   {
@@ -96,7 +96,7 @@ const books = [
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198365280.jpg',
     price: 799,
-    qty: 10,
+    qty: 10
   },
 
   {
@@ -109,7 +109,7 @@ const books = [
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198365303.jpg',
     price: 899,
-    qty: 10,
+    qty: 10
   },
 
   {
@@ -122,7 +122,7 @@ const books = [
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198365266.jpg',
     price: 699,
-    qty: 10,
+    qty: 10
   },
 
   {
@@ -135,7 +135,7 @@ const books = [
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198376439.jpg',
     price: 699,
-    qty: 10,
+    qty: 10
   },
 
   {
@@ -148,7 +148,7 @@ const books = [
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198376453.jpg',
     price: 699,
-    qty: 10,
+    qty: 10
   },
 
   {
@@ -161,7 +161,7 @@ const books = [
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198376477.jpg',
     price: 75,
-    qty: 10,
+    qty: 10
   },
 
   {
@@ -174,7 +174,7 @@ const books = [
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198376460.jpg',
     price: 75,
-    qty: 10,
+    qty: 10
   },
 
   {
@@ -187,7 +187,7 @@ const books = [
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198376422.jpg',
     price: 699,
-    qty: 10,
+    qty: 10
   },
 
   {
@@ -200,7 +200,7 @@ const books = [
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198376446.jpg',
     price: 699,
-    qty: 10,
+    qty: 10
   },
 
   {
@@ -213,7 +213,7 @@ const books = [
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198365334.jpg',
     price: 7199,
-    qty: 10,
+    qty: 10
   },
 
   {
@@ -225,7 +225,7 @@ const books = [
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198394921.jpg',
     price: 11299,
-    qty: 10,
+    qty: 10
   },
 
   {
@@ -237,7 +237,7 @@ const books = [
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198394891.jpg',
     price: 11299,
-    qty: 10,
+    qty: 10
   },
 
   {
@@ -249,91 +249,91 @@ const books = [
     imageUrl:
       'https://global.oup.com/education/covers/oxed/medium/9780198394907.jpg',
     price: 11299,
-    qty: 10,
-  },
+    qty: 10
+  }
 ]
 
 const authors = [
   {
     firstName: 'Terry',
-    lastName: 'Hudson',
+    lastName: 'Hudson'
   },
   {
     firstName: 'Henry',
-    lastName: 'Hudson',
+    lastName: 'Hudson'
   },
   {
     firstName: 'Judith',
-    lastName: 'Amery',
+    lastName: 'Amery'
   },
   {
     firstName: 'Larry',
-    lastName: 'Hudson',
+    lastName: 'Hudson'
   },
   {
     firstName: 'Barry',
-    lastName: 'Hudson',
+    lastName: 'Hudson'
   },
   {
     firstName: 'Gary',
-    lastName: 'Hudson',
+    lastName: 'Hudson'
   },
   {
     firstName: 'Khalilah',
-    lastName: 'Hudson',
+    lastName: 'Hudson'
   },
   {
     firstName: 'Harris',
-    lastName: 'Hudson',
+    lastName: 'Hudson'
   },
   {
     firstName: 'Orlando',
-    lastName: 'Hudson',
+    lastName: 'Hudson'
   },
   {
     firstName: 'Celine',
-    lastName: 'Hudson',
+    lastName: 'Hudson'
   },
   {
     firstName: 'Mac',
-    lastName: 'Hudson',
+    lastName: 'Hudson'
   },
   {
     firstName: 'Hedra',
-    lastName: 'Hudson',
+    lastName: 'Hudson'
   },
   {
     firstName: 'Jess',
-    lastName: 'Hudson',
+    lastName: 'Hudson'
   },
   {
     firstName: 'Melody',
-    lastName: 'Hudson',
+    lastName: 'Hudson'
   },
   {
     firstName: 'Kathryn',
-    lastName: 'Hudson',
+    lastName: 'Hudson'
   },
   {
     firstName: 'Yoon',
-    lastName: 'Hudson',
+    lastName: 'Hudson'
   },
   {
     firstName: 'Sara',
-    lastName: 'Hudson',
+    lastName: 'Hudson'
   },
   {
     firstName: 'Alison',
-    lastName: 'Hudson',
+    lastName: 'Hudson'
   },
   {
     firstName: 'Elle',
-    lastName: 'Hudson',
+    lastName: 'Hudson'
   },
   {
     firstName: 'Mary',
-    lastName: 'Hudson',
-  },
+    lastName: 'Hudson'
+  }
 ]
 
 const users = [
@@ -341,91 +341,91 @@ const users = [
     email: '123@gmail.com',
     password: '123456',
     salt: '1233456',
-    address: '123 Main Street, New York, NY 10004',
+    address: '123 Main Street, New York, NY 10004'
   },
   {
     email: '321@gmail.com',
     password: '123456',
     salt: '1233456',
-    address: '321 Main Street, New York, NY 10004',
+    address: '321 Main Street, New York, NY 10004'
   },
   {
     email: 'ryan@gmail.com',
     password: '111111',
     salt: '123456',
-    address: '435 East 14th Street, New York, NY 10009',
+    address: '435 East 14th Street, New York, NY 10009'
   },
   {
     email: 'thomas@gmail.com',
     password: '111111',
     salt: '123456',
-    address: '316 West 30th Street, New York, NY 10001',
+    address: '316 West 30th Street, New York, NY 10001'
   },
   {
     email: 'julie@gmail.com',
     password: '123456',
     salt: '123456',
-    address: '405 Broadway 17H, New York, NY 10001',
+    address: '405 Broadway 17H, New York, NY 10001'
   },
   {
     email: 'lydia@gmail.com',
     password: '123456',
     salt: '123456',
-    address: '439 bloom street, New York, NY 10015',
+    address: '439 bloom street, New York, NY 10015'
   },
   {
     email: 'claudia@gmail.com',
     password: '123456',
     salt: '123456',
-    address: '4739 hello street, Brookyln, NY 10015',
+    address: '4739 hello street, Brookyln, NY 10015'
   },
   {
     email: 'jaqueline@gmail.com',
     password: '123456',
     salt: '123456',
-    address: '504 main street, New York, NY 10015',
+    address: '504 main street, New York, NY 10015'
   },
   {
     email: 'simona@gmail.com',
     password: '123456',
     salt: '123456',
-    address: '1003 hanover street, New York, NY 10015',
+    address: '1003 hanover street, New York, NY 10015'
   },
   {
     email: 'samuel@gmail.com',
     password: '123456',
     salt: '123456',
-    address: '415 13th street, New York, NY 10009',
+    address: '415 13th street, New York, NY 10009'
   },
   {
     email: 'philip@gmail.com',
     password: '123456',
     salt: '123456',
-    address: '435 E 14th street, New York, NY 10009',
+    address: '435 E 14th street, New York, NY 10009'
   },
   {
     email: 'alexis@gmail.com',
     password: '123456',
     salt: '123456',
-    address: '115 W 83th street, New York, NY 10006',
+    address: '115 W 83th street, New York, NY 10006'
   },
   {
     email: 'joanna@gmail.com',
     password: '123456',
     salt: '123456',
-    address: '111 E 28th street, New York, NY 10006',
+    address: '111 E 28th street, New York, NY 10006'
   },
   {
     email: 'lanZhang@gmail.com',
     password: '123456',
     salt: '123456',
-    address: '324 W 27th street, New York, NY 10006',
+    address: '324 W 27th street, New York, NY 10006'
   },
   {
     email: 'casey@gmail.com',
     password: '123456',
     salt: '123456',
-    address: '324 W 27th street, New York, NY 10006',
+    address: '324 W 27th street, New York, NY 10006'
   },
 
   {
@@ -433,30 +433,30 @@ const users = [
     password: '123456',
     salt: '1233456',
     address: '111 homeOffice, New York, NY 10004',
-    isAdmin: true,
-  },
+    isAdmin: true
+  }
 ]
 
 const orders = [
   {
-    status: 'in progress',
+    status: 'in progress'
   },
 
   {
-    status: 'in progress',
-  },
+    status: 'in progress'
+  }
 ]
 
 const booksInOrder = [
   {
     quantity: 3,
-    totalPrice: 9297,
+    totalPrice: 9297
   },
 
   {
     quantity: 4,
-    totalPrice: 12396,
-  },
+    totalPrice: 12396
+  }
 ]
 
 // eslint-disable-next-line max-statements
@@ -465,31 +465,31 @@ const seed = async () => {
     await db.sync({force: true})
 
     const booksArr = await Promise.all(
-      books.map((book) => {
+      books.map(book => {
         return Book.create(book)
       })
     )
 
     const authorsArr = await Promise.all(
-      authors.map((author) => {
+      authors.map(author => {
         return Author.create(author)
       })
     )
 
     const usersArr = await Promise.all(
-      users.map((user) => {
+      users.map(user => {
         return User.create(user)
       })
     )
 
     const ordersArr = await Promise.all(
-      orders.map((order) => {
+      orders.map(order => {
         return Order.create(order)
       })
     )
 
     const booksInOrderArr = await Promise.all(
-      booksInOrder.map((book) => {
+      booksInOrder.map(book => {
         return BookInOrder.create(book)
       })
     )
@@ -575,7 +575,7 @@ if (require.main === module) {
       console.log('Seeding Successful!')
       db.close()
     })
-    .catch((err) => {
+    .catch(err => {
       console.log('Something went wrong!', err)
       db.close()
     })

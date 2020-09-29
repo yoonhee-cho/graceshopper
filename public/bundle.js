@@ -1546,12 +1546,9 @@ var Navbar = function Navbar(_ref) {
       isLoggedIn = _ref.isLoggedIn,
       isAdmin = _ref.isAdmin,
       userId = _ref.userId;
-<<<<<<< HEAD
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
     className: "title"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "HYKM BOOKS")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", null, isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
-=======
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "HYKM's Book Store"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", null, isLoggedIn ? isAdmin ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "HYKM BOOKS")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", null, isLoggedIn ? isAdmin ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
     to: "/admin/books"
   }, "All Books"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
     to: "/admin/users"
@@ -1559,13 +1556,12 @@ var Navbar = function Navbar(_ref) {
     href: "#",
     onClick: handleClick
   }, "Logout")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
->>>>>>> 05d5cc6eff549f2b6c648de632867d3438d63f42
     to: "/home"
   }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
     to: '/' + userId + '/cart'
-  }, "Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+  }, "CART"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
     to: "/books"
-  }, "Books"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, "AllBooks"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "#",
     onClick: handleClick
   }, "Logout")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
@@ -1736,13 +1732,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_AllBooks__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/AllBooks */ "./client/components/AllBooks.js");
 /* harmony import */ var _components_SingleBook__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/SingleBook */ "./client/components/SingleBook.js");
 /* harmony import */ var _components_Cart__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Cart */ "./client/components/Cart.js");
-<<<<<<< HEAD
 /* harmony import */ var _components_Checkout__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Checkout */ "./client/components/Checkout.js");
 /* harmony import */ var _components_Confirmation__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Confirmation */ "./client/components/Confirmation.js");
-=======
-/* harmony import */ var _components_Admin__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Admin */ "./client/components/Admin.js");
-/* harmony import */ var _components_AllUsers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/AllUsers */ "./client/components/AllUsers.js");
->>>>>>> 05d5cc6eff549f2b6c648de632867d3438d63f42
+/* harmony import */ var _components_Admin__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/Admin */ "./client/components/Admin.js");
+/* harmony import */ var _components_AllUsers__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/AllUsers */ "./client/components/AllUsers.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1764,6 +1757,8 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
 
 
 
@@ -1817,11 +1812,11 @@ var Routes = /*#__PURE__*/function (_Component) {
       }), isLoggedIn && isAdmin && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         exact: true,
         path: "/admin/users",
-        component: _components_AllUsers__WEBPACK_IMPORTED_MODULE_10__["default"]
+        component: _components_AllUsers__WEBPACK_IMPORTED_MODULE_12__["default"]
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         exact: true,
         path: "/admin",
-        component: _components_Admin__WEBPACK_IMPORTED_MODULE_9__["default"]
+        component: _components_Admin__WEBPACK_IMPORTED_MODULE_11__["default"]
       })), isLoggedIn && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/home",
         component: _components__WEBPACK_IMPORTED_MODULE_4__["UserHome"]
