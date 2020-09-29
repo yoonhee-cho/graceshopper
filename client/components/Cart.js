@@ -28,6 +28,7 @@ export class Cart extends React.Component {
 
   async componentDidMount() {
     const userId = Number(this.props.match.params.userId)
+
     await this.props.getCart(userId)
     const quantityInCart = this.props.cart.map(book => {
       return book.book_in_orders

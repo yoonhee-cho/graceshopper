@@ -6,8 +6,9 @@ export class UpdateBook extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: 'title',
-      price: 0
+      title: this.props.book.title,
+      price: this.props.book.price / 100,
+      qty: this.props.book.qty
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -24,7 +25,7 @@ export class UpdateBook extends React.Component {
     try {
       event.preventDefault()
       this.props.book.title = this.state.title
-      this.props.book.price = this.state.price
+      this.props.book.price = this.state.price * 100
       this.props.update(this.props.book)
     } catch (error) {
       console.log(error)
@@ -39,7 +40,11 @@ export class UpdateBook extends React.Component {
           <input type="text" name="title" onChange={this.handleChange} />
           <label htmlFor="price">New Price</label>
           <input type="text" name="price" onChange={this.handleChange} />
-          <button type="submit">Update</button>
+          <label htmlFor="qty">Quantity</label>
+          <input type="number" name="qty" onChange={this.handleChange} />
+          <button type="submit" className="minusplus">
+            Update
+          </button>
         </form>
       </div>
     )

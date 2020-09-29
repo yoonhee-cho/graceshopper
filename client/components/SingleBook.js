@@ -11,13 +11,15 @@ export class SingleBook extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props, 'PROPSP')
     this.props.loadSingleBookInReact(this.props.match.params.bookId)
   }
 
   render() {
     const singleBook = this.props.singleBookInReact.singleBook
     const authors = this.props.singleBookInReact.singleBook.authors
-    const loggedUserId = this.props.location.loggedUserId
+    const loggedUserId = this.props.loggedInUserId
+    const isAdmin = this.props.isAdmin
     return (
       <div className="books-list">
         <p className="title">
@@ -50,7 +52,7 @@ export class SingleBook extends React.Component {
                     ) : (
                       <Link to="/login">Login to Add to Cart</Link>
                     )}
-                    <UpdateBook book={singleBook} />
+                    {isAdmin ? <UpdateBook book={singleBook} /> : null}
                   </li>
                 </div>
               </ul>
@@ -63,7 +65,9 @@ export class SingleBook extends React.Component {
 
 const mapState = state => {
   return {
-    singleBookInReact: state.singleBook
+    singleBookInReact: state.singleBook,
+    isAdmin: state.user.isAdmin,
+    loggedInUserId: state.user.id
   }
 }
 

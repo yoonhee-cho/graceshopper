@@ -38,8 +38,11 @@ class Routes extends Component {
           isAdmin && (
             <Switch>
               {/* Only for admin */}
+              <Route path="/:userId/cart" component={Cart} />
               <Route exact path="/admin/users" component={AllUsers} />
               <Route exact path="/home" component={Admin} />
+              <Route path="/checkout" component={Checkout} />
+              <Route path="/confirmation" component={Confirmation} />
             </Switch>
           )}
 

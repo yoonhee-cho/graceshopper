@@ -475,7 +475,8 @@ var AllBooks = /*#__PURE__*/function (_React$Component) {
         }, loggedUserId ? isAdmin ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
           to: "/books/".concat(book.id),
           loggedUserId: loggedUserId,
-          isAdmin: isAdmin
+          isAdmin: isAdmin,
+          className: "minusplus"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Book Title : ", book.title)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
           to: "/books/".concat(book.id),
           loggedUserId: loggedUserId
@@ -490,7 +491,8 @@ var AllBooks = /*#__PURE__*/function (_React$Component) {
           loggedUserId: loggedUserId
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
           to: "/books/".concat(book.id),
-          book: book
+          book: book,
+          className: "minusplus"
         }, "Edit Book")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AddToCart__WEBPACK_IMPORTED_MODULE_3__["default"], {
           book: book,
           loggedUserId: loggedUserId
@@ -1383,6 +1385,7 @@ var SingleBook = /*#__PURE__*/function (_React$Component) {
   _createClass(SingleBook, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      console.log(this.props, 'PROPSP');
       this.props.loadSingleBookInReact(this.props.match.params.bookId);
     }
   }, {
@@ -1390,7 +1393,8 @@ var SingleBook = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var singleBook = this.props.singleBookInReact.singleBook;
       var authors = this.props.singleBookInReact.singleBook.authors;
-      var loggedUserId = this.props.location.loggedUserId;
+      var loggedUserId = this.props.loggedInUserId;
+      var isAdmin = this.props.isAdmin;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "books-list"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
@@ -1407,9 +1411,9 @@ var SingleBook = /*#__PURE__*/function (_React$Component) {
         book: singleBook
       }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
         to: "/login"
-      }, "Login to Add to Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UpdateBook__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      }, "Login to Add to Cart"), isAdmin ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UpdateBook__WEBPACK_IMPORTED_MODULE_5__["default"], {
         book: singleBook
-      }))))));
+      }) : null)))));
     }
   }]);
 
@@ -1418,7 +1422,9 @@ var SingleBook = /*#__PURE__*/function (_React$Component) {
 
 var mapState = function mapState(state) {
   return {
-    singleBookInReact: state.singleBook
+    singleBookInReact: state.singleBook,
+    isAdmin: state.user.isAdmin,
+    loggedInUserId: state.user.id
   };
 };
 
@@ -1494,8 +1500,9 @@ var UpdateBook = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      title: 'title',
-      price: 0
+      title: _this.props.book.title,
+      price: _this.props.book.price / 100,
+      qty: _this.props.book.qty
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -1519,7 +1526,7 @@ var UpdateBook = /*#__PURE__*/function (_React$Component) {
                 try {
                   event.preventDefault();
                   this.props.book.title = this.state.title;
-                  this.props.book.price = this.state.price;
+                  this.props.book.price = this.state.price * 100;
                   this.props.update(this.props.book);
                 } catch (error) {
                   console.log(error);
@@ -1556,8 +1563,15 @@ var UpdateBook = /*#__PURE__*/function (_React$Component) {
         type: "text",
         name: "price",
         onChange: this.handleChange
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "qty"
+      }, "Quantity"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "number",
+        name: "qty",
+        onChange: this.handleChange
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "submit"
+        type: "submit",
+        className: "minusplus"
       }, "Update")));
     }
   }]);
@@ -1772,17 +1786,19 @@ var Navbar = function Navbar(_ref) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
     className: "title"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "HYKM BOOKS")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", null, isLoggedIn ? isAdmin ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
-    to: "/admin/books"
+    to: "/home"
   }, "All Books"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
     to: "/admin/users"
-  }, "All Users"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, "All Users"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+    to: '/' + userId + '/cart'
+  }, "Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "#",
     onClick: handleClick
   }, "Logout")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
     to: "/home"
   }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
     to: '/' + userId + '/cart'
-  }, "CART"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+  }, "Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
     to: "/books"
   }, "AllBooks"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "#",
@@ -2039,6 +2055,9 @@ var Routes = /*#__PURE__*/function (_Component) {
         path: "/books/:bookId",
         component: _components_SingleBook__WEBPACK_IMPORTED_MODULE_7__["default"]
       }), isLoggedIn && isAdmin && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        path: "/:userId/cart",
+        component: _components_Cart__WEBPACK_IMPORTED_MODULE_8__["default"]
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         exact: true,
         path: "/admin/users",
         component: _components_AllUsers__WEBPACK_IMPORTED_MODULE_12__["default"]
@@ -2046,6 +2065,12 @@ var Routes = /*#__PURE__*/function (_Component) {
         exact: true,
         path: "/home",
         component: _components_Admin__WEBPACK_IMPORTED_MODULE_11__["default"]
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        path: "/checkout",
+        component: _components_Checkout__WEBPACK_IMPORTED_MODULE_9__["default"]
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        path: "/confirmation",
+        component: _components_Confirmation__WEBPACK_IMPORTED_MODULE_10__["default"]
       })), isLoggedIn && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/home",
         component: _components__WEBPACK_IMPORTED_MODULE_4__["UserHome"]

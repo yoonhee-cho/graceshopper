@@ -41,6 +41,7 @@ export class AllBooks extends React.Component {
                     to={`/books/${book.id}`}
                     loggedUserId={loggedUserId}
                     isAdmin={isAdmin}
+                    className="minusplus"
                   >
                     <h4>Book Title : {book.title}</h4>
                   </Link>
@@ -78,7 +79,11 @@ export class AllBooks extends React.Component {
                 isAdmin ? (
                   <div>
                     <AddToCart book={book} loggedUserId={loggedUserId} />
-                    <Link to={`/books/${book.id}`} book={book}>
+                    <Link
+                      to={`/books/${book.id}`}
+                      book={book}
+                      className="minusplus"
+                    >
                       Edit Book
                     </Link>
                     {/* <EditBook book={book} /> */}
