@@ -7,11 +7,11 @@ import AllBooks from './AllBooks'
 import SingleBook from './SingleBook'
 import navbar from './navbar'
 import AllUsers from './AllUsers'
-
+import {UserHome} from './user-home'
 /**
  * COMPONENT
  */
-export default class Admin extends Component {
+class Admin extends Component {
   //   componentDidMount() {
   //     this.props.loadInitialData()
   //   }
@@ -21,7 +21,12 @@ export default class Admin extends Component {
     return (
       <div>
         <h3>Hello Admin </h3>
-        <AllBooks />
+        <UserHome
+          isAdmin="true"
+          isLoggedIn="true"
+          loggedUserId={this.props.loggedUserId}
+        />
+        {/* <AllBooks /> */}
       </div>
     )
   }
@@ -30,12 +35,12 @@ export default class Admin extends Component {
 /**
  * CONTAINER
  */
-// const mapState = (state) => {
-//   return {
-//     isLoggedIn: !!state.user.id,
-//     isAdmin: state.user.isAdmin,
-//   }
-// }
+const mapState = state => {
+  return {
+    loggedUserId: state.user.id,
+    isAdmin: state.user.isAdmin
+  }
+}
 
 // const mapDispatch = (dispatch) => {
 //   return {
@@ -47,7 +52,7 @@ export default class Admin extends Component {
 
 // // The `withRouter` wrapper makes sure that updates are not blocked
 // // when the url changes
-// export default withRouter(connect(mapState, mapDispatch)(AdminHome))
+export default withRouter(connect(mapState, null)(Admin))
 
 // /**
 //  * PROP TYPES

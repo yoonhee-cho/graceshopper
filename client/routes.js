@@ -39,7 +39,7 @@ class Routes extends Component {
             <Switch>
               {/* Only for admin */}
               <Route exact path="/admin/users" component={AllUsers} />
-              <Route exact path="/admin" component={Admin} />
+              <Route exact path="/home" component={Admin} />
             </Switch>
           )}
 

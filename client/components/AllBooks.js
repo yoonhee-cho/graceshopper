@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 import AddToCart from './AddToCart'
 
 import {Link} from 'react-router-dom'
+import EditBook from './EditBook'
 
 export class AllBooks extends React.Component {
   // eslint-disable-next-line no-useless-constructor
@@ -19,6 +20,11 @@ export class AllBooks extends React.Component {
   render() {
     // const books = this.props.books
     const loggedUserId = this.props.loggedUserId
+    const isAdmin = this.props.isAdmin
+    const isLoggedIn = this.props.isLoggedIn
+
+    console.log('HELLLLO:props ', this.props)
+    console.log('this is admin ', isAdmin)
 
     return (
       <div className="books-list">
@@ -30,9 +36,19 @@ export class AllBooks extends React.Component {
           this.props.booksInReact.books.map(book => (
             <div key={book.id} className="individual-book">
               {loggedUserId ? (
-                <Link to={`/books/${book.id}`} loggedUserId={loggedUserId}>
-                  <h4>Book Title : {book.title}</h4>
-                </Link>
+                isAdmin ? (
+                  <Link
+                    to={`/books/${book.id}`}
+                    loggedUserId={loggedUserId}
+                    isAdmin={isAdmin}
+                  >
+                    <h4>Book Title : {book.title}</h4>
+                  </Link>
+                ) : (
+                  <Link to={`/books/${book.id}`} loggedUserId={loggedUserId}>
+                    <h4>Book Title : {book.title}</h4>
+                  </Link>
+                )
               ) : (
                 <Link to={`/books/${book.id}`}>
                   <h4>Book Title : {book.title}</h4>
@@ -56,8 +72,17 @@ export class AllBooks extends React.Component {
               <div>Price: ${book.price / 100}</div>
 
               <img src={book.imageUrl} />
-              {loggedUserId ? (
-                <AddToCart book={book} loggedUserId={loggedUserId} />
+              {/* <div>{isAdmin ? <EditBook book={book} /> : null}</div> */}
+              <br />
+              {loggedUserId || isLoggedIn ? (
+                isAdmin ? (
+                  <div>
+                    <AddToCart book={book} loggedUserId={loggedUserId} />
+                    <EditBook book={book} />
+                  </div>
+                ) : (
+                  <AddToCart book={book} loggedUserId={loggedUserId} />
+                )
               ) : (
                 <Link to="/login">Log in to add to cart</Link>
               )}
