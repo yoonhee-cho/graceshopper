@@ -36,3 +36,8 @@ button.deleteButton2 {
   width: 150px;
   height: 25px;
 }
+
+.fa-shopping-cart {
+  color: rgb(9, 145, 55);
+  font-size: 25px;
+}

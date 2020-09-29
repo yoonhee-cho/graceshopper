@@ -348,6 +348,84 @@ const users = [
     password: '123456',
     salt: '1233456',
     address: '321 Main Street, New York, NY 10004'
+  },
+  {
+    email: 'ryan@gmail.com',
+    password: '111111',
+    salt: '123456',
+    address: '435 East 14th Street, New York, NY 10009'
+  },
+  {
+    email: 'thomas@gmail.com',
+    password: '111111',
+    salt: '123456',
+    address: '316 West 30th Street, New York, NY 10001'
+  },
+  {
+    email: 'julie@gmail.com',
+    password: '123456',
+    salt: '123456',
+    address: '405 Broadway 17H, New York, NY 10001'
+  },
+  {
+    email: 'lydia@gmail.com',
+    password: '123456',
+    salt: '123456',
+    address: '439 bloom street, New York, NY 10015'
+  },
+  {
+    email: 'claudia@gmail.com',
+    password: '123456',
+    salt: '123456',
+    address: '4739 hello street, Brookyln, NY 10015'
+  },
+  {
+    email: 'jaqueline@gmail.com',
+    password: '123456',
+    salt: '123456',
+    address: '504 main street, New York, NY 10015'
+  },
+  {
+    email: 'simona@gmail.com',
+    password: '123456',
+    salt: '123456',
+    address: '1003 hanover street, New York, NY 10015'
+  },
+  {
+    email: 'samuel@gmail.com',
+    password: '123456',
+    salt: '123456',
+    address: '415 13th street, New York, NY 10009'
+  },
+  {
+    email: 'philip@gmail.com',
+    password: '123456',
+    salt: '123456',
+    address: '435 E 14th street, New York, NY 10009'
+  },
+  {
+    email: 'alexis@gmail.com',
+    password: '123456',
+    salt: '123456',
+    address: '115 W 83th street, New York, NY 10006'
+  },
+  {
+    email: 'joanna@gmail.com',
+    password: '123456',
+    salt: '123456',
+    address: '111 E 28th street, New York, NY 10006'
+  },
+  {
+    email: 'lanZhang@gmail.com',
+    password: '123456',
+    salt: '123456',
+    address: '324 W 27th street, New York, NY 10006'
+  },
+  {
+    email: 'casey@gmail.com',
+    password: '123456',
+    salt: '123456',
+    address: '324 W 27th street, New York, NY 10006'
   }
 ]
 

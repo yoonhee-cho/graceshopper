@@ -50,9 +50,9 @@ export function addBookToCart(bookObj, userId) {
     try {
       await axios.post(`/api/users/${userId}/cart`, bookObj)
     } catch (error) {
-      alert(
-        'This item is already in your cart. If you wish to update the quantity, please visit your cart. :) '
-      )
+      // alert(
+      //   'This item is already in your cart. If you wish to update the quantity, please visit your cart. :) '
+      // )
       console.log(error)
     }
   }

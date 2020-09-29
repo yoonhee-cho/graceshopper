@@ -125,7 +125,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _store_cart__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store/cart */ "./client/store/cart.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var toastify_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! toastify-js */ "./node_modules/toastify-js/src/toastify.js");
+/* harmony import */ var toastify_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(toastify_js__WEBPACK_IMPORTED_MODULE_3__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -150,6 +156,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var AddToCart = /*#__PURE__*/function (_React$Component) {
   _inherits(AddToCart, _React$Component);
 
@@ -166,12 +173,75 @@ var AddToCart = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(AddToCart, [{
+    key: "componentDidMount",
+    value: function () {
+      var _componentDidMount = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        var userId;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                userId = this.props.user.id;
+                this.props.getCart(userId);
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function componentDidMount() {
+        return _componentDidMount.apply(this, arguments);
+      }
+
+      return componentDidMount;
+    }()
+  }, {
     key: "handleClick",
     value: function handleClick(event) {
+      var _this2 = this;
+
       event.preventDefault();
       var userId = this.props.user.id;
       var book = this.props.book;
       this.props.addBook(book, userId);
+      var bookInCart = this.props.cart.reduce(function (accum, book) {
+        if (book.id === _this2.props.book.id) {
+          accum.push(book.id);
+        }
+
+        return accum;
+      }, []);
+      console.log('bookInCart', bookInCart);
+      console.log('cart', this.props.cart);
+
+      if (bookInCart.length === 1) {
+        toastify_js__WEBPACK_IMPORTED_MODULE_3___default()({
+          text: "".concat(this.props.book.title, " is already in your cart. If you wish to update the quantity, please visit your cart. :) "),
+          duration: 3000,
+          destination: 'https://github.com/apvarun/toastify-js',
+          newWindow: true,
+          close: true,
+          gravity: 'top',
+          position: 'center',
+          backgroundColor: 'linear-gradient(to right, #00b09b, #96c93d)',
+          stopOnFocus: true
+        }).showToast();
+      } else {
+        toastify_js__WEBPACK_IMPORTED_MODULE_3___default()({
+          text: "".concat(this.props.book.title, " is added to your cart "),
+          duration: 3000,
+          destination: 'https://github.com/apvarun/toastify-js',
+          newWindow: true,
+          close: true,
+          gravity: 'top',
+          position: 'center',
+          backgroundColor: 'linear-gradient(to right, #00b09b, #96c93d)',
+          stopOnFocus: true
+        }).showToast();
+      }
     }
   }, {
     key: "render",
@@ -179,7 +249,9 @@ var AddToCart = /*#__PURE__*/function (_React$Component) {
       var loggedUserId = this.props.loggedUserId;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "addToCart"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fas fa-shopping-cart"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "click",
         onClick: this.handleClick
       }, "Add To Cart"));
@@ -191,7 +263,8 @@ var AddToCart = /*#__PURE__*/function (_React$Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    user: state.user
+    user: state.user,
+    cart: state.cart
   };
 };
 
@@ -199,6 +272,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     addBook: function addBook(bookObj, userId) {
       return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_1__["addBookToCart"])(bookObj, userId));
+    },
+    getCart: function getCart(userId) {
+      return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_1__["fetchCart"])(userId));
     }
   };
 };
@@ -327,6 +403,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _DeleteAllBooksFromCart__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./DeleteAllBooksFromCart */ "./client/components/DeleteAllBooksFromCart.js");
 /* harmony import */ var _loadingSpinner__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./loadingSpinner */ "./client/components/loadingSpinner.js");
+/* harmony import */ var toastify_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! toastify-js */ "./node_modules/toastify-js/src/toastify.js");
+/* harmony import */ var toastify_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(toastify_js__WEBPACK_IMPORTED_MODULE_5__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -360,6 +438,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var Cart = /*#__PURE__*/function (_React$Component) {
   _inherits(Cart, _React$Component);
 
@@ -379,6 +458,18 @@ var Cart = /*#__PURE__*/function (_React$Component) {
         console.log('From handle remove Iam clicked', bookObj);
 
         _this.props.deleteOneBook(userId, bookObj);
+
+        toastify_js__WEBPACK_IMPORTED_MODULE_5___default()({
+          text: "Your item is removed :) ",
+          duration: 3000,
+          destination: 'https://github.com/apvarun/toastify-js',
+          newWindow: true,
+          close: true,
+          gravity: 'top',
+          position: 'center',
+          backgroundColor: 'linear-gradient(to right, #00b09b, #96c93d)',
+          stopOnFocus: true
+        }).showToast();
       };
     });
 
@@ -517,6 +608,19 @@ var Cart = /*#__PURE__*/function (_React$Component) {
                 });
 
               case 12:
+                toastify_js__WEBPACK_IMPORTED_MODULE_5___default()({
+                  text: "Your cart is updated :) ",
+                  duration: 3000,
+                  destination: 'https://github.com/apvarun/toastify-js',
+                  newWindow: true,
+                  close: true,
+                  gravity: 'top',
+                  position: 'center',
+                  backgroundColor: 'linear-gradient(to right, #00b09b, #96c93d)',
+                  stopOnFocus: true
+                }).showToast();
+
+              case 13:
               case "end":
                 return _context2.stop();
             }
@@ -535,7 +639,7 @@ var Cart = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      var userId = Number(this.props.match.params.userId);
+      var userId = Number(this.props.match.params.userId); // console.log('this.props.cart', this.props.cart)
 
       if (this.props.cart.length === 0 || this.props.cart === undefined) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "cart is empty");
@@ -623,6 +727,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _store_cart__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store/cart */ "./client/store/cart.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var toastify_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! toastify-js */ "./node_modules/toastify-js/src/toastify.js");
+/* harmony import */ var toastify_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(toastify_js__WEBPACK_IMPORTED_MODULE_3__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -649,6 +755,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var DeleteAllBooksFromCart = /*#__PURE__*/function (_React$Component) {
   _inherits(DeleteAllBooksFromCart, _React$Component);
 
@@ -669,6 +776,17 @@ var DeleteAllBooksFromCart = /*#__PURE__*/function (_React$Component) {
     value: function handleClick(event) {
       event.preventDefault();
       this.props.emptyAllBooks(this.props.userId);
+      toastify_js__WEBPACK_IMPORTED_MODULE_3___default()({
+        text: "All items are removed",
+        duration: 3000,
+        destination: 'https://github.com/apvarun/toastify-js',
+        newWindow: true,
+        close: true,
+        gravity: 'top',
+        position: 'center',
+        backgroundColor: 'linear-gradient(to right, #00b09b, #96c93d)',
+        stopOnFocus: true
+      }).showToast();
     }
   }, {
     key: "render",
@@ -989,7 +1107,7 @@ var Navbar = function Navbar(_ref) {
     to: "/home"
   }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
     to: '/' + userId + '/cart'
-  }, "CART"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+  }, "Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
     to: "/books"
   }, "AllBooks"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "#",
@@ -1513,16 +1631,18 @@ function addBookToCart(bookObj, userId) {
               return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/users/".concat(userId, "/cart"), bookObj);
 
             case 3:
-              _context2.next = 9;
+              _context2.next = 8;
               break;
 
             case 5:
               _context2.prev = 5;
               _context2.t0 = _context2["catch"](0);
-              alert('This item is already in your cart. If you wish to update the quantity, please visit your cart. :) ');
+              // alert(
+              //   'This item is already in your cart. If you wish to update the quantity, please visit your cart. :) '
+              // )
               console.log(_context2.t0);
 
-            case 9:
+            case 8:
             case "end":
               return _context2.stop();
           }
@@ -59638,6 +59758,413 @@ function toArray(list, index) {
 
     return array
 }
+
+
+/***/ }),
+
+/***/ "./node_modules/toastify-js/src/toastify.js":
+/*!**************************************************!*\
+  !*** ./node_modules/toastify-js/src/toastify.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*!
+ * Toastify js 1.9.2
+ * https://github.com/apvarun/toastify-js
+ * @license MIT licensed
+ *
+ * Copyright (C) 2018 Varun A P
+ */
+(function(root, factory) {
+  if ( true && module.exports) {
+    module.exports = factory();
+  } else {
+    root.Toastify = factory();
+  }
+})(this, function(global) {
+  // Object initialization
+  var Toastify = function(options) {
+      // Returning a new init object
+      return new Toastify.lib.init(options);
+    },
+    // Library version
+    version = "1.9.2";
+
+  // Defining the prototype of the object
+  Toastify.lib = Toastify.prototype = {
+    toastify: version,
+
+    constructor: Toastify,
+
+    // Initializing the object with required parameters
+    init: function(options) {
+      // Verifying and validating the input object
+      if (!options) {
+        options = {};
+      }
+
+      // Creating the options object
+      this.options = {};
+
+      this.toastElement = null;
+
+      // Validating the options
+      this.options.text = options.text || "Hi there!"; // Display message
+      this.options.node = options.node // Display content as node
+      this.options.duration = options.duration === 0 ? 0 : options.duration || 3000; // Display duration
+      this.options.selector = options.selector; // Parent selector
+      this.options.callback = options.callback || function() {}; // Callback after display
+      this.options.destination = options.destination; // On-click destination
+      this.options.newWindow = options.newWindow || false; // Open destination in new window
+      this.options.close = options.close || false; // Show toast close icon
+      this.options.gravity = options.gravity === "bottom" ? "toastify-bottom" : "toastify-top"; // toast position - top or bottom
+      this.options.positionLeft = options.positionLeft || false; // toast position - left or right
+      this.options.position = options.position || ''; // toast position - left or right
+      this.options.backgroundColor = options.backgroundColor; // toast background color
+      this.options.avatar = options.avatar || ""; // img element src - url or a path
+      this.options.className = options.className || ""; // additional class names for the toast
+      this.options.stopOnFocus = options.stopOnFocus === undefined? true: options.stopOnFocus; // stop timeout on focus
+      this.options.onClick = options.onClick; // Callback after click
+
+      const normalOffset = { x: 0, y: 0 };
+
+      this.options.offset = options.offset || normalOffset // toast offset
+
+      // Returning the current object for chaining functions
+      return this;
+    },
+
+    // Building the DOM element
+    buildToast: function() {
+      // Validating if the options are defined
+      if (!this.options) {
+        throw "Toastify is not initialized";
+      }
+
+      // Creating the DOM object
+      var divElement = document.createElement("div");
+      divElement.className = "toastify on " + this.options.className;
+
+      // Positioning toast to left or right or center
+      if (!!this.options.position) {
+        divElement.className += " toastify-" + this.options.position;
+      } else {
+        // To be depreciated in further versions
+        if (this.options.positionLeft === true) {
+          divElement.className += " toastify-left";
+          console.warn('Property `positionLeft` will be depreciated in further versions. Please use `position` instead.')
+        } else {
+          // Default position
+          divElement.className += " toastify-right";
+        }
+      }
+
+      // Assigning gravity of element
+      divElement.className += " " + this.options.gravity;
+
+      if (this.options.backgroundColor) {
+        divElement.style.background = this.options.backgroundColor;
+      }
+
+      // Adding the toast message/node
+      if (this.options.node && this.options.node.nodeType === Node.ELEMENT_NODE) {
+        // If we have a valid node, we insert it
+        divElement.appendChild(this.options.node)
+      } else {
+        divElement.innerHTML = this.options.text;
+
+        if (this.options.avatar !== "") {
+          var avatarElement = document.createElement("img");
+          avatarElement.src = this.options.avatar;
+
+          avatarElement.className = "toastify-avatar";
+
+          if (this.options.position == "left" || this.options.positionLeft === true) {
+            // Adding close icon on the left of content
+            divElement.appendChild(avatarElement);
+          } else {
+            // Adding close icon on the right of content
+            divElement.insertAdjacentElement("afterbegin", avatarElement);
+          }
+        }
+      }
+
+      // Adding a close icon to the toast
+      if (this.options.close === true) {
+        // Create a span for close element
+        var closeElement = document.createElement("span");
+        closeElement.innerHTML = "&#10006;";
+
+        closeElement.className = "toast-close";
+
+        // Triggering the removal of toast from DOM on close click
+        closeElement.addEventListener(
+          "click",
+          function(event) {
+            event.stopPropagation();
+            this.removeElement(this.toastElement);
+            window.clearTimeout(this.toastElement.timeOutValue);
+          }.bind(this)
+        );
+
+        //Calculating screen width
+        var width = window.innerWidth > 0 ? window.innerWidth : screen.width;
+
+        // Adding the close icon to the toast element
+        // Display on the right if screen width is less than or equal to 360px
+        if ((this.options.position == "left" || this.options.positionLeft === true) && width > 360) {
+          // Adding close icon on the left of content
+          divElement.insertAdjacentElement("afterbegin", closeElement);
+        } else {
+          // Adding close icon on the right of content
+          divElement.appendChild(closeElement);
+        }
+      }
+
+      // Clear timeout while toast is focused
+      if (this.options.stopOnFocus && this.options.duration > 0) {
+        const self = this;
+        // stop countdown
+        divElement.addEventListener(
+          "mouseover",
+          function(event) {
+            window.clearTimeout(divElement.timeOutValue);
+          }
+        )
+        // add back the timeout
+        divElement.addEventListener(
+          "mouseleave",
+          function() {
+            divElement.timeOutValue = window.setTimeout(
+              function() {
+                // Remove the toast from DOM
+                self.removeElement(divElement);
+              },
+              self.options.duration
+            )
+          }
+        )
+      }
+      
+      // Adding an on-click destination path
+      if (typeof this.options.destination !== "undefined") {
+        divElement.addEventListener(
+          "click",
+          function(event) {
+            event.stopPropagation();
+            if (this.options.newWindow === true) {
+              window.open(this.options.destination, "_blank");
+            } else {
+              window.location = this.options.destination;
+            }
+          }.bind(this)
+        );
+      }
+
+      if (typeof this.options.onClick === "function" && typeof this.options.destination === "undefined") {
+        divElement.addEventListener(
+          "click",
+          function(event) {
+            event.stopPropagation();
+            this.options.onClick();            
+          }.bind(this)
+        );
+      }
+
+      // Adding offset
+      if(typeof this.options.offset === "object") {
+
+        var x = getAxisOffsetAValue("x", this.options);
+        var y = getAxisOffsetAValue("y", this.options);
+        
+        const xOffset = this.options.position == "left" ? x : `-${x}`;
+        const yOffset = this.options.gravity == "toastify-top" ? y : `-${y}`;
+
+        divElement.style.transform = `translate(${xOffset}, ${yOffset})`;
+
+      }
+
+      // Returning the generated element
+      return divElement;
+    },
+
+    // Displaying the toast
+    showToast: function() {
+      // Creating the DOM object for the toast
+      this.toastElement = this.buildToast();
+
+      // Getting the root element to with the toast needs to be added
+      var rootElement;
+      if (typeof this.options.selector === "undefined") {
+        rootElement = document.body;
+      } else {
+        rootElement = document.getElementById(this.options.selector);
+      }
+
+      // Validating if root element is present in DOM
+      if (!rootElement) {
+        throw "Root element is not defined";
+      }
+
+      // Adding the DOM element
+      rootElement.insertBefore(this.toastElement, rootElement.firstChild);
+
+      // Repositioning the toasts in case multiple toasts are present
+      Toastify.reposition();
+
+      if (this.options.duration > 0) {
+        this.toastElement.timeOutValue = window.setTimeout(
+          function() {
+            // Remove the toast from DOM
+            this.removeElement(this.toastElement);
+          }.bind(this),
+          this.options.duration
+        ); // Binding `this` for function invocation
+      }
+
+      // Supporting function chaining
+      return this;
+    },
+
+    hideToast: function() {
+      if (this.toastElement.timeOutValue) {
+        clearTimeout(this.toastElement.timeOutValue);
+      }
+      this.removeElement(this.toastElement);
+    },
+
+    // Removing the element from the DOM
+    removeElement: function(toastElement) {
+      // Hiding the element
+      // toastElement.classList.remove("on");
+      toastElement.className = toastElement.className.replace(" on", "");
+
+      // Removing the element from DOM after transition end
+      window.setTimeout(
+        function() {
+          // remove options node if any
+          if (this.options.node && this.options.node.parentNode) {
+            this.options.node.parentNode.removeChild(this.options.node);
+          }
+
+          // Remove the elemenf from the DOM, only when the parent node was not removed before.
+          if (toastElement.parentNode) {
+            toastElement.parentNode.removeChild(toastElement);
+          }
+
+          // Calling the callback function
+          this.options.callback.call(toastElement);
+
+          // Repositioning the toasts again
+          Toastify.reposition();
+        }.bind(this),
+        400
+      ); // Binding `this` for function invocation
+    },
+  };
+
+  // Positioning the toasts on the DOM
+  Toastify.reposition = function() {
+
+    // Top margins with gravity
+    var topLeftOffsetSize = {
+      top: 15,
+      bottom: 15,
+    };
+    var topRightOffsetSize = {
+      top: 15,
+      bottom: 15,
+    };
+    var offsetSize = {
+      top: 15,
+      bottom: 15,
+    };
+
+    // Get all toast messages on the DOM
+    var allToasts = document.getElementsByClassName("toastify");
+
+    var classUsed;
+
+    // Modifying the position of each toast element
+    for (var i = 0; i < allToasts.length; i++) {
+      // Getting the applied gravity
+      if (containsClass(allToasts[i], "toastify-top") === true) {
+        classUsed = "toastify-top";
+      } else {
+        classUsed = "toastify-bottom";
+      }
+
+      var height = allToasts[i].offsetHeight;
+      classUsed = classUsed.substr(9, classUsed.length-1)
+      // Spacing between toasts
+      var offset = 15;
+
+      var width = window.innerWidth > 0 ? window.innerWidth : screen.width;
+
+      // Show toast in center if screen with less than or qual to 360px
+      if (width <= 360) {
+        // Setting the position
+        allToasts[i].style[classUsed] = offsetSize[classUsed] + "px";
+
+        offsetSize[classUsed] += height + offset;
+      } else {
+        if (containsClass(allToasts[i], "toastify-left") === true) {
+          // Setting the position
+          allToasts[i].style[classUsed] = topLeftOffsetSize[classUsed] + "px";
+
+          topLeftOffsetSize[classUsed] += height + offset;
+        } else {
+          // Setting the position
+          allToasts[i].style[classUsed] = topRightOffsetSize[classUsed] + "px";
+
+          topRightOffsetSize[classUsed] += height + offset;
+        }
+      }
+    }
+
+    // Supporting function chaining
+    return this;
+  };
+
+  // Helper function to get offset.
+  function getAxisOffsetAValue(axis, options) {
+
+    if(options.offset[axis]) {
+      if(isNaN(options.offset[axis])) {
+        return options.offset[axis];
+      }
+      else {
+        return options.offset[axis] + 'px';
+      }
+    }
+
+    return '0px';
+
+  }
+
+  function containsClass(elem, yourClass) {
+    if (!elem || typeof yourClass !== "string") {
+      return false;
+    } else if (
+      elem.className &&
+      elem.className
+        .trim()
+        .split(/\s+/gi)
+        .indexOf(yourClass) > -1
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  // Setting up the prototype for the init object
+  Toastify.lib.init.prototype = Toastify.lib;
+
+  // Returning the Toastify function to be assigned to the window object/module
+  return Toastify;
+});
 
 
 /***/ }),

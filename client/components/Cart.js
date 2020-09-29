@@ -7,6 +7,8 @@ import DeleteAllBooksFromCart from './DeleteAllBooksFromCart'
 
 import LoadingSpinner from './loadingSpinner'
 
+import Toastify from 'toastify-js'
+
 export class Cart extends React.Component {
   constructor(props) {
     super(props)
@@ -99,16 +101,6 @@ export class Cart extends React.Component {
     const userId = Number(this.props.match.params.userId)
     await this.props.update(book, userId)
 
-    // this.setState({loading: true}, () => {
-    //   this.props.getCart(userId)
-    //     .then(result => {
-    //       console.log(result, 'RESULT')
-    //       this.setState({
-    //       loading: false,
-
-    //     })})
-    // })
-
     await this.props.getCart(userId)
     const quantityInCart = this.props.cart.map(book => {
       return book.book_in_orders
@@ -120,6 +112,18 @@ export class Cart extends React.Component {
     await this.setState({
       loading: false
     })
+
+    Toastify({
+      text: `Your cart is updated :) `,
+      duration: 3000,
+      destination: 'https://github.com/apvarun/toastify-js',
+      newWindow: true,
+      close: true,
+      gravity: 'top',
+      position: 'center',
+      backgroundColor: 'linear-gradient(to right, #00b09b, #96c93d)',
+      stopOnFocus: true
+    }).showToast()
   }
 
   handleRemove = bookObj => event => {
@@ -128,11 +132,22 @@ export class Cart extends React.Component {
 
     console.log('From handle remove Iam clicked', bookObj)
     this.props.deleteOneBook(userId, bookObj)
+    Toastify({
+      text: `Your item is removed :) `,
+      duration: 3000,
+      destination: 'https://github.com/apvarun/toastify-js',
+      newWindow: true,
+      close: true,
+      gravity: 'top',
+      position: 'center',
+      backgroundColor: 'linear-gradient(to right, #00b09b, #96c93d)',
+      stopOnFocus: true
+    }).showToast()
   }
 
   render() {
     const userId = Number(this.props.match.params.userId)
-
+    // console.log('this.props.cart', this.props.cart)
     if (this.props.cart.length === 0 || this.props.cart === undefined) {
       return <h1>cart is empty</h1>
     } else {
