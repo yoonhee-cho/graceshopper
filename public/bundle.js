@@ -125,8 +125,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _store_cart__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store/cart */ "./client/store/cart.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var toastify_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! toastify-js */ "./node_modules/toastify-js/src/toastify.js");
-/* harmony import */ var toastify_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(toastify_js__WEBPACK_IMPORTED_MODULE_3__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -156,7 +154,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-
 var AddToCart = /*#__PURE__*/function (_React$Component) {
   _inherits(AddToCart, _React$Component);
 
@@ -182,9 +179,10 @@ var AddToCart = /*#__PURE__*/function (_React$Component) {
             switch (_context.prev = _context.next) {
               case 0:
                 userId = this.props.user.id;
-                this.props.getCart(userId);
+                _context.next = 3;
+                return this.props.getCart(userId);
 
-              case 2:
+              case 3:
               case "end":
                 return _context.stop();
             }
@@ -200,48 +198,44 @@ var AddToCart = /*#__PURE__*/function (_React$Component) {
     }()
   }, {
     key: "handleClick",
-    value: function handleClick(event) {
-      var _this2 = this;
+    value: function () {
+      var _handleClick = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(event) {
+        var _this2 = this;
 
-      event.preventDefault();
-      var userId = this.props.user.id;
-      var book = this.props.book;
-      this.props.addBook(book, userId);
-      var bookInCart = this.props.cart.reduce(function (accum, book) {
-        if (book.id === _this2.props.book.id) {
-          accum.push(book.id);
-        }
+        var userId, book, bookInCart;
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                event.preventDefault();
+                userId = this.props.user.id;
+                book = this.props.book;
+                _context2.next = 5;
+                return this.props.addBook(book, userId);
 
-        return accum;
-      }, []); // console.log('bookInCart', bookInCart)
-      // console.log('cart', this.props.cart)
+              case 5:
+                bookInCart = this.props.cart.reduce(function (accum, book) {
+                  if (book.id === _this2.props.book.id) {
+                    accum.push(book.id);
+                  }
 
-      if (bookInCart.length === 1) {
-        toastify_js__WEBPACK_IMPORTED_MODULE_3___default()({
-          text: "".concat(this.props.book.title, " is already in your cart. If you wish to update the quantity, please visit your cart. :) "),
-          duration: 3000,
-          destination: 'https://github.com/apvarun/toastify-js',
-          newWindow: true,
-          close: true,
-          gravity: 'top',
-          position: 'center',
-          backgroundColor: 'linear-gradient(to right, #00b09b, #96c93d)',
-          stopOnFocus: true
-        }).showToast();
-      } else {
-        toastify_js__WEBPACK_IMPORTED_MODULE_3___default()({
-          text: "".concat(this.props.book.title, " is added to your cart "),
-          duration: 3000,
-          destination: 'https://github.com/apvarun/toastify-js',
-          newWindow: true,
-          close: true,
-          gravity: 'top',
-          position: 'center',
-          backgroundColor: 'linear-gradient(to right, #00b09b, #96c93d)',
-          stopOnFocus: true
-        }).showToast();
+                  return accum;
+                }, []);
+
+              case 6:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function handleClick(_x) {
+        return _handleClick.apply(this, arguments);
       }
-    }
+
+      return handleClick;
+    }()
   }, {
     key: "render",
     value: function render() {
@@ -1736,6 +1730,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
+/* harmony import */ var toastify_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! toastify-js */ "./node_modules/toastify-js/src/toastify.js");
+/* harmony import */ var toastify_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(toastify_js__WEBPACK_IMPORTED_MODULE_2__);
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -1751,6 +1747,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
  //action constant
@@ -1825,7 +1822,7 @@ function fetchCart(userId) {
             case 10:
               _context.prev = 10;
               _context.t0 = _context["catch"](0);
-              alert('You are not an authorized user to make changes to this account');
+              alert('You are not an authorized to make changes to this account');
               console.log(_context.t0);
 
             case 14:
@@ -1854,21 +1851,42 @@ function addBookToCart(bookObj, userId) {
               return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/users/".concat(userId, "/cart"), bookObj);
 
             case 3:
-              _context2.next = 9;
+              toastify_js__WEBPACK_IMPORTED_MODULE_2___default()({
+                text: "".concat(bookObj.title, " has been added to your cart "),
+                duration: 3000,
+                destination: 'https://github.com/apvarun/toastify-js',
+                newWindow: true,
+                close: true,
+                gravity: 'top',
+                position: 'center',
+                backgroundColor: 'linear-gradient(to right, #00b09b, #96c93d)',
+                stopOnFocus: true
+              }).showToast();
+              _context2.next = 10;
               break;
 
-            case 5:
-              _context2.prev = 5;
+            case 6:
+              _context2.prev = 6;
               _context2.t0 = _context2["catch"](0);
-              alert('This item is already in your cart. If you wish to update the quantity, please visit your cart. :) ');
+              toastify_js__WEBPACK_IMPORTED_MODULE_2___default()({
+                text: "".concat(bookObj.title, " is already in your cart. If you wish to update the quantity, please visit your cart. :) "),
+                duration: 3000,
+                destination: 'https://github.com/apvarun/toastify-js',
+                newWindow: true,
+                close: true,
+                gravity: 'top',
+                position: 'center',
+                backgroundColor: 'linear-gradient(to right, #00b09b, #96c93d)',
+                stopOnFocus: true
+              }).showToast();
               console.log(_context2.t0);
 
-            case 9:
+            case 10:
             case "end":
               return _context2.stop();
           }
         }
-      }, _callee2, null, [[0, 5]]);
+      }, _callee2, null, [[0, 6]]);
     }));
 
     return function (_x2) {

@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 
 import AddToCart from './AddToCart'
 
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 
 export class AllBooks extends React.Component {
   constructor(props) {
