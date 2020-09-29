@@ -436,6 +436,7 @@ var AllBooks = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(AllBooks);
 
+  // eslint-disable-next-line no-useless-constructor
   function AllBooks(props) {
     _classCallCheck(this, AllBooks);
 

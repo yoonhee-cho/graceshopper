@@ -4,9 +4,10 @@ import {connect} from 'react-redux'
 
 import AddToCart from './AddToCart'
 
-import {Link, Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 export class AllBooks extends React.Component {
+  // eslint-disable-next-line no-useless-constructor
   constructor(props) {
     super(props)
   }
