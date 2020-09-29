@@ -41,3 +41,8 @@ button.deleteButton2 {
   color: rgb(9, 145, 55);
   font-size: 25px;
 }
+
+.confirmation-page {
+  color: rebeccapurple;
+  text-size-adjust: 100px;
+}

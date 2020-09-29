@@ -2,7 +2,7 @@ import React from 'react'
 
 const LoadingSpinner = () => (
   <div>
-    <i className="loading" /> Loading ...
+    <i className="fas fa-spinner fa-spin" /> Loading ...
   </div>
 )
 

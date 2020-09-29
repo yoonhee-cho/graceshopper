@@ -12,9 +12,11 @@ export class Checkout extends React.Component {
 
   render() {
     return (
-      <div className="books-list">
+      <div className="confirmation-page">
         <p>OMG THANK YOU SOOO MUCH FOR YOUR ORDER!!!</p>
-        <div>one order of textbooks coming right up!</div>
+        <div>
+          <i>one order of textbooks coming right up!</i>
+        </div>
       </div>
     )
   }

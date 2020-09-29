@@ -880,8 +880,8 @@ var Checkout = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "books-list"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "OMG THANK YOU SOOO MUCH FOR YOUR ORDER!!!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "one order of textbooks coming right up!"));
+        className: "confirmation-page"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "OMG THANK YOU SOOO MUCH FOR YOUR ORDER!!!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "one order of textbooks coming right up!")));
     }
   }]);
 
@@ -1259,7 +1259,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var LoadingSpinner = function LoadingSpinner() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "loading"
+    className: "fas fa-spinner fa-spin"
   }), " Loading ...");
 };
 
