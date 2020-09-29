@@ -4,6 +4,9 @@ import {connect} from 'react-redux'
 import DeleteAllBooksFromCart from './DeleteAllBooksFromCart'
 import LoadingSpinner from './loadingSpinner'
 import Toastify from 'toastify-js'
+import Checkout from './Checkout'
+import LoadingSpinner from './loadingSpinner'
+import {NavLink} from 'react-router-dom'
 
 export class Cart extends React.Component {
   constructor(props) {
@@ -148,7 +151,7 @@ export class Cart extends React.Component {
       return <h1>cart is empty</h1>
     } else {
       const books = this.props.cart
-
+      const subtotal = []
       return (
         <div className="books-list">
           <h3>Cart</h3>
@@ -168,9 +171,11 @@ export class Cart extends React.Component {
                     {this.state.quantities.map(item => {
                       if (Array.isArray(item)) {
                         if (item[0].bookId === book.id) {
+                          subtotal.push(item[0].totalPrice / 100)
                           return item[0].totalPrice / 100
                         }
                       } else if (item.bookId === book.id) {
+                        subtotal.push(item.totalPrice / 100)
                         return item.totalPrice / 100
                       }
                     })}
@@ -211,6 +216,17 @@ export class Cart extends React.Component {
                 </li>
               </div>
             ))}
+            <div>
+              <NavLink
+                to={{
+                  pathname: '/checkout',
+                  prices: subtotal,
+                  userId: Number(this.props.match.params.userId)
+                }}
+              >
+                Continue to Checkout
+              </NavLink>
+            </div>
             <DeleteAllBooksFromCart userId={userId} />
           </ul>
         </div>

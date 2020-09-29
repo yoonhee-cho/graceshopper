@@ -391,343 +391,27 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   !*** ./client/components/Cart.js ***!
   \***********************************/
 /*! exports provided: Cart, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Cart", function() { return Cart; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _store_cart__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store/cart */ "./client/store/cart.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _DeleteAllBooksFromCart__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./DeleteAllBooksFromCart */ "./client/components/DeleteAllBooksFromCart.js");
-/* harmony import */ var _loadingSpinner__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./loadingSpinner */ "./client/components/loadingSpinner.js");
-/* harmony import */ var toastify_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! toastify-js */ "./node_modules/toastify-js/src/toastify.js");
-/* harmony import */ var toastify_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(toastify_js__WEBPACK_IMPORTED_MODULE_5__);
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-
-
-
-
-var Cart = /*#__PURE__*/function (_React$Component) {
-  _inherits(Cart, _React$Component);
-
-  var _super = _createSuper(Cart);
-
-  function Cart(props) {
-    var _this;
-
-    _classCallCheck(this, Cart);
-
-    _this = _super.call(this, props);
-
-    _defineProperty(_assertThisInitialized(_this), "handleRemove", function (bookObj) {
-      return function (event) {
-        event.preventDefault();
-        var userId = Number(_this.props.match.params.userId);
-        console.log('From handle remove Iam clicked', bookObj);
-
-        _this.props.deleteOneBook(userId, bookObj);
-
-        toastify_js__WEBPACK_IMPORTED_MODULE_5___default()({
-          text: "Your item is removed :) ",
-          duration: 3000,
-          destination: 'https://github.com/apvarun/toastify-js',
-          newWindow: true,
-          close: true,
-          gravity: 'top',
-          position: 'center',
-          backgroundColor: 'linear-gradient(to right, #00b09b, #96c93d)',
-          stopOnFocus: true
-        }).showToast();
-      };
-    });
-
-    _this.state = {
-      loading: false,
-      quantities: [{
-        bookId: 0,
-        quantity: 6,
-        totalPrice: 6
-      }]
-    };
-    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
-    _this.handleClickMinus = _this.handleClickMinus.bind(_assertThisInitialized(_this));
-    _this.handleUpdate = _this.handleUpdate.bind(_assertThisInitialized(_this));
-    _this.handleRemove = _this.handleRemove.bind(_assertThisInitialized(_this));
-    return _this;
-  }
-
-  _createClass(Cart, [{
-    key: "componentDidMount",
-    value: function () {
-      var _componentDidMount = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var userId, quantityInCart;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                userId = Number(this.props.match.params.userId);
-                _context.next = 3;
-                return this.props.getCart(userId);
-
-              case 3:
-                quantityInCart = this.props.cart.map(function (book) {
-                  return book.book_in_orders;
-                });
-                this.setState({
-                  quantities: quantityInCart
-                });
-
-              case 5:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function componentDidMount() {
-        return _componentDidMount.apply(this, arguments);
-      }
-
-      return componentDidMount;
-    }()
-  }, {
-    key: "handleClick",
-    value: function handleClick(bookId, event) {
-      var index = 0;
-      this.state.quantities.map(function (item, idx) {
-        if (item[0].bookId === bookId) {
-          index = idx;
-        }
-      });
-      var currentQuantitiesObject = this.state.quantities[index];
-      var restOfQuantities = this.state.quantities.slice();
-      restOfQuantities.splice(index, 1);
-      currentQuantitiesObject[0].quantity++;
-      restOfQuantities.push(currentQuantitiesObject);
-      restOfQuantities.sort(function (a, b) {
-        return a.id - b.id;
-      });
-      this.setState({
-        quantities: restOfQuantities
-      });
-    }
-  }, {
-    key: "handleClickMinus",
-    value: function handleClickMinus(bookId, event) {
-      var index = 0;
-      this.state.quantities.map(function (item, idx) {
-        if (item[0].bookId === bookId) {
-          index = idx;
-        }
-      });
-      var currentQuantitiesObject = this.state.quantities[index];
-      var restOfQuantities = this.state.quantities.slice();
-      restOfQuantities.splice(index, 1);
-
-      if (currentQuantitiesObject[0].quantity < 1) {
-        currentQuantitiesObject[0].quantity = 0;
-      } else {
-        currentQuantitiesObject[0].quantity--;
-      }
-
-      restOfQuantities.push(currentQuantitiesObject);
-      restOfQuantities.sort(function (a, b) {
-        return a.id - b.id;
-      });
-      this.setState({
-        quantities: restOfQuantities
-      });
-    }
-  }, {
-    key: "handleUpdate",
-    value: function () {
-      var _handleUpdate = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(book, event) {
-        var userId, quantityInCart;
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                event.preventDefault();
-                _context2.next = 3;
-                return this.setState({
-                  loading: true
-                });
-
-              case 3:
-                userId = Number(this.props.match.params.userId);
-                _context2.next = 6;
-                return this.props.update(book, userId);
-
-              case 6:
-                _context2.next = 8;
-                return this.props.getCart(userId);
-
-              case 8:
-                quantityInCart = this.props.cart.map(function (book) {
-                  return book.book_in_orders;
-                });
-                this.setState({
-                  quantities: quantityInCart
-                });
-                _context2.next = 12;
-                return this.setState({
-                  loading: false
-                });
-
-              case 12:
-                toastify_js__WEBPACK_IMPORTED_MODULE_5___default()({
-                  text: "Your cart is updated :) ",
-                  duration: 3000,
-                  destination: 'https://github.com/apvarun/toastify-js',
-                  newWindow: true,
-                  close: true,
-                  gravity: 'top',
-                  position: 'center',
-                  backgroundColor: 'linear-gradient(to right, #00b09b, #96c93d)',
-                  stopOnFocus: true
-                }).showToast();
-
-              case 13:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this);
-      }));
-
-      function handleUpdate(_x, _x2) {
-        return _handleUpdate.apply(this, arguments);
-      }
-
-      return handleUpdate;
-    }()
-  }, {
-    key: "render",
-    value: function render() {
-      var _this2 = this;
-
-      var userId = Number(this.props.match.params.userId); // console.log('this.props.cart', this.props.cart)
-
-      if (this.props.cart.length === 0 || this.props.cart === undefined) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "cart is empty");
-      } else {
-        var books = this.props.cart;
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "books-list"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, books.map(function (book) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            key: book.id
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-            className: "single-book"
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, book.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, book.shortDescription)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Genre:", book.category), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Unit Price: $ ", book.price / 100), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Total Price: $", ' ', _this2.state.quantities.map(function (item) {
-            if (Array.isArray(item)) {
-              if (item[0].bookId === book.id) {
-                return item[0].totalPrice / 100;
-              }
-            } else if (item.bookId === book.id) {
-              return item.totalPrice / 100;
-            }
-          })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Quantity:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-            onClick: _this2.handleClickMinus.bind(_this2, book.id)
-          }, "-"), _this2.state.loading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_loadingSpinner__WEBPACK_IMPORTED_MODULE_4__["default"], null) : _this2.state.quantities.map(function (item) {
-            if (Array.isArray(item)) {
-              if (item[0].bookId === book.id) {
-                return item[0].quantity;
-              }
-            } else if (item.bookId === book.id) {
-              return item.quantity;
-            }
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-            onClick: _this2.handleClick.bind(_this2, book.id)
-          }, "+"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-            onClick: _this2.handleUpdate.bind(_this2, book)
-          }, "Update Quantity"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-            className: "deleteButton2",
-            onClick: _this2.handleRemove(book)
-          }, "Remove from Cart")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-            src: book.imageUrl
-          })));
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DeleteAllBooksFromCart__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          userId: userId
-        })));
-      }
-    }
-  }]);
-
-  return Cart;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    cart: state.cart
-  };
-};
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    getCart: function getCart(userId) {
-      return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_1__["fetchCart"])(userId));
-    },
-    update: function update(bookObj, userId) {
-      return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_1__["updateBook"])(bookObj, userId));
-    },
-    deleteOneBook: function deleteOneBook(userId, bookId) {
-      return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_1__["deleteOneThunk"])(userId, bookId));
-    }
-  };
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Cart));
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/yunicho/senior/graceshopper/client/components/Cart.js: Identifier 'LoadingSpinner' has already been declared (8:7)\n\n\u001b[0m \u001b[90m  6 | \u001b[39m\u001b[36mimport\u001b[39m \u001b[33mToastify\u001b[39m from \u001b[32m'toastify-js'\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m  7 | \u001b[39m\u001b[36mimport\u001b[39m \u001b[33mCheckout\u001b[39m from \u001b[32m'./Checkout'\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m  8 | \u001b[39m\u001b[36mimport\u001b[39m \u001b[33mLoadingSpinner\u001b[39m from \u001b[32m'./loadingSpinner'\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m       \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m  9 | \u001b[39m\u001b[36mimport\u001b[39m {\u001b[33mNavLink\u001b[39m} from \u001b[32m'react-router-dom'\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 10 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 11 | \u001b[39m\u001b[36mexport\u001b[39m \u001b[36mclass\u001b[39m \u001b[33mCart\u001b[39m \u001b[36mextends\u001b[39m \u001b[33mReact\u001b[39m\u001b[33m.\u001b[39m\u001b[33mComponent\u001b[39m {\u001b[0m\n    at Object._raise (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:766:17)\n    at Object.raiseWithData (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:759:17)\n    at Object.raise (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:753:17)\n    at ScopeHandler.checkRedeclarationInScope (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:4873:12)\n    at ScopeHandler.declareName (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:4839:12)\n    at Object.checkLVal (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9422:22)\n    at Object.parseImportSpecifierLocal (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:12829:10)\n    at Object.maybeParseDefaultImportSpecifier (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:12874:12)\n    at Object.parseImport (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:12800:31)\n    at Object.parseStatementContent (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:11531:27)\n    at Object.parseStatement (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:11431:17)\n    at Object.parseBlockOrModuleBlockBody (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:12013:25)\n    at Object.parseBlockBody (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:11999:10)\n    at Object.parseTopLevel (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:11362:10)\n    at Object.parse (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:13045:10)\n    at parse (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:13098:38)\n    at parser (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/lib/parser/index.js:54:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/lib/transformation/normalize-file.js:99:38)\n    at normalizeFile.next (<anonymous>)\n    at run (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/lib/transformation/index.js:31:50)\n    at run.next (<anonymous>)\n    at Function.transform (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/lib/transform.js:27:41)\n    at transform.next (<anonymous>)\n    at step (/Users/yunicho/senior/graceshopper/node_modules/gensync/index.js:254:32)\n    at /Users/yunicho/senior/graceshopper/node_modules/gensync/index.js:266:13\n    at async.call.result.err.err (/Users/yunicho/senior/graceshopper/node_modules/gensync/index.js:216:11)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)");
 
 /***/ }),
 
-/***/ "./client/components/DeleteAllBooksFromCart.js":
-/*!*****************************************************!*\
-  !*** ./client/components/DeleteAllBooksFromCart.js ***!
-  \*****************************************************/
-/*! exports provided: default */
+/***/ "./client/components/Checkout.js":
+/*!***************************************!*\
+  !*** ./client/components/Checkout.js ***!
+  \***************************************/
+/*! exports provided: Checkout, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Checkout", function() { return Checkout; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _store_cart__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store/cart */ "./client/store/cart.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var toastify_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! toastify-js */ "./node_modules/toastify-js/src/toastify.js");
-/* harmony import */ var toastify_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(toastify_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _store_cart_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/cart.js */ "./client/store/cart.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -754,61 +438,146 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+var Checkout = /*#__PURE__*/function (_React$Component) {
+  _inherits(Checkout, _React$Component);
 
-var DeleteAllBooksFromCart = /*#__PURE__*/function (_React$Component) {
-  _inherits(DeleteAllBooksFromCart, _React$Component);
+  var _super = _createSuper(Checkout);
 
-  var _super = _createSuper(DeleteAllBooksFromCart);
-
-  function DeleteAllBooksFromCart() {
+  function Checkout(props) {
     var _this;
 
-    _classCallCheck(this, DeleteAllBooksFromCart);
+    _classCallCheck(this, Checkout);
 
-    _this = _super.call(this);
+    _this = _super.call(this, props);
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
     return _this;
   }
 
-  _createClass(DeleteAllBooksFromCart, [{
+  _createClass(Checkout, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {}
+  }, {
     key: "handleClick",
     value: function handleClick(event) {
-      event.preventDefault();
-      this.props.emptyAllBooks(this.props.userId);
-      toastify_js__WEBPACK_IMPORTED_MODULE_3___default()({
-        text: "All items are removed",
-        duration: 3000,
-        destination: 'https://github.com/apvarun/toastify-js',
-        newWindow: true,
-        close: true,
-        gravity: 'top',
-        position: 'center',
-        backgroundColor: 'linear-gradient(to right, #00b09b, #96c93d)',
-        stopOnFocus: true
-      }).showToast();
+      var userId = this.props.location.userId;
+      this.props.update(userId);
     }
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "deleteButton",
+      var orderTotal = this.props.location.prices.reduce(function (accum, currentPrice) {
+        return accum + currentPrice;
+      }, 0);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "books-list"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Order Details"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Order Total: $ ", orderTotal), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["NavLink"], {
+        to: {
+          pathname: '/confirmation'
+        },
         onClick: this.handleClick
-      }, "EMPTY CART"));
+      }, "Place Order"));
     }
   }]);
 
-  return DeleteAllBooksFromCart;
+  return Checkout;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+var mapState = function mapState(state) {
+  return {};
+};
 
 var mapDispatch = function mapDispatch(dispatch) {
   return {
-    emptyAllBooks: function emptyAllBooks(userId) {
-      return dispatch(Object(_store_cart__WEBPACK_IMPORTED_MODULE_1__["emptyCartThunk"])(userId));
+    update: function update(id) {
+      dispatch(Object(_store_cart_js__WEBPACK_IMPORTED_MODULE_3__["updateOrderStatus"])(id));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(null, mapDispatch)(DeleteAllBooksFromCart));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapState, mapDispatch)(Checkout));
+
+/***/ }),
+
+/***/ "./client/components/Confirmation.js":
+/*!*******************************************!*\
+  !*** ./client/components/Confirmation.js ***!
+  \*******************************************/
+/*! exports provided: Checkout, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Checkout", function() { return Checkout; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_singleBook__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/singleBook */ "./client/store/singleBook.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+var Checkout = /*#__PURE__*/function (_React$Component) {
+  _inherits(Checkout, _React$Component);
+
+  var _super = _createSuper(Checkout);
+
+  function Checkout(props) {
+    _classCallCheck(this, Checkout);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(Checkout, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {}
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "books-list"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "OMG THANK YOU SOOO MUCH FOR YOUR ORDER!!!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "one order of textbooks coming right up!"));
+    }
+  }]);
+
+  return Checkout;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+var mapState = function mapState(state) {
+  return {};
+};
+
+var mapDispatch = function mapDispatch(dispatch) {
+  return {
+    loadSingleBookInReact: function loadSingleBookInReact(id) {
+      dispatch(Object(_store_singleBook__WEBPACK_IMPORTED_MODULE_2__["fetchSingleBook"])(id));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapState, mapDispatch)(Checkout));
 
 /***/ }),
 
@@ -1053,29 +822,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./client/components/loadingSpinner.js":
-/*!*********************************************!*\
-  !*** ./client/components/loadingSpinner.js ***!
-  \*********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-
-var LoadingSpinner = function LoadingSpinner() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "loading"
-  }), " Loading ...");
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (LoadingSpinner);
-
-/***/ }),
-
 /***/ "./client/components/navbar.js":
 /*!*************************************!*\
   !*** ./client/components/navbar.js ***!
@@ -1276,6 +1022,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_AllBooks__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/AllBooks */ "./client/components/AllBooks.js");
 /* harmony import */ var _components_SingleBook__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/SingleBook */ "./client/components/SingleBook.js");
 /* harmony import */ var _components_Cart__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Cart */ "./client/components/Cart.js");
+/* harmony import */ var _components_Checkout__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Checkout */ "./client/components/Checkout.js");
+/* harmony import */ var _components_Confirmation__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Confirmation */ "./client/components/Confirmation.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1297,6 +1045,8 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
 
 
 
@@ -1350,6 +1100,12 @@ var Routes = /*#__PURE__*/function (_Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/:userId/cart",
         component: _components_Cart__WEBPACK_IMPORTED_MODULE_8__["default"]
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        path: "/checkout",
+        component: _components_Checkout__WEBPACK_IMPORTED_MODULE_9__["default"]
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        path: "/confirmation",
+        component: _components_Confirmation__WEBPACK_IMPORTED_MODULE_10__["default"]
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         component: _components__WEBPACK_IMPORTED_MODULE_4__["Login"]
       }));
@@ -1515,336 +1271,9 @@ function booksReducer() {
   !*** ./client/store/cart.js ***!
   \******************************/
 /*! exports provided: fetchCart, addBookToCart, updateBook, updateOrderStatus, emptyCartThunk, deleteOneThunk, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCart", function() { return fetchCart; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addBookToCart", function() { return addBookToCart; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateBook", function() { return updateBook; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateOrderStatus", function() { return updateOrderStatus; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "emptyCartThunk", function() { return emptyCartThunk; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteOneThunk", function() { return deleteOneThunk; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return cartReducer; });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-
- //action constant
-
-var GET_CART = 'GET_CART';
-var ADD_BOOK = 'ADD_BOOK';
-var UPDATE_CART = 'UPDATE_CART';
-var EMPTY_CART = 'EMPTY_CART';
-var ADD_TO_COMPLETED = 'ADD_TO_COMPLETED';
-var DELETE_SINGLEBOOK = 'DELETE_SINGLEBOOK'; //action creator
-
-var getCart = function getCart(cart) {
-  return {
-    type: GET_CART,
-    cart: cart
-  };
-};
-
-var addBook = function addBook(book) {
-  return {
-    type: ADD_BOOK,
-    book: book
-  };
-};
-
-var updateCart = function updateCart(books) {
-  return {
-    type: UPDATE_CART,
-    books: books
-  };
-};
-
-var emptyCart = function emptyCart(userId) {
-  return {
-    type: EMPTY_CART,
-    userId: userId
-  };
-};
-
-var addToCompleted = function addToCompleted(order, completedOrders) {
-  return {
-    type: ADD_TO_COMPLETED,
-    completed: completedOrders,
-    order: order
-  };
-}; //thunk
-
-
-function fetchCart(userId) {
-  return /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch) {
-      var res, cart;
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.prev = 0;
-              _context.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/users/".concat(userId, "/cart"));
-
-            case 3:
-              res = _context.sent;
-              _context.next = 6;
-              return res.data;
-
-            case 6:
-              cart = _context.sent;
-              dispatch(getCart(cart));
-              _context.next = 14;
-              break;
-
-            case 10:
-              _context.prev = 10;
-              _context.t0 = _context["catch"](0);
-              alert('You are not an authorized user to make changes to this account');
-              console.log(_context.t0);
-
-            case 14:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee, null, [[0, 10]]);
-    }));
-
-    return function (_x) {
-      return _ref.apply(this, arguments);
-    };
-  }();
-} /// need to write a post route to a users cart
-
-function addBookToCart(bookObj, userId) {
-  return /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch) {
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.prev = 0;
-              _context2.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/users/".concat(userId, "/cart"), bookObj);
-
-            case 3:
-              _context2.next = 9;
-              break;
-
-            case 5:
-              _context2.prev = 5;
-              _context2.t0 = _context2["catch"](0);
-              alert('This item is already in your cart. If you wish to update the quantity, please visit your cart. :) ');
-              console.log(_context2.t0);
-
-            case 9:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, _callee2, null, [[0, 5]]);
-    }));
-
-    return function (_x2) {
-      return _ref2.apply(this, arguments);
-    };
-  }();
-}
-function updateBook(book, userId) {
-  return /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(dispatch) {
-      var res;
-      return regeneratorRuntime.wrap(function _callee3$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              _context3.prev = 0;
-              _context3.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("/api/users/".concat(userId, "/cart"), book);
-
-            case 3:
-              _context3.next = 5;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/users/".concat(userId, "/cart"));
-
-            case 5:
-              res = _context3.sent;
-              dispatch(updateCart(res.data));
-              _context3.next = 12;
-              break;
-
-            case 9:
-              _context3.prev = 9;
-              _context3.t0 = _context3["catch"](0);
-              console.log(_context3.t0);
-
-            case 12:
-            case "end":
-              return _context3.stop();
-          }
-        }
-      }, _callee3, null, [[0, 9]]);
-    }));
-
-    return function (_x3) {
-      return _ref3.apply(this, arguments);
-    };
-  }();
-}
-function updateOrderStatus(userId) {
-  return /*#__PURE__*/function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(dispatch) {
-      var completed, completedOrders, res;
-      return regeneratorRuntime.wrap(function _callee4$(_context4) {
-        while (1) {
-          switch (_context4.prev = _context4.next) {
-            case 0:
-              _context4.prev = 0;
-              _context4.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/users/".concat(userId, "/completed"));
-
-            case 3:
-              completed = _context4.sent;
-              completedOrders = completed.data;
-              _context4.next = 7;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/users/".concat(userId, "/completed"));
-
-            case 7:
-              res = _context4.sent;
-              _context4.next = 13;
-              break;
-
-            case 10:
-              _context4.prev = 10;
-              _context4.t0 = _context4["catch"](0);
-              console.log(_context4.t0);
-
-            case 13:
-            case "end":
-              return _context4.stop();
-          }
-        }
-      }, _callee4, null, [[0, 10]]);
-    }));
-
-    return function (_x4) {
-      return _ref4.apply(this, arguments);
-    };
-  }();
-} //Thunk Creator for DELETE ALL items in cart
-
-var emptyCartThunk = function emptyCartThunk(userId) {
-  return /*#__PURE__*/function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(dispatch) {
-      var _yield$axios$get, data;
-
-      return regeneratorRuntime.wrap(function _callee5$(_context5) {
-        while (1) {
-          switch (_context5.prev = _context5.next) {
-            case 0:
-              _context5.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/users/".concat(userId, "/cart"));
-
-            case 2:
-              _context5.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/users/".concat(userId, "/cart"));
-
-            case 4:
-              _yield$axios$get = _context5.sent;
-              data = _yield$axios$get.data;
-              dispatch(getCart(data));
-
-            case 7:
-            case "end":
-              return _context5.stop();
-          }
-        }
-      }, _callee5);
-    }));
-
-    return function (_x5) {
-      return _ref5.apply(this, arguments);
-    };
-  }();
-}; //Thunk Creator for DELETE ONE ITEM FROM CART
-
-var deleteOneThunk = function deleteOneThunk(userId, bookObj) {
-  return /*#__PURE__*/function () {
-    var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(dispatch) {
-      var _yield$axios$get2, data;
-
-      return regeneratorRuntime.wrap(function _callee6$(_context6) {
-        while (1) {
-          switch (_context6.prev = _context6.next) {
-            case 0:
-              console.log('from think delete ONE ', bookObj);
-              _context6.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/users/".concat(userId, "/cart"), {
-                data: bookObj
-              });
-
-            case 3:
-              _context6.next = 5;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/users/".concat(userId, "/cart"));
-
-            case 5:
-              _yield$axios$get2 = _context6.sent;
-              data = _yield$axios$get2.data;
-              dispatch(getCart(data));
-
-            case 8:
-            case "end":
-              return _context6.stop();
-          }
-        }
-      }, _callee6);
-    }));
-
-    return function (_x6) {
-      return _ref6.apply(this, arguments);
-    };
-  }();
-}; //initial State
-
-var initialState = []; //reducer func
-
-function cartReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-
-  switch (action.type) {
-    case UPDATE_CART:
-      return action.books;
-
-    case ADD_BOOK:
-      var bookToAdd = action.book;
-      return [].concat(_toConsumableArray(state), [bookToAdd]);
-
-    case GET_CART:
-      return action.cart;
-
-    default:
-      return state;
-  }
-}
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/yunicho/senior/graceshopper/client/store/cart.js: Identifier 'updateOrderStatus' has already been declared (105:16)\n\n\u001b[0m \u001b[90m 103 | \u001b[39m}\u001b[0m\n\u001b[0m \u001b[90m 104 | \u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 105 | \u001b[39m\u001b[36mexport\u001b[39m \u001b[36mfunction\u001b[39m updateOrderStatus(userId) {\u001b[0m\n\u001b[0m \u001b[90m     | \u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 106 | \u001b[39m  \u001b[36mreturn\u001b[39m async dispatch \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m 107 | \u001b[39m    \u001b[36mtry\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m 108 | \u001b[39m      \u001b[36mconst\u001b[39m completed \u001b[33m=\u001b[39m await axios\u001b[33m.\u001b[39mget(\u001b[32m`/api/users/${userId}/completed`\u001b[39m)\u001b[0m\n    at Object._raise (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:766:17)\n    at Object.raiseWithData (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:759:17)\n    at Object.raise (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:753:17)\n    at ScopeHandler.checkRedeclarationInScope (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:4873:12)\n    at ScopeHandler.declareName (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:4839:12)\n    at Object.registerFunctionStatementId (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:12183:16)\n    at Object.parseFunction (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:12159:12)\n    at Object.parseFunctionStatement (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:11779:17)\n    at Object.parseStatementContent (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:11469:21)\n    at Object.parseStatement (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:11431:17)\n    at Object.parseExportDeclaration (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:12627:17)\n    at Object.maybeParseExportDeclaration (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:12583:31)\n    at Object.parseExport (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:12521:29)\n    at Object.parseStatementContent (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:11537:27)\n    at Object.parseStatement (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:11431:17)\n    at Object.parseBlockOrModuleBlockBody (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:12013:25)\n    at Object.parseBlockBody (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:11999:10)\n    at Object.parseTopLevel (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:11362:10)\n    at Object.parse (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:13045:10)\n    at parse (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:13098:38)\n    at parser (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/lib/parser/index.js:54:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/lib/transformation/normalize-file.js:99:38)\n    at normalizeFile.next (<anonymous>)\n    at run (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/lib/transformation/index.js:31:50)\n    at run.next (<anonymous>)\n    at Function.transform (/Users/yunicho/senior/graceshopper/node_modules/@babel/core/lib/transform.js:27:41)\n    at transform.next (<anonymous>)\n    at step (/Users/yunicho/senior/graceshopper/node_modules/gensync/index.js:254:32)\n    at /Users/yunicho/senior/graceshopper/node_modules/gensync/index.js:266:13");
 
 /***/ }),
 

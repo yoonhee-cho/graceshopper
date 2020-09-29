@@ -64,6 +64,8 @@ export function fetchCart(userId) {
 export function addBookToCart(bookObj, userId) {
   return async dispatch => {
     try {
+      // const book = axios.get(//book by bookId//)
+
       await axios.post(`/api/users/${userId}/cart`, bookObj)
     } catch (error) {
       alert(
@@ -77,6 +79,7 @@ export function addBookToCart(bookObj, userId) {
 export function updateBook(book, userId) {
   return async dispatch => {
     try {
+      console.log('HELLLLLooo')
       await axios.put(`/api/users/${userId}/cart`, book)
       const res = await axios.get(`/api/users/${userId}/cart`)
       dispatch(updateCart(res.data))
@@ -93,11 +96,23 @@ export function updateOrderStatus(userId) {
       const completedOrders = completed.data
       const res = await axios.post(`/api/users/${userId}/completed`)
     } catch (error) {
+      console.log('OOOUCH')
       console.log(error)
     }
   }
 }
 
+export function updateOrderStatus(userId) {
+  return async dispatch => {
+    try {
+      const completed = await axios.get(`/api/users/${userId}/completed`)
+      const completedOrders = completed.data
+      const res = await axios.post(`/api/users/${userId}/completed`)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
 //Thunk Creator for DELETE ALL items in cart
 export const emptyCartThunk = userId => {
   return async dispatch => {
