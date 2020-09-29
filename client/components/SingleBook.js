@@ -18,7 +18,9 @@ export class SingleBook extends React.Component {
 
     return (
       <div className="books-list">
-        <p>Book Details</p>
+        <p className="title">
+          <i>Book Details</i>
+        </p>
         {singleBook &&
           authors && (
             <div>

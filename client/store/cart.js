@@ -1,5 +1,6 @@
 import axios from 'axios'
 import thunkMiddleware from 'redux-thunk'
+import Toastify from 'toastify-js'
 
 //action constant
 const GET_CART = 'GET_CART'
@@ -54,7 +55,7 @@ export function fetchCart(userId) {
       const cart = await res.data
       dispatch(getCart(cart))
     } catch (err) {
-      alert('You are not an authorized user to make changes to this account')
+      alert('You are not an authorized to make changes to this account')
       console.log(err)
     }
   }
@@ -67,10 +68,31 @@ export function addBookToCart(bookObj, userId) {
       // const book = axios.get(//book by bookId//)
 
       await axios.post(`/api/users/${userId}/cart`, bookObj)
+      Toastify({
+        text: `${bookObj.title} has been added to your cart `,
+        duration: 3000,
+        destination: 'https://github.com/apvarun/toastify-js',
+        newWindow: true,
+        close: true,
+        gravity: 'top',
+        position: 'center',
+        backgroundColor: 'linear-gradient(to right, #00b09b, #96c93d)',
+        stopOnFocus: true
+      }).showToast()
     } catch (error) {
-      alert(
-        'This item is already in your cart. If you wish to update the quantity, please visit your cart. :) '
-      )
+      Toastify({
+        text: `${
+          bookObj.title
+        } is already in your cart. If you wish to update the quantity, please visit your cart. :) `,
+        duration: 5000,
+        destination: 'https://github.com/apvarun/toastify-js',
+        newWindow: true,
+        close: true,
+        gravity: 'top',
+        position: 'center',
+        backgroundColor: 'linear-gradient(to right, #00b09b, #96c93d)',
+        stopOnFocus: true
+      }).showToast()
       console.log(error)
     }
   }

@@ -16,41 +16,45 @@ router.get('/:userId/cart', isUserMiddleWare, async (req, res, next) => {
       attributes: ['id']
     })
 
-    const findBooksIdInCart = await BookInOrder.findAll({
-      where: {
-        orderId: orderIdFromOrders[0].id
-      },
-      attributes: ['bookId']
-    })
+    if (orderIdFromOrders.length > 0) {
+      const findBooksIdInCart = await BookInOrder.findAll({
+        where: {
+          orderId: orderIdFromOrders[0].id
+        },
+        attributes: ['bookId']
+      })
 
-    const getBooks = async () => {
-      return Promise.all(
-        findBooksIdInCart.map(async book => {
-          const bookId = book.bookId
-          const bookGetter = await Book.findOne({
-            where: {
-              id: bookId
-            },
+      const getBooks = async () => {
+        return Promise.all(
+          findBooksIdInCart.map(async book => {
+            const bookId = book.bookId
+            const bookGetter = await Book.findOne({
+              where: {
+                id: bookId
+              },
 
-            include: [
-              {
-                model: BookInOrder,
-                where: {
-                  orderId: orderIdFromOrders[0].id
-                },
+              include: [
+                {
+                  model: BookInOrder,
+                  where: {
+                    orderId: orderIdFromOrders[0].id
+                  },
 
-                attributes: ['bookId', 'quantity', 'totalPrice']
-              }
-            ]
+                  attributes: ['bookId', 'quantity', 'totalPrice']
+                }
+              ]
+            })
+            return bookGetter
           })
-          return bookGetter
-        })
-      )
-    }
+        )
+      }
 
-    getBooks().then(data => {
-      res.json(data)
-    })
+      getBooks().then(data => {
+        res.json(data)
+      })
+    } else {
+      res.json([])
+    }
   } catch (err) {
     next(err)
   }
