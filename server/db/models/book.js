@@ -4,6 +4,7 @@ const db = require('../db')
 const Book = db.define('book', {
   title: {
     type: Sequelize.STRING,
+    isUnique: true,
     allowNull: false
   },
   shortDescription: {

@@ -348,6 +348,13 @@ const users = [
     password: '123456',
     salt: '1233456',
     address: '321 Main Street, New York, NY 10004'
+  },
+  {
+    email: 'admin@gmail.com',
+    password: '123456',
+    salt: '1233456',
+    address: '111 homeOffice, New York, NY 10004',
+    isAdmin: true
   }
 ]
 

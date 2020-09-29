@@ -45,7 +45,6 @@ export class AllBooks extends React.Component {
 
                 <div>Price: {book.price / 100}</div>
                 <AddToCart book={book} loggedUserId={loggedUserId} />
-
                 <img src={book.imageUrl} />
               </Link>
             </div>

@@ -7,6 +7,7 @@ import {me} from './store'
 import AllBooks from './components/AllBooks'
 import SingleBook from './components/SingleBook'
 import Cart from './components/Cart'
+import Admin from './components/Admin'
 
 /**
  * COMPONENT
@@ -18,6 +19,7 @@ class Routes extends Component {
 
   render() {
     const {isLoggedIn} = this.props
+    const {isAdmin} = this.props
 
     return (
       <Switch>
@@ -28,6 +30,14 @@ class Routes extends Component {
         {/* <Route path='/guest/cart' component={} */}
         <Route exact path="/books" component={AllBooks} />
         <Route path="/books/:bookId" component={SingleBook} />
+
+        {isLoggedIn &&
+          isAdmin && (
+            <Switch>
+              {/* Only for admin */}
+              <Route path="/admin" component={Admin} />
+            </Switch>
+          )}
 
         {isLoggedIn && (
           <Switch>
@@ -51,7 +61,8 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    isAdmin: state.user.isAdmin
   }
 }
 
