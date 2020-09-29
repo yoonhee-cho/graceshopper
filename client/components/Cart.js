@@ -1,9 +1,9 @@
 import React from 'react'
-import {fetchCart, updateBook} from '../store/cart'
-
+import {deleteOneThunk, fetchCart, updateBook} from '../store/cart'
 import {connect} from 'react-redux'
-
 import DeleteAllBooksFromCart from './DeleteAllBooksFromCart'
+import LoadingSpinner from './loadingSpinner'
+import Toastify from 'toastify-js'
 import Checkout from './Checkout'
 import LoadingSpinner from './loadingSpinner'
 import {NavLink} from 'react-router-dom'
@@ -24,6 +24,7 @@ export class Cart extends React.Component {
     this.handleClick = this.handleClick.bind(this)
     this.handleClickMinus = this.handleClickMinus.bind(this)
     this.handleUpdate = this.handleUpdate.bind(this)
+    this.handleRemove = this.handleRemove.bind(this)
   }
 
   async componentDidMount() {
@@ -110,11 +111,42 @@ export class Cart extends React.Component {
     await this.setState({
       loading: false
     })
+
+    Toastify({
+      text: `Your cart is updated :) `,
+      duration: 3000,
+      destination: 'https://github.com/apvarun/toastify-js',
+      newWindow: true,
+      close: true,
+      gravity: 'top',
+      position: 'center',
+      backgroundColor: 'linear-gradient(to right, #00b09b, #96c93d)',
+      stopOnFocus: true
+    }).showToast()
+  }
+
+  handleRemove = bookObj => event => {
+    event.preventDefault()
+    const userId = Number(this.props.match.params.userId)
+
+    console.log('From handle remove Iam clicked', bookObj)
+    this.props.deleteOneBook(userId, bookObj)
+    Toastify({
+      text: `Your item is removed :) `,
+      duration: 3000,
+      destination: 'https://github.com/apvarun/toastify-js',
+      newWindow: true,
+      close: true,
+      gravity: 'top',
+      position: 'center',
+      backgroundColor: 'linear-gradient(to right, #00b09b, #96c93d)',
+      stopOnFocus: true
+    }).showToast()
   }
 
   render() {
     const userId = Number(this.props.match.params.userId)
-
+    // console.log('this.props.cart', this.props.cart)
     if (this.props.cart.length === 0 || this.props.cart === undefined) {
       return <h1>cart is empty</h1>
     } else {
@@ -172,6 +204,12 @@ export class Cart extends React.Component {
                     <button onClick={this.handleUpdate.bind(this, book)}>
                       Update Quantity
                     </button>
+                    <button
+                      className="deleteButton2"
+                      onClick={this.handleRemove(book)}
+                    >
+                      Remove from Cart
+                    </button>
                   </div>
 
                   <img src={book.imageUrl} />
@@ -206,7 +244,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getCart: userId => dispatch(fetchCart(userId)),
-    update: (bookObj, userId) => dispatch(updateBook(bookObj, userId))
+    update: (bookObj, userId) => dispatch(updateBook(bookObj, userId)),
+    deleteOneBook: (userId, bookId) => dispatch(deleteOneThunk(userId, bookId))
   }
 }
 

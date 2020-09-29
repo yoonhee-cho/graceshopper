@@ -26,8 +26,8 @@ export function fetchBooks() {
 }
 //initial State
 const initialState = []
-//reducer func
 
+//reducer func
 export default function booksReducer(state = initialState, action) {
   switch (action.type) {
     case GET_BOOKS:

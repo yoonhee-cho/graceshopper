@@ -28,3 +28,16 @@ button.deleteButton {
   height: 25px;
   float: right;
 }
+
+button.deleteButton2 {
+  background-color: red;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 150px;
+  height: 25px;
+}
+
+.fa-shopping-cart {
+  color: rgb(9, 145, 55);
+  font-size: 25px;
+}

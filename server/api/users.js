@@ -13,7 +13,6 @@ router.get('/:userId/cart', isUserMiddleWare, async (req, res, next) => {
         userId: userIdFromLink,
         status: 'in progress'
       },
-
       attributes: ['id']
     })
 
@@ -21,7 +20,6 @@ router.get('/:userId/cart', isUserMiddleWare, async (req, res, next) => {
       where: {
         orderId: orderIdFromOrders[0].id
       },
-
       attributes: ['bookId']
     })
 
@@ -76,7 +74,6 @@ router.get('/:userId/completed', async (req, res, next) => {
   }
 })
 //Post Route /api/users/:userId/cart
-
 router.post('/:userId/cart', async (req, res, next) => {
   try {
     const bookId = req.body.id
@@ -89,6 +86,7 @@ router.post('/:userId/cart', async (req, res, next) => {
       },
       attributes: ['id']
     })
+
     const bookAlreadyInOrder = await BookInOrder.findOne({
       where: {
         bookId: bookId,
@@ -163,6 +161,7 @@ router.put('/:userId/cart', isUserMiddleWare, async (req, res, next) => {
     })
 
     const quantityInCart = req.body.book_in_orders[0].quantity
+
     const bookInOrder = await BookInOrder.findOne({
       where: {
         bookId: bookId,
@@ -188,22 +187,31 @@ router.put('/:userId/cart', isUserMiddleWare, async (req, res, next) => {
 router.delete('/:userId/cart', isUserMiddleWare, async (req, res, next) => {
   try {
     const userId = req.params.userId
-    console.log(req.user.id, 'req.user.id')
-    const orderIdToBeDeleted = await Order.findOne({
-      where: {
-        userId: userId,
-        status: 'in progress'
-      },
-      attributes: ['id']
-    })
+    const bookIdToBeRmoved = req.body.id
+    if (!req.body.id) {
+      const orderIdToBeDeleted = await Order.findOne({
+        where: {
+          userId: userId,
+          status: 'in progress'
+        },
+        attributes: ['id']
+      })
 
-    await BookInOrder.destroy({
-      where: {
-        orderId: orderIdToBeDeleted.id
-      }
-    })
+      await BookInOrder.destroy({
+        where: {
+          orderId: orderIdToBeDeleted.id
+        }
+      })
 
-    res.status(204).end()
+      return res.status(204).end()
+    } else {
+      await BookInOrder.destroy({
+        where: {
+          bookId: bookIdToBeRmoved
+        }
+      })
+      return res.status(204).end()
+    }
   } catch (err) {
     next(err)
   }
