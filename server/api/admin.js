@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User, Book} = require('../db/models')
+const {User, Book, Author} = require('../db/models')
 module.exports = router
 const isAdminMiddleware = require('../app/adminPrivileges')
 
@@ -31,7 +31,15 @@ router.get('/books', isAdminMiddleware, async (req, res, next) => {
 // add book, working ok, need to add admin middleware!!
 router.post('/books', async (req, res, next) => {
   try {
-    await Book.create(req.body)
+    const newBook = await Book.create(req.body)
+    const author = await Author.findOrCreate({
+      where: {
+        firstName: req.body.authors[0]
+      }
+    })
+
+    await newBook.addAuthors(author.id)
+
     res.status(201).end()
   } catch (err) {
     next(err)

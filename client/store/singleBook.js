@@ -27,6 +27,14 @@ export const editABook = updatedBook => {
   }
 }
 
+export const deleteBook = bookId => {
+  return async dispatch => {
+    await axios.delete(`/api/admin/books/${bookId}`)
+
+    dispatch(setSingleBook({}))
+  }
+}
+
 const initialState = {
   singleBook: {}
 }

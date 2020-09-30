@@ -297,7 +297,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _navbar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./navbar */ "./client/components/navbar.js");
 /* harmony import */ var _AllUsers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./AllUsers */ "./client/components/AllUsers.js");
 /* harmony import */ var _user_home__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./user-home */ "./client/components/user-home.js");
+/* harmony import */ var _store_books__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../store/books */ "./client/store/books.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -329,6 +336,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 /**
  * COMPONENT
  */
@@ -338,20 +346,109 @@ var Admin = /*#__PURE__*/function (_Component) {
 
   var _super = _createSuper(Admin);
 
-  function Admin() {
+  function Admin(props) {
+    var _this;
+
     _classCallCheck(this, Admin);
 
-    return _super.apply(this, arguments);
+    _this = _super.call(this, props);
+    _this.state = {
+      title: '',
+      price: 0,
+      qty: 0,
+      category: '',
+      author: ''
+    };
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(Admin, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {}
+  }, {
+    key: "handleChange",
+    value: function handleChange(event) {
+      this.setState(_defineProperty({}, event.target.name, event.target.value));
+    }
+  }, {
+    key: "handleSubmit",
+    value: function () {
+      var _handleSubmit = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
+        var bookObj;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                try {
+                  event.preventDefault();
+                  bookObj = {};
+                  bookObj.title = this.state.title;
+                  bookObj.price = Math.floor(this.state.price * 100);
+                  bookObj.qty = this.state.qty;
+                  bookObj.category = this.state.category;
+                  bookObj.authors = [this.state.author];
+                  console.log(this.props, 'is ADD here?');
+                  this.props.add(bookObj);
+                } catch (error) {
+                  console.log(error);
+                }
+
+              case 1:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function handleSubmit(_x) {
+        return _handleSubmit.apply(this, arguments);
+      }
+
+      return handleSubmit;
+    }()
+  }, {
     key: "render",
-    //   componentDidMount() {
-    //     this.props.loadInitialData()
-    //   }
     value: function render() {
       // const {isAdmin} = this.props
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Hello Admin "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_user_home__WEBPACK_IMPORTED_MODULE_8__["UserHome"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Hello Admin "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.handleSubmit
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "title"
+      }, "Title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        name: "title",
+        onChange: this.handleChange
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "price"
+      }, "Price"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        name: "price",
+        onChange: this.handleChange
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "qty"
+      }, "Quantity"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "number",
+        name: "qty",
+        onChange: this.handleChange
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "category"
+      }, "Category"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        name: "category",
+        onChange: this.handleChange
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "author"
+      }, "Author"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        name: "author",
+        onChange: this.handleChange
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "submit",
+        className: "minusplus"
+      }, "Add New Book")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_user_home__WEBPACK_IMPORTED_MODULE_8__["UserHome"], {
         isAdmin: "true",
         isLoggedIn: "true",
         loggedUserId: this.props.loggedUserId
@@ -371,18 +468,19 @@ var mapState = function mapState(state) {
     loggedUserId: state.user.id,
     isAdmin: state.user.isAdmin
   };
-}; // const mapDispatch = (dispatch) => {
-//   return {
-//     loadInitialData() {
-//       dispatch(me())
-//     },
-//   }
-// }
-// // The `withRouter` wrapper makes sure that updates are not blocked
+};
+
+var mapDispatch = function mapDispatch(dispatch) {
+  return {
+    add: function add(bookObj) {
+      dispatch(Object(_store_books__WEBPACK_IMPORTED_MODULE_9__["addABook"])(bookObj));
+    }
+  };
+}; // // The `withRouter` wrapper makes sure that updates are not blocked
 // // when the url changes
 
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapState, null)(Admin))); // /**
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapState, mapDispatch)(Admin))); // /**
 //  * PROP TYPES
 //  */
 // // AdminHome.propTypes = {
@@ -482,7 +580,7 @@ var AllBooks = /*#__PURE__*/function (_React$Component) {
           loggedUserId: loggedUserId
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Book Title : ", book.title)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
           to: "/books/".concat(book.id)
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Book Title : ", book.title)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "by", ' ', book.authors.map(function (author, idx) {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Book Title : ", book.title)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, book.authors.map(function (author, idx) {
           return idx === book.authors.length - 1 ? "".concat(author.firstName, " ").concat(author.lastName, " ") : "".concat(author.firstName, " ").concat(author.lastName, " , ");
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, book.shortDescription)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Genre:", book.category), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Price: $", book.price / 100), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: book.imageUrl
@@ -1377,9 +1475,13 @@ var SingleBook = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(SingleBook);
 
   function SingleBook(props) {
+    var _this;
+
     _classCallCheck(this, SingleBook);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(SingleBook, [{
@@ -1387,6 +1489,12 @@ var SingleBook = /*#__PURE__*/function (_React$Component) {
     value: function componentDidMount() {
       console.log(this.props, 'PROPSP');
       this.props.loadSingleBookInReact(this.props.match.params.bookId);
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick(event) {
+      event.preventDefault();
+      this.props["delete"](this.props.singleBookInReact.singleBook.id);
     }
   }, {
     key: "render",
@@ -1411,9 +1519,12 @@ var SingleBook = /*#__PURE__*/function (_React$Component) {
         book: singleBook
       }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
         to: "/login"
-      }, "Login to Add to Cart"), isAdmin ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UpdateBook__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      }, "Login to Add to Cart"), isAdmin ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "minusplus",
+        onClick: this.handleClick
+      }, "Delete Book"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UpdateBook__WEBPACK_IMPORTED_MODULE_5__["default"], {
         book: singleBook
-      }) : null)))));
+      }), ' ') : null)))));
     }
   }]);
 
@@ -1432,6 +1543,9 @@ var mapDispatch = function mapDispatch(dispatch) {
   return {
     loadSingleBookInReact: function loadSingleBookInReact(id) {
       dispatch(Object(_store_singleBook__WEBPACK_IMPORTED_MODULE_2__["fetchSingleBook"])(id));
+    },
+    "delete": function _delete(id) {
+      dispatch(Object(_store_singleBook__WEBPACK_IMPORTED_MODULE_2__["deleteBook"])(id));
     }
   };
 };
@@ -2245,12 +2359,13 @@ function usersReducer() {
 /*!*******************************!*\
   !*** ./client/store/books.js ***!
   \*******************************/
-/*! exports provided: fetchBooks, default */
+/*! exports provided: fetchBooks, addABook, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchBooks", function() { return fetchBooks; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addABook", function() { return addABook; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return booksReducer; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
@@ -2315,6 +2430,49 @@ function fetchBooks() {
 
     return function (_x) {
       return _ref.apply(this, arguments);
+    };
+  }();
+}
+function addABook(bookObj) {
+  return /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch) {
+      var books;
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              _context2.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/admin/books", bookObj);
+
+            case 3:
+              _context2.next = 5;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/books");
+
+            case 5:
+              books = _context2.sent;
+              _context2.next = 8;
+              return dispatch(getBooks(books.data));
+
+            case 8:
+              _context2.next = 13;
+              break;
+
+            case 10:
+              _context2.prev = 10;
+              _context2.t0 = _context2["catch"](0);
+              console.log(_context2.t0);
+
+            case 13:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, null, [[0, 10]]);
+    }));
+
+    return function (_x2) {
+      return _ref2.apply(this, arguments);
     };
   }();
 } //initial State
@@ -2756,7 +2914,7 @@ var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, m
 /*!************************************!*\
   !*** ./client/store/singleBook.js ***!
   \************************************/
-/*! exports provided: setSingleBook, fetchSingleBook, editABook, default */
+/*! exports provided: setSingleBook, fetchSingleBook, editABook, deleteBook, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2764,6 +2922,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSingleBook", function() { return setSingleBook; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchSingleBook", function() { return fetchSingleBook; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editABook", function() { return editABook; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteBook", function() { return deleteBook; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return singleBookReducer; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
@@ -2842,6 +3001,32 @@ var editABook = function editABook(updatedBook) {
 
     return function (_x2) {
       return _ref2.apply(this, arguments);
+    };
+  }();
+};
+var deleteBook = function deleteBook(bookId) {
+  return /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(dispatch) {
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/admin/books/".concat(bookId));
+
+            case 2:
+              dispatch(setSingleBook({}));
+
+            case 3:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
+
+    return function (_x3) {
+      return _ref3.apply(this, arguments);
     };
   }();
 };

@@ -57,7 +57,6 @@ export class AllBooks extends React.Component {
               )}
 
               <div>
-                by{' '}
                 {book.authors.map(
                   (author, idx) =>
                     idx === book.authors.length - 1

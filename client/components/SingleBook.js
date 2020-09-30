@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchSingleBook} from '../store/singleBook'
+import {fetchSingleBook, deleteBook} from '../store/singleBook'
 import AddToCart from './AddToCart'
 import {Link} from 'react-router-dom'
 import UpdateBook from './UpdateBook'
@@ -8,11 +8,17 @@ import UpdateBook from './UpdateBook'
 export class SingleBook extends React.Component {
   constructor(props) {
     super(props)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   componentDidMount() {
     console.log(this.props, 'PROPSP')
     this.props.loadSingleBookInReact(this.props.match.params.bookId)
+  }
+
+  handleClick(event) {
+    event.preventDefault()
+    this.props.delete(this.props.singleBookInReact.singleBook.id)
   }
 
   render() {
@@ -52,7 +58,17 @@ export class SingleBook extends React.Component {
                     ) : (
                       <Link to="/login">Login to Add to Cart</Link>
                     )}
-                    {isAdmin ? <UpdateBook book={singleBook} /> : null}
+                    {isAdmin ? (
+                      <div>
+                        <button
+                          className="minusplus"
+                          onClick={this.handleClick}
+                        >
+                          Delete Book
+                        </button>
+                        <UpdateBook book={singleBook} />{' '}
+                      </div>
+                    ) : null}
                   </li>
                 </div>
               </ul>
@@ -75,6 +91,9 @@ const mapDispatch = dispatch => {
   return {
     loadSingleBookInReact: id => {
       dispatch(fetchSingleBook(id))
+    },
+    delete: id => {
+      dispatch(deleteBook(id))
     }
   }
 }

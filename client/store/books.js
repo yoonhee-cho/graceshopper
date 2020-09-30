@@ -25,6 +25,20 @@ export function fetchBooks() {
   }
 }
 
+export function addABook(bookObj) {
+  return async dispatch => {
+    try {
+      await axios.post(`/api/admin/books`, bookObj)
+
+      const books = await axios.get(`/api/books`)
+
+      await dispatch(getBooks(books.data))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
 //initial State
 const initialState = []
 
