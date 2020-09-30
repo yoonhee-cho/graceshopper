@@ -140,15 +140,6 @@ router.post('/:userId/completed', isUserMiddleWare, async (req, res, next) => {
     console.log(error)
   }
 })
-// //put route api/users/:userId/cart
-
-// router.put('/:userId/cart', async (req, res, next) => {
-//   try {
-
-//   } catch (error) {
-//     console.log(error)
-//   }
-// })
 
 router.put('/:userId/cart', isUserMiddleWare, async (req, res, next) => {
   try {

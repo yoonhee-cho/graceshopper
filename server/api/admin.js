@@ -28,8 +28,7 @@ router.get('/books', isAdminMiddleware, async (req, res, next) => {
   }
 })
 
-// add book, working ok, need to add admin middleware!!
-router.post('/books', async (req, res, next) => {
+router.post('/books', isAdminMiddleware, async (req, res, next) => {
   try {
     const newBook = await Book.create(req.body)
     const author = await Author.findOrCreate({
@@ -46,8 +45,7 @@ router.post('/books', async (req, res, next) => {
   }
 })
 
-// update/edit book, working ok, need to add admin middleware
-router.put('/books/:id', async (req, res, next) => {
+router.put('/books/:id', isAdminMiddleware, async (req, res, next) => {
   try {
     const id = +req.params.id
     const findBook = await Book.findByPk(id)
@@ -58,8 +56,8 @@ router.put('/books/:id', async (req, res, next) => {
   }
 })
 
-//DELETE a book, working ok, add admin middleware
-router.delete('/books/:id', async (req, res, next) => {
+//DELETE a book
+router.delete('/books/:id', isAdminMiddleware, async (req, res, next) => {
   try {
     const id = +req.params.id
     const bookToBeDeleted = await Book.findByPk(id)

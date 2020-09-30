@@ -20,7 +20,7 @@ const Book = db.define('book', {
     type: Sequelize.INTEGER
   },
   imageUrl: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     defaultValue:
       'https://global.oup.com/education/covers/oxed/medium/9780198418054.jpg'
   },
