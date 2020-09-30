@@ -1,5 +1,7 @@
 const router = require('express').Router()
 const {Book, Author} = require('../db/models')
+const isAdminMiddleware = require('../app/adminPrivileges')
+
 module.exports = router
 
 //GET api/books
@@ -35,7 +37,7 @@ router.get('/:bookId', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', isAdminMiddleware, async (req, res, next) => {
   try {
     const newBook = await Book.findOrCreate(req.body)
     res.json(newBook)
