@@ -5,7 +5,6 @@ import {connect} from 'react-redux'
 import AddToCart from './AddToCart'
 
 import {Link} from 'react-router-dom'
-import EditBook from './EditBook'
 
 export class AllBooks extends React.Component {
   // eslint-disable-next-line no-useless-constructor
@@ -18,13 +17,9 @@ export class AllBooks extends React.Component {
   }
 
   render() {
-    // const books = this.props.books
     const loggedUserId = this.props.loggedUserId
     const isAdmin = this.props.isAdmin
     const isLoggedIn = this.props.isLoggedIn
-
-    console.log('HELLLLO:props ', this.props)
-    console.log('this is admin ', isAdmin)
 
     return (
       <div className="books-list">
@@ -72,7 +67,7 @@ export class AllBooks extends React.Component {
               <div>Price: ${book.price / 100}</div>
 
               <img src={book.imageUrl} />
-              {/* <div>{isAdmin ? <EditBook book={book} /> : null}</div> */}
+
               <br />
               {loggedUserId || isLoggedIn ? (
                 isAdmin ? (
@@ -85,7 +80,6 @@ export class AllBooks extends React.Component {
                     >
                       Edit Book
                     </Link>
-                    {/* <EditBook book={book} /> */}
                   </div>
                 ) : (
                   <AddToCart book={book} loggedUserId={loggedUserId} />

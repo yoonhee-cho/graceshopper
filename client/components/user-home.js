@@ -8,12 +8,12 @@ import AllBooks from './AllBooks'
  */
 export const UserHome = props => {
   const {email, userId, isAdmin, isLoggedIn} = props
-  console.log('what is props here', props)
+
   return (
     <div>
       <h3 className="title">
         {' '}
-        <i>Welcome, {email}!</i>
+        <i>Welcome {email ? email : 'user'}!</i>
       </h3>
       <AllBooks
         loggedUserId={userId}

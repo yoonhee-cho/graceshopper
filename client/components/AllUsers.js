@@ -15,10 +15,9 @@ class AllUsers extends React.Component {
     this.props.loadUsersInReact()
   }
 
-  //NEED TO ADD the single user product
+  //NEED TO ADD the single user product in the future
   handleClick = userId => event => {
     event.preventDefault()
-    console.log('I am in handleClick AllUser', userId)
   }
 
   render() {
@@ -57,5 +56,3 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllUsers)
-
-//export default AllUsers

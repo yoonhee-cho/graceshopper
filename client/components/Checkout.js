@@ -14,7 +14,6 @@ export class Checkout extends React.Component {
 
   handleClick(event) {
     const userId = this.props.location.userId
-
     this.props.update(userId)
   }
 
@@ -26,7 +25,7 @@ export class Checkout extends React.Component {
       0
     )
     const booksInOrder = this.props.location.books
-    console.log(booksInOrder, 'BOOKSINORDER')
+
     return (
       <div className="books-list">
         <p className="title">Order Details</p>

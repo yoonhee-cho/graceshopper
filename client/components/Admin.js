@@ -1,12 +1,6 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
-import {withRouter, Route, Switch} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
-import AllBooks from './AllBooks'
-// import {me} from './store'
-import SingleBook from './SingleBook'
-import navbar from './navbar'
-import AllUsers from './AllUsers'
 import {UserHome} from './user-home'
 import {addABook} from '../store/books'
 /**
@@ -17,8 +11,8 @@ class Admin extends Component {
     super(props)
     this.state = {
       title: '',
-      price: 0,
-      qty: 0,
+      price: null,
+      qty: null,
       category: '',
       author: ''
     }
@@ -32,7 +26,7 @@ class Admin extends Component {
     })
   }
 
-  async handleSubmit(event) {
+  handleSubmit(event) {
     try {
       event.preventDefault()
       const bookObj = {}
@@ -41,28 +35,59 @@ class Admin extends Component {
       bookObj.qty = this.state.qty
       bookObj.category = this.state.category
       bookObj.authors = [this.state.author]
-      console.log(this.props, 'is ADD here?')
+
       this.props.add(bookObj)
+      this.setState({
+        title: '',
+        price: null,
+        qty: null,
+        category: '',
+        author: ''
+      })
     } catch (error) {
       console.log(error)
     }
   }
   render() {
-    // const {isAdmin} = this.props
     return (
       <div>
         <h3>Hello Admin </h3>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="title">Title</label>
-          <input type="text" name="title" onChange={this.handleChange} />
+          <input
+            type="text"
+            name="title"
+            value={this.state.title}
+            onChange={this.handleChange}
+          />
           <label htmlFor="price">Price</label>
-          <input type="text" name="price" onChange={this.handleChange} />
+          <input
+            type="text"
+            name="price"
+            value={this.state.price}
+            onChange={this.handleChange}
+          />
           <label htmlFor="qty">Quantity</label>
-          <input type="number" name="qty" onChange={this.handleChange} />
+          <input
+            type="number"
+            name="qty"
+            value={this.state.qty}
+            onChange={this.handleChange}
+          />
           <label htmlFor="category">Category</label>
-          <input type="text" name="category" onChange={this.handleChange} />
+          <input
+            type="text"
+            name="category"
+            value={this.state.category}
+            onChange={this.handleChange}
+          />
           <label htmlFor="author">Author</label>
-          <input type="text" name="author" onChange={this.handleChange} />
+          <input
+            type="text"
+            name="author"
+            value={this.state.author}
+            onChange={this.handleChange}
+          />
           <button type="submit" className="minusplus">
             Add New Book
           </button>
@@ -72,8 +97,6 @@ class Admin extends Component {
           isLoggedIn="true"
           loggedUserId={this.props.loggedUserId}
         />
-
-        {/* <AllBooks /> */}
       </div>
     )
   }
@@ -100,11 +123,3 @@ const mapDispatch = dispatch => {
 // // The `withRouter` wrapper makes sure that updates are not blocked
 // // when the url changes
 export default withRouter(connect(mapState, mapDispatch)(Admin))
-
-// /**
-//  * PROP TYPES
-//  */
-// // AdminHome.propTypes = {
-// //   loadInitialData: PropTypes.func.isRequired,
-// //   isAdmin: PropTypes.bool.isRequired,
-// // }

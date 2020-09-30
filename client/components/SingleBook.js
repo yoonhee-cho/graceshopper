@@ -12,7 +12,6 @@ export class SingleBook extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props, 'PROPSP')
     this.props.loadSingleBookInReact(this.props.match.params.bookId)
   }
 

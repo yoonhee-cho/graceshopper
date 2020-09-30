@@ -32,7 +32,7 @@ export function addABook(bookObj) {
 
       const books = await axios.get(`/api/books`)
 
-      await dispatch(getBooks(books.data))
+      dispatch(getBooks(books.data))
     } catch (error) {
       console.log(error)
     }

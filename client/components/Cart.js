@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 import DeleteAllBooksFromCart from './DeleteAllBooksFromCart'
 import LoadingSpinner from './loadingSpinner'
 import Toastify from 'toastify-js'
-import Checkout from './Checkout'
 import {NavLink} from 'react-router-dom'
 
 export class Cart extends React.Component {
@@ -129,7 +128,6 @@ export class Cart extends React.Component {
     event.preventDefault()
     const userId = Number(this.props.match.params.userId)
 
-    console.log('From handle remove Iam clicked', bookObj)
     this.props.deleteOneBook(userId, bookObj)
     Toastify({
       text: `Your item is removed :) `,
@@ -146,7 +144,7 @@ export class Cart extends React.Component {
 
   render() {
     const userId = Number(this.props.match.params.userId)
-    // console.log('this.props.cart', this.props.cart)
+
     if (this.props.cart.length === 0 || this.props.cart === undefined) {
       return <h1>cart is empty</h1>
     } else {

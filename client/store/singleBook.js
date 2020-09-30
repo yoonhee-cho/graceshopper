@@ -14,7 +14,7 @@ export const setSingleBook = data => {
 export const fetchSingleBook = id => {
   return async dispatch => {
     const {data} = await axios.get(`/api/books/${id}`)
-    //console.log('data', data)
+
     await dispatch(setSingleBook(data))
   }
 }

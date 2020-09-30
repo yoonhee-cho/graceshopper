@@ -6,9 +6,6 @@ import Toastify from 'toastify-js'
 const GET_CART = 'GET_CART'
 const ADD_BOOK = 'ADD_BOOK'
 const UPDATE_CART = 'UPDATE_CART'
-const EMPTY_CART = 'EMPTY_CART'
-const ADD_TO_COMPLETED = 'ADD_TO_COMPLETED'
-const DELETE_SINGLEBOOK = 'DELETE_SINGLEBOOK'
 
 //action creator
 const getCart = cart => {
@@ -18,32 +15,10 @@ const getCart = cart => {
   }
 }
 
-const addBook = book => {
-  return {
-    type: ADD_BOOK,
-    book: book
-  }
-}
-
 const updateCart = books => {
   return {
     type: UPDATE_CART,
     books: books
-  }
-}
-
-const emptyCart = userId => {
-  return {
-    type: EMPTY_CART,
-    userId: userId
-  }
-}
-
-const addToCompleted = (order, completedOrders) => {
-  return {
-    type: ADD_TO_COMPLETED,
-    completed: completedOrders,
-    order: order
   }
 }
 
@@ -101,7 +76,6 @@ export function addBookToCart(bookObj, userId) {
 export function updateBook(book, userId) {
   return async dispatch => {
     try {
-      console.log('HELLLLLooo')
       await axios.put(`/api/users/${userId}/cart`, book)
       const res = await axios.get(`/api/users/${userId}/cart`)
       dispatch(updateCart(res.data))
@@ -122,7 +96,7 @@ export function updateOrderStatus(userId) {
     }
   }
 }
-//Thunk Creator for DELETE ALL items in cart
+
 export const emptyCartThunk = userId => {
   return async dispatch => {
     await axios.delete(`/api/users/${userId}/cart`)
@@ -131,10 +105,8 @@ export const emptyCartThunk = userId => {
   }
 }
 
-//Thunk Creator for DELETE ONE ITEM FROM CART
 export const deleteOneThunk = (userId, bookObj) => {
   return async dispatch => {
-    console.log('from think delete ONE ', bookObj)
     await axios.delete(`/api/users/${userId}/cart`, {data: bookObj})
     const {data} = await axios.get(`/api/users/${userId}/cart`)
     dispatch(getCart(data))

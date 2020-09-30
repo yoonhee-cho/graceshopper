@@ -494,12 +494,6 @@ const seed = async () => {
       })
     )
 
-    // const reviewsArr = await Promise.all(
-    //     reviews.map((review)=>{
-    //         return Review.create(review)
-    //     })
-    // )
-
     const book1 = booksArr[0]
     const author1 = authorsArr[0]
 
@@ -532,36 +526,11 @@ const seed = async () => {
     const bookInOrder1 = booksInOrderArr[0]
     const bookInOrder2 = booksInOrderArr[1]
 
-    // await book4.addBookInOrder(bookInOrder1)
-    // await book3.addBookInOrder(bookInOrder2)
-
     await bookInOrder1.setBook(book4)
     await bookInOrder2.setBook(book3)
 
     await bookInOrder1.setOrder(order1)
     await bookInOrder2.setOrder(order2)
-
-    // await user1.addBooks(book1)
-    // await user2.addBooks([book1, book2, book3, book4])
-
-    // setBooks will overwrite
-    // await user2.setBooks([book3, book4])
-
-    // booksArr.map(async (book,idx)=>{
-    //     try {
-    //         console.log(Object.keys(Book.prototype));
-    //    await book.addAuthor(authorsArr[idx]);
-    //     } catch( error ) {
-    //         console.log(error)
-    //     }
-
-    // })
-
-    // reviewsArr.forEach((review,idx)=>{
-
-    //     review.setUsers(usersArr[idx].id);
-
-    // })
   } catch (error) {
     console.log(error)
   }

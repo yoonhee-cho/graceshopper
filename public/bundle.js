@@ -288,21 +288,11 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _AllBooks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./AllBooks */ "./client/components/AllBooks.js");
-/* harmony import */ var _SingleBook__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./SingleBook */ "./client/components/SingleBook.js");
-/* harmony import */ var _navbar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./navbar */ "./client/components/navbar.js");
-/* harmony import */ var _AllUsers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./AllUsers */ "./client/components/AllUsers.js");
-/* harmony import */ var _user_home__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./user-home */ "./client/components/user-home.js");
-/* harmony import */ var _store_books__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../store/books */ "./client/store/books.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _user_home__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./user-home */ "./client/components/user-home.js");
+/* harmony import */ var _store_books__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../store/books */ "./client/store/books.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -330,12 +320,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
- // import {me} from './store'
-
-
-
-
-
 
 /**
  * COMPONENT
@@ -354,8 +338,8 @@ var Admin = /*#__PURE__*/function (_Component) {
     _this = _super.call(this, props);
     _this.state = {
       title: '',
-      price: 0,
-      qty: 0,
+      price: null,
+      qty: null,
       category: '',
       author: ''
     };
@@ -374,45 +358,30 @@ var Admin = /*#__PURE__*/function (_Component) {
     }
   }, {
     key: "handleSubmit",
-    value: function () {
-      var _handleSubmit = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
-        var bookObj;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                try {
-                  event.preventDefault();
-                  bookObj = {};
-                  bookObj.title = this.state.title;
-                  bookObj.price = Math.floor(this.state.price * 100);
-                  bookObj.qty = this.state.qty;
-                  bookObj.category = this.state.category;
-                  bookObj.authors = [this.state.author];
-                  console.log(this.props, 'is ADD here?');
-                  this.props.add(bookObj);
-                } catch (error) {
-                  console.log(error);
-                }
-
-              case 1:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function handleSubmit(_x) {
-        return _handleSubmit.apply(this, arguments);
+    value: function handleSubmit(event) {
+      try {
+        event.preventDefault();
+        var bookObj = {};
+        bookObj.title = this.state.title;
+        bookObj.price = Math.floor(this.state.price * 100);
+        bookObj.qty = this.state.qty;
+        bookObj.category = this.state.category;
+        bookObj.authors = [this.state.author];
+        this.props.add(bookObj);
+        this.setState({
+          title: '',
+          price: null,
+          qty: null,
+          category: '',
+          author: ''
+        });
+      } catch (error) {
+        console.log(error);
       }
-
-      return handleSubmit;
-    }()
+    }
   }, {
     key: "render",
     value: function render() {
-      // const {isAdmin} = this.props
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Hello Admin "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -420,35 +389,40 @@ var Admin = /*#__PURE__*/function (_Component) {
       }, "Title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         name: "title",
+        value: this.state.title,
         onChange: this.handleChange
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "price"
       }, "Price"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         name: "price",
+        value: this.state.price,
         onChange: this.handleChange
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "qty"
       }, "Quantity"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "number",
         name: "qty",
+        value: this.state.qty,
         onChange: this.handleChange
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "category"
       }, "Category"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         name: "category",
+        value: this.state.category,
         onChange: this.handleChange
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "author"
       }, "Author"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         name: "author",
+        value: this.state.author,
         onChange: this.handleChange
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
         className: "minusplus"
-      }, "Add New Book")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_user_home__WEBPACK_IMPORTED_MODULE_8__["UserHome"], {
+      }, "Add New Book")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_user_home__WEBPACK_IMPORTED_MODULE_3__["UserHome"], {
         isAdmin: "true",
         isLoggedIn: "true",
         loggedUserId: this.props.loggedUserId
@@ -473,20 +447,14 @@ var mapState = function mapState(state) {
 var mapDispatch = function mapDispatch(dispatch) {
   return {
     add: function add(bookObj) {
-      dispatch(Object(_store_books__WEBPACK_IMPORTED_MODULE_9__["addABook"])(bookObj));
+      dispatch(Object(_store_books__WEBPACK_IMPORTED_MODULE_4__["addABook"])(bookObj));
     }
   };
 }; // // The `withRouter` wrapper makes sure that updates are not blocked
 // // when the url changes
 
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapState, mapDispatch)(Admin))); // /**
-//  * PROP TYPES
-//  */
-// // AdminHome.propTypes = {
-// //   loadInitialData: PropTypes.func.isRequired,
-// //   isAdmin: PropTypes.bool.isRequired,
-// // }
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapState, mapDispatch)(Admin)));
 
 /***/ }),
 
@@ -506,8 +474,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _AddToCart__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AddToCart */ "./client/components/AddToCart.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _EditBook__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./EditBook */ "./client/components/EditBook.js");
-/* harmony import */ var _EditBook__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_EditBook__WEBPACK_IMPORTED_MODULE_5__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -535,7 +501,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-
 var AllBooks = /*#__PURE__*/function (_React$Component) {
   _inherits(AllBooks, _React$Component);
 
@@ -556,12 +521,9 @@ var AllBooks = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      // const books = this.props.books
       var loggedUserId = this.props.loggedUserId;
       var isAdmin = this.props.isAdmin;
       var isLoggedIn = this.props.isLoggedIn;
-      console.log('HELLLLO:props ', this.props);
-      console.log('this is admin ', isAdmin);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "books-list"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
@@ -679,7 +641,6 @@ var AllUsers = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "handleClick", function (userId) {
       return function (event) {
         event.preventDefault();
-        console.log('I am in handleClick AllUser', userId);
       };
     });
 
@@ -691,7 +652,7 @@ var AllUsers = /*#__PURE__*/function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.loadUsersInReact();
-    } //NEED TO ADD the single user product
+    } //NEED TO ADD the single user product in the future
 
   }, {
     key: "render",
@@ -729,7 +690,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(AllUsers)); //export default AllUsers
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(AllUsers));
 
 /***/ }),
 
@@ -751,8 +712,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _loadingSpinner__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./loadingSpinner */ "./client/components/loadingSpinner.js");
 /* harmony import */ var toastify_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! toastify-js */ "./node_modules/toastify-js/src/toastify.js");
 /* harmony import */ var toastify_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(toastify_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _Checkout__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Checkout */ "./client/components/Checkout.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -788,7 +748,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
 var Cart = /*#__PURE__*/function (_React$Component) {
   _inherits(Cart, _React$Component);
 
@@ -805,7 +764,6 @@ var Cart = /*#__PURE__*/function (_React$Component) {
       return function (event) {
         event.preventDefault();
         var userId = Number(_this.props.match.params.userId);
-        console.log('From handle remove Iam clicked', bookObj);
 
         _this.props.deleteOneBook(userId, bookObj);
 
@@ -989,7 +947,7 @@ var Cart = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      var userId = Number(this.props.match.params.userId); // console.log('this.props.cart', this.props.cart)
+      var userId = Number(this.props.match.params.userId);
 
       if (this.props.cart.length === 0 || this.props.cart === undefined) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "cart is empty");
@@ -1038,7 +996,7 @@ var Cart = /*#__PURE__*/function (_React$Component) {
           }, "Remove from Cart")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
             src: book.imageUrl
           })));
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["NavLink"], {
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["NavLink"], {
           to: {
             pathname: '/checkout',
             prices: subtotal,
@@ -1154,7 +1112,6 @@ var Checkout = /*#__PURE__*/function (_React$Component) {
         return accum + currentPrice;
       }, 0);
       var booksInOrder = this.props.location.books;
-      console.log(booksInOrder, 'BOOKSINORDER');
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "books-list"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
@@ -1378,52 +1335,6 @@ var mapDispatch = function mapDispatch(dispatch) {
 
 /***/ }),
 
-/***/ "./client/components/EditBook.js":
-/*!***************************************!*\
-  !*** ./client/components/EditBook.js ***!
-  \***************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// import React from 'react'
-// import {editABook} from '../store/singleBook'
-// import {connect} from ‘react-redux’
-// class EditBook extends React.Component {
-//   constructor(props) {
-//     super(props)
-//     this.handleClick = this.handleClick.bind(this)
-//   }
-//   handleClick(event) {
-//     event.preventDefault()
-//     this.props.update()
-//   }
-//   render() {
-//     //Pass down
-//     //const bookObj = this.props.book
-//     return (
-//       <div>
-//         <button className="minusplus" type="click" onClick={this.handleClick}>
-//           Edit Book
-//         </button>
-//       </div>
-//     )
-//   }
-// }
-// // const mapStateToProps = (state) => {
-// //   return {
-// //     user: state.user,
-// //     cart: state.cart,
-// //   }
-// // }
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     update: (bookObj) => dispatch(editABook(bookObj))
-//   }
-// }
-// export default connect(null, mapDispatchToProps)(EditBook)
-
-/***/ }),
-
 /***/ "./client/components/SingleBook.js":
 /*!*****************************************!*\
   !*** ./client/components/SingleBook.js ***!
@@ -1487,7 +1398,6 @@ var SingleBook = /*#__PURE__*/function (_React$Component) {
   _createClass(SingleBook, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      console.log(this.props, 'PROPSP');
       this.props.loadSingleBookInReact(this.props.match.params.bookId);
     }
   }, {
@@ -1572,10 +1482,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_singleBook__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/singleBook */ "./client/store/singleBook.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1627,39 +1533,20 @@ var UpdateBook = /*#__PURE__*/function (_React$Component) {
     key: "handleChange",
     value: function handleChange(event) {
       this.setState(_defineProperty({}, event.target.name, event.target.value));
-      console.log(this.state.title, 'TITLE');
     }
   }, {
     key: "handleSubmit",
-    value: function () {
-      var _handleSubmit = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                try {
-                  event.preventDefault();
-                  this.props.book.title = this.state.title;
-                  this.props.book.price = this.state.price * 100;
-                  this.props.update(this.props.book);
-                } catch (error) {
-                  console.log(error);
-                }
-
-              case 1:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function handleSubmit(_x) {
-        return _handleSubmit.apply(this, arguments);
-      }
-
-      return handleSubmit;
-    }()
+    value: function handleSubmit(event) {
+      event.preventDefault();
+      this.props.book.title = this.state.title;
+      this.props.book.price = this.state.price * 100;
+      this.props.update(this.props.book);
+      this.setState({
+        title: '',
+        price: 0,
+        qty: 0
+      });
+    }
   }, {
     key: "render",
     value: function render() {
@@ -1670,18 +1557,21 @@ var UpdateBook = /*#__PURE__*/function (_React$Component) {
       }, "New Title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         name: "title",
+        value: this.state.title,
         onChange: this.handleChange
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "price"
       }, "New Price"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         name: "price",
+        value: this.state.price,
         onChange: this.handleChange
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "qty"
       }, "Quantity"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "number",
         name: "qty",
+        value: this.state.qty,
         onChange: this.handleChange
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
@@ -1913,7 +1803,7 @@ var Navbar = function Navbar(_ref) {
   }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
     to: '/' + userId + '/cart'
   }, "Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
-    to: "/books"
+    to: "/home"
   }, "AllBooks"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "#",
     onClick: handleClick
@@ -1987,10 +1877,9 @@ var UserHome = function UserHome(props) {
       userId = props.userId,
       isAdmin = props.isAdmin,
       isLoggedIn = props.isLoggedIn;
-  console.log('what is props here', props);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "title"
-  }, ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "Welcome, ", email, "!")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AllBooks__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "Welcome ", email ? email : 'user', "!")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AllBooks__WEBPACK_IMPORTED_MODULE_3__["default"], {
     loggedUserId: userId,
     isAdmin: isAdmin,
     isLoggedIn: isLoggedIn
@@ -2451,24 +2340,21 @@ function addABook(bookObj) {
 
             case 5:
               books = _context2.sent;
-              _context2.next = 8;
-              return dispatch(getBooks(books.data));
-
-            case 8:
-              _context2.next = 13;
+              dispatch(getBooks(books.data));
+              _context2.next = 12;
               break;
 
-            case 10:
-              _context2.prev = 10;
+            case 9:
+              _context2.prev = 9;
               _context2.t0 = _context2["catch"](0);
               console.log(_context2.t0);
 
-            case 13:
+            case 12:
             case "end":
               return _context2.stop();
           }
         }
-      }, _callee2, null, [[0, 10]]);
+      }, _callee2, null, [[0, 9]]);
     }));
 
     return function (_x2) {
@@ -2539,10 +2425,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var GET_CART = 'GET_CART';
 var ADD_BOOK = 'ADD_BOOK';
-var UPDATE_CART = 'UPDATE_CART';
-var EMPTY_CART = 'EMPTY_CART';
-var ADD_TO_COMPLETED = 'ADD_TO_COMPLETED';
-var DELETE_SINGLEBOOK = 'DELETE_SINGLEBOOK'; //action creator
+var UPDATE_CART = 'UPDATE_CART'; //action creator
 
 var getCart = function getCart(cart) {
   return {
@@ -2551,32 +2434,10 @@ var getCart = function getCart(cart) {
   };
 };
 
-var addBook = function addBook(book) {
-  return {
-    type: ADD_BOOK,
-    book: book
-  };
-};
-
 var updateCart = function updateCart(books) {
   return {
     type: UPDATE_CART,
     books: books
-  };
-};
-
-var emptyCart = function emptyCart(userId) {
-  return {
-    type: EMPTY_CART,
-    userId: userId
-  };
-};
-
-var addToCompleted = function addToCompleted(order, completedOrders) {
-  return {
-    type: ADD_TO_COMPLETED,
-    completed: completedOrders,
-    order: order
   };
 }; //thunk
 
@@ -2688,31 +2549,30 @@ function updateBook(book, userId) {
           switch (_context3.prev = _context3.next) {
             case 0:
               _context3.prev = 0;
-              console.log('HELLLLLooo');
-              _context3.next = 4;
+              _context3.next = 3;
               return axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("/api/users/".concat(userId, "/cart"), book);
 
-            case 4:
-              _context3.next = 6;
+            case 3:
+              _context3.next = 5;
               return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/users/".concat(userId, "/cart"));
 
-            case 6:
+            case 5:
               res = _context3.sent;
               dispatch(updateCart(res.data));
-              _context3.next = 13;
+              _context3.next = 12;
               break;
 
-            case 10:
-              _context3.prev = 10;
+            case 9:
+              _context3.prev = 9;
               _context3.t0 = _context3["catch"](0);
               console.log(_context3.t0);
 
-            case 13:
+            case 12:
             case "end":
               return _context3.stop();
           }
         }
-      }, _callee3, null, [[0, 10]]);
+      }, _callee3, null, [[0, 9]]);
     }));
 
     return function (_x3) {
@@ -2760,8 +2620,7 @@ function updateOrderStatus(userId) {
       return _ref4.apply(this, arguments);
     };
   }();
-} //Thunk Creator for DELETE ALL items in cart
-
+}
 var emptyCartThunk = function emptyCartThunk(userId) {
   return /*#__PURE__*/function () {
     var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(dispatch) {
@@ -2795,8 +2654,7 @@ var emptyCartThunk = function emptyCartThunk(userId) {
       return _ref5.apply(this, arguments);
     };
   }();
-}; //Thunk Creator for DELETE ONE ITEM FROM CART
-
+};
 var deleteOneThunk = function deleteOneThunk(userId, bookObj) {
   return /*#__PURE__*/function () {
     var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(dispatch) {
@@ -2806,22 +2664,21 @@ var deleteOneThunk = function deleteOneThunk(userId, bookObj) {
         while (1) {
           switch (_context6.prev = _context6.next) {
             case 0:
-              console.log('from think delete ONE ', bookObj);
-              _context6.next = 3;
+              _context6.next = 2;
               return axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/users/".concat(userId, "/cart"), {
                 data: bookObj
               });
 
-            case 3:
-              _context6.next = 5;
+            case 2:
+              _context6.next = 4;
               return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/users/".concat(userId, "/cart"));
 
-            case 5:
+            case 4:
               _yield$axios$get2 = _context6.sent;
               data = _yield$axios$get2.data;
               dispatch(getCart(data));
 
-            case 8:
+            case 7:
             case "end":
               return _context6.stop();
           }
