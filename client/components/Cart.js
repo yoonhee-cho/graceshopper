@@ -152,18 +152,14 @@ export class Cart extends React.Component {
       const subtotal = []
       return (
         <div className="books-list">
-          <h3 className="title">
-            <i>Cart</i>
-          </h3>
+          <h3 className="title">Cart</h3>
           <ul>
             {books.map(book => (
               <div key={book.id}>
                 <li className="single-book">
                   <h4>{book.title}</h4>
 
-                  <div>
-                    <i>{book.shortDescription}</i>
-                  </div>
+                  <div>{book.shortDescription}</div>
                   <div>Genre:{book.category}</div>
                   <div>Unit Price: $ {book.price / 100}</div>
                   <div>

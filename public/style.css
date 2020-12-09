@@ -1,6 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Barlow Condensed', sans-serif;
+  scroll-behavior: smooth;
+}
+
 body {
-  font-family: sans-serif;
-  background-image: url('slack-imgs.jpg');
+  font-family: 'Barlow Condensed', sans-serif;
   background-repeat: no-repeat;
   background-position: center center fixed;
   -webkit-background-size: cover;
@@ -9,6 +16,12 @@ body {
   background-attachment: fixed;
   background-size: auto;
   background-size: cover;
+}
+
+.title {
+  color: pink;
+  font-family: 'Barlow Condensed', sans-serif;
+  text-decoration: none;
 }
 input:focus {
   background-color: rgba(206, 216, 26, 0.748);
@@ -23,9 +36,7 @@ a {
   font-weight: bolder;
 }
 #app {
-  background-color: rgba(163, 155, 158, 0.892);
-  font-family: -apple-system, BlinkMacSystemFont, ‘Segoe UI’, Roboto, Oxygen,
-    Ubuntu, Cantarell, ‘Open Sans’, ‘Helvetica Neue’, sans-serif;
+  font-family: 'Barlow Condensed', sans-serif;
 }
 label {
   display: block;
@@ -40,7 +51,9 @@ form div {
 }
 .individual-book {
   border-style: groove;
-  background-origin: padding-box;
+  width: 30%;
+  padding: 20px;
+  /* background-origin: padding-box;  */
 }
 button.deleteButton {
   background-color: rgb(40, 185, 117);
@@ -69,9 +82,4 @@ button.deleteButton2 {
 .confirmation-page {
   color: rebeccapurple;
   text-size-adjust: 100px;
-}
-.title {
-  color: black;
-  text-indent: 2%;
-  text-decoration: underline;
 }

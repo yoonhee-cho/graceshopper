@@ -11,10 +11,7 @@ export const UserHome = props => {
 
   return (
     <div>
-      <h3 className="title">
-        {' '}
-        <i>Welcome {email ? email : 'user'}!</i>
-      </h3>
+      <h3 className="title"> Welcome {email ? email : 'user'}!</h3>
       <AllBooks
         loggedUserId={userId}
         isAdmin={isAdmin}

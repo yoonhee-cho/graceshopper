@@ -27,9 +27,7 @@ export class SingleBook extends React.Component {
     const isAdmin = this.props.isAdmin
     return (
       <div className="books-list">
-        <p className="title">
-          <i>Book Details</i>
-        </p>
+        <p className="title">Book Details</p>
         {singleBook &&
           authors && (
             <div>
@@ -47,9 +45,7 @@ export class SingleBook extends React.Component {
                       )}
                     </div>
                     <div>Price: $ {singleBook.price / 100}</div>
-                    <div>
-                      <i>{singleBook.shortDescription}</i>
-                    </div>
+                    <div>{singleBook.shortDescription}</div>
                     <div>Genre:{singleBook.category}</div>
                     <img src={singleBook.imageUrl} />
                     {loggedUserId ? (

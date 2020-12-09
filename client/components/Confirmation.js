@@ -14,9 +14,7 @@ export class Checkout extends React.Component {
     return (
       <div className="title">
         <p>OMG THANK YOU SOOO MUCH FOR YOUR ORDER!!!</p>
-        <div>
-          <i>one order of textbooks coming right up!</i>
-        </div>
+        <div>one order of textbooks coming right up!</div>
       </div>
     )
   }

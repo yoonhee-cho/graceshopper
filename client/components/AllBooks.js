@@ -23,9 +23,7 @@ export class AllBooks extends React.Component {
 
     return (
       <div className="books-list">
-        <h3 className="title">
-          <i>Books</i>
-        </h3>
+        <h1 className="title">Books </h1>
 
         {this.props.booksInReact.books &&
           this.props.booksInReact.books.map(book => (
@@ -59,9 +57,7 @@ export class AllBooks extends React.Component {
                       : `${author.firstName} ${author.lastName} , `
                 )}
               </div>
-              <div>
-                <i>{book.shortDescription}</i>
-              </div>
+              <div>{book.shortDescription}</div>
               <div>Genre:{book.category}</div>
 
               <div>Price: ${book.price / 100}</div>
