@@ -10,26 +10,53 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" />
+    <div className="login-container-div">
+      <main className="login-content-main">
+        <div className="login-content-div">
+          <div className="login-header-div">
+            <h1 className="login-header-logo">HYKM BOOKS</h1>
+          </div>
+
+          <h1 className="login-header-h1">
+            {displayName} to Your HYKM Book Account with Google
+          </h1>
+
+          <div className="login-form-div">
+            <form
+              className="login-form-form"
+              onSubmit={handleSubmit}
+              name={name}
+            >
+              <div>
+                <label htmlFor="email">
+                  <small>Email</small>
+                </label>
+                <input className="login-form-email" name="email" type="text" />
+              </div>
+
+              <div>
+                <label htmlFor="password">
+                  <small>Password</small>
+                </label>
+                <input
+                  className="login-form-pw"
+                  name="password"
+                  type="password"
+                />
+              </div>
+
+              <div className="sign-in-button-container">
+                <button className="sign-in-button" type="submit">
+                  {displayName}
+                </button>
+              </div>
+
+              {error && error.response && <div> {error.response.data} </div>}
+            </form>
+            <a href="/auth/google">{displayName} with Google</a>
+          </div>
         </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
-      <a href="/auth/google">{displayName} with Google</a>
+      </main>
     </div>
   )
 }
@@ -44,7 +71,7 @@ const AuthForm = props => {
 const mapLogin = state => {
   return {
     name: 'login',
-    displayName: 'Login',
+    displayName: 'Log In',
     error: state.user.error
   }
 }

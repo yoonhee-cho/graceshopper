@@ -152,7 +152,7 @@ export class Cart extends React.Component {
       const subtotal = []
       return (
         <div className="books-list">
-          <h3 className="title">Cart</h3>
+          {/* <h3 className="title">Cart</h3> */}
           <ul>
             {books.map(book => (
               <div key={book.id}>

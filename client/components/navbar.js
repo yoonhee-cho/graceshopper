@@ -6,37 +6,66 @@ import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn, isAdmin, userId}) => (
   <div>
-    <h1 className="title">HYKM BOOKS</h1>
-
     <nav>
       {isLoggedIn ? (
         isAdmin ? (
-          <div>
-            <Link to="/home">All Books</Link>
-            <Link to="/admin/users">All Users</Link>
-            <Link to={'/' + userId + '/cart'}>Cart</Link>
-            <a href="#" onClick={handleClick}>
-              Logout
-            </a>
-          </div>
+          <header>
+            <h1 className="logo">HYKM BOOKS</h1>
+            <ul className="menu">
+              <li>
+                <Link to="/home">AllBooks</Link>
+              </li>
+              <li>
+                <Link to="/admin/users">All Users</Link>
+              </li>
+              <li>
+                <Link to={'/' + userId + '/cart'}>Cart</Link>
+              </li>
+              <li>
+                <a href="#" onClick={handleClick}>
+                  Logout
+                </a>
+              </li>
+            </ul>
+          </header>
         ) : (
-          <div>
+          <header>
             {/* The navbar will show these links after you log in */}
-            <Link to="/home">Home</Link>
-            <Link to={'/' + userId + '/cart'}>Cart</Link>
-            <Link to="/home">AllBooks</Link>
-            <a href="#" onClick={handleClick}>
-              Logout
-            </a>
-          </div>
+            <h1 className="logo">HYKM BOOKS</h1>
+            <ul className="menu">
+              <li>
+                <Link to="/home">Home</Link>
+              </li>
+              <li>
+                <Link to="/home">AllBooks</Link>
+              </li>
+              <li>
+                <Link to={'/' + userId + '/cart'}>Cart</Link>
+              </li>
+              <li>
+                <a href="#" onClick={handleClick}>
+                  Logout
+                </a>
+              </li>
+            </ul>
+          </header>
         )
       ) : (
-        <div>
+        <header>
           {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-          <Link to="/books">All Books</Link>
-        </div>
+          <h1 className="logo">HYKM BOOKS</h1>
+          <ul className="menu">
+            <li>
+              <Link to="/books">All Books</Link>
+            </li>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+            <li>
+              <Link to="/signup">Sign Up</Link>
+            </li>
+          </ul>
+        </header>
       )}
     </nav>
     <hr />

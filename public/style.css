@@ -2,12 +2,53 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Maven Pro', sans-serif;
   scroll-behavior: smooth;
 }
+/* //------------HEADER----------------// */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 100px;
+  /* z-index: 1000; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  transition: 0.5s;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+header .logo {
+  color: black;
+  font-family: 'Maven Pro', sans-serif;
+  font-size: 24px;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-left: 2rem;
+}
+header ul {
+  position: relative;
+  display: flex;
+}
+header ul li {
+  position: relative;
+  list-style: none;
+}
+header ul li a {
+  position: relative;
+  display: inline-block;
+  margin: 0 15px;
+  color: black;
+  text-decoration: none;
+}
+
+/* //------------BODY----------------// */
 
 body {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Maven Pro', sans-serif;
   background-repeat: no-repeat;
   background-position: center center fixed;
   -webkit-background-size: cover;
@@ -17,48 +58,203 @@ body {
   background-size: auto;
   background-size: cover;
 }
-
-.title {
-  color: pink;
-  font-family: 'Barlow Condensed', sans-serif;
-  text-decoration: none;
-}
-input:focus {
-  background-color: rgba(206, 216, 26, 0.748);
-  outline-width: 0;
-}
 button:focus {
   outline-width: 0;
 }
 a {
   text-decoration: none;
   color: black;
-  font-weight: bolder;
 }
 #app {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Maven Pro', sans-serif;
 }
 label {
   display: block;
 }
 nav a {
   display: inline-block;
-  margin: 1em;
+  margin: 2em;
+  font-size: 20px;
+}
+.nav {
+  flex-direction: row;
+  background-color: aqua;
 }
 form div {
   margin: 1em;
   display: inline-block;
 }
+/* //------------ALL BOOKS----------------// */
+
+.books-list {
+  display: flex;
+  flex-direction: row;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-content: center;
+  padding: 150px;
+}
 .individual-book {
-  border-style: groove;
   width: 30%;
+  height: 30%;
+  align-content: center;
   padding: 20px;
-  /* background-origin: padding-box;  */
+  padding-top: 10px;
+  padding-bottom: 80px;
+}
+.book-title {
+  width: 80%;
+  font-weight: 900;
+  font-size: 20px;
+  flex-direction: row;
+  flex-flow: row wrap;
+  padding-top: 10px;
+  text-decoration: none;
+  color: black;
+}
+.price {
+  padding-top: 10px;
+}
+.author {
+  padding-top: 10px;
+}
+.individual-book img {
+  width: 40%;
+}
+.addToCartButton {
+  background-color: rgb(88, 174, 148);
+  font-size: 16px;
+  color: white;
+  width: 150px;
+  height: 40px;
+  border: none;
+  border: none;
+  border-radius: 5px;
+}
+/* //---------------------------SINGLE BOOK-------------------------------// */
+.single-product-container {
+  padding-top: 300px;
+  padding-left: 150px;
+  display: flex;
+  justify-content: center;
+}
+.single-product-content {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.product-image {
+  width: 50%;
+  flex-direction: row;
+  justify-content: center;
+}
+.product-image img {
+  width: 40%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 15px;
+}
+.product-detail {
+  width: 50%;
+  flex-direction: row;
+}
+.product-title {
+  font-size: 2.08rem;
+}
+.product-author {
+  padding-top: 10px;
+}
+.product-price {
+  padding-top: 20px;
+  font-size: 25px;
+  font-weight: bolder;
+}
+.product-genre {
+  padding-top: 40px;
+  font-size: 18px;
+}
+.product-description {
+  padding-top: 10px;
+  padding-bottom: 40px;
+  font-size: 18px;
+}
+/* //----------------------------CART--------------------------------// */
+
+/* //---------------------------LOG IN------------------------------// */
+.login-container-div {
+  padding-top: 200px;
+}
+
+.login-content-div {
+  padding: 10px;
+  margin: 50px auto;
+  width: 375px;
+  border-radius: 5px;
+  background-color: #fbfaf6;
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 4px 5px 0 rgba(0, 0, 0, 0.14),
+    0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+}
+.login-header-div {
+  width: 100%;
+  display: block;
+}
+.login-header-logo {
+  padding-top: 30px;
+  text-align: center;
+}
+.login-header-h1 {
+  padding-top: 15px;
+  font-size: 14px;
+  text-align: center;
+}
+.login-form-div {
+  padding-top: 30px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+}
+.login-form-form {
+  display: grid;
+  grid-template-columns: 1ft;
+  grid-template-rows: auto;
+  justify-content: center;
+}
+.login-form-email {
+  width: 300px;
+  height: 30px;
+  border-radius: 5px;
+}
+.login-form-pw {
+  width: 300px;
+  height: 30px;
+  border-radius: 5px;
+}
+.sign-in-button {
+  background-color: rgb(88, 174, 148);
+  font-size: 16px;
+  color: white;
+  height: 25px;
+  width: 300px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+}
+input:focus {
+  background-color: rgb(225, 245, 240);
+  outline-width: 0;
+}
+/* //---------------------------------------------------------------// */
+
+.minusplus {
+  background-color: rgb(47, 161, 127);
+  color: white;
+  height: 25px;
 }
 button.deleteButton {
   background-color: rgb(40, 185, 117);
   color: white;
-  font-family: ‘Segoe UI’, Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Maven Pro', sans-serif;
   width: 150px;
   height: 25px;
   float: right;
@@ -66,15 +262,11 @@ button.deleteButton {
 button.deleteButton2 {
   background-color: rgb(47, 161, 127);
   color: white;
-  font-family: ‘Segoe UI’, Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Maven Pro', sans-serif;
   width: 150px;
   height: 24px;
 }
-.minusplus {
-  background-color: rgb(47, 161, 127);
-  color: white;
-  height: 25px;
-}
+
 .fa-shopping-cart {
   color: rgb(9, 145, 55);
   font-size: 25px;

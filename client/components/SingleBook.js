@@ -26,47 +26,51 @@ export class SingleBook extends React.Component {
     const loggedUserId = this.props.loggedInUserId
     const isAdmin = this.props.isAdmin
     return (
-      <div className="books-list">
-        <p className="title">Book Details</p>
+      <div className="single-product-container">
         {singleBook &&
           authors && (
             <div>
-              <ul>
-                <div key={singleBook.id}>
-                  <li className="single-book">
-                    <h4>{singleBook.title}</h4>
-                    <div>
-                      by{' '}
-                      {authors.map(
-                        (author, idx) =>
-                          idx === authors.length - 1
-                            ? `${author.firstName} ${author.lastName} `
-                            : `${author.firstName} ${author.lastName} , `
-                      )}
-                    </div>
-                    <div>Price: $ {singleBook.price / 100}</div>
-                    <div>{singleBook.shortDescription}</div>
-                    <div>Genre:{singleBook.category}</div>
-                    <img src={singleBook.imageUrl} />
-                    {loggedUserId ? (
-                      <AddToCart book={singleBook} />
-                    ) : (
-                      <Link to="/login">Login to Add to Cart</Link>
-                    )}
-                    {isAdmin ? (
-                      <div>
-                        <button
-                          className="minusplus"
-                          onClick={this.handleClick}
-                        >
-                          Delete Book
-                        </button>
-                        <UpdateBook book={singleBook} />{' '}
-                      </div>
-                    ) : null}
-                  </li>
+              <div className="single-product-content" key={singleBook.id}>
+                <div className="product-image">
+                  <img src={singleBook.imageUrl} />
                 </div>
-              </ul>
+
+                <div className="product-detail">
+                  <h4 className="product-title">{singleBook.title}</h4>
+                  <div className="product-author">
+                    by{' '}
+                    {authors.map(
+                      (author, idx) =>
+                        idx === authors.length - 1
+                          ? `${author.firstName} ${author.lastName} `
+                          : `${author.firstName} ${author.lastName} , `
+                    )}
+                  </div>
+                  <div className="product-price">
+                    $ {singleBook.price / 100}
+                  </div>
+                  <div className="product-genre">
+                    Genre : {singleBook.category}
+                  </div>
+                  <div className="product-description">
+                    Product Details : {singleBook.shortDescription}
+                  </div>
+
+                  {loggedUserId ? (
+                    <AddToCart book={singleBook} />
+                  ) : (
+                    <Link to="/login">Login to Add to Cart</Link>
+                  )}
+                  {isAdmin ? (
+                    <div>
+                      <button className="minusplus" onClick={this.handleClick}>
+                        Delete Book
+                      </button>
+                      <UpdateBook book={singleBook} />{' '}
+                    </div>
+                  ) : null}
+                </div>
+              </div>
             </div>
           )}
       </div>

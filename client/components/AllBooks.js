@@ -1,9 +1,7 @@
 import React from 'react'
 import {fetchBooks} from '../store/books'
 import {connect} from 'react-redux'
-
 import AddToCart from './AddToCart'
-
 import {Link} from 'react-router-dom'
 
 export class AllBooks extends React.Component {
@@ -23,11 +21,10 @@ export class AllBooks extends React.Component {
 
     return (
       <div className="books-list">
-        <h1 className="title">Books </h1>
-
         {this.props.booksInReact.books &&
           this.props.booksInReact.books.map(book => (
             <div key={book.id} className="individual-book">
+              <img src={book.imageUrl} />
               {loggedUserId ? (
                 isAdmin ? (
                   <Link
@@ -36,20 +33,20 @@ export class AllBooks extends React.Component {
                     isAdmin={isAdmin}
                     className="minusplus"
                   >
-                    <h4>Book Title : {book.title}</h4>
+                    <h4 className="book-title">{book.title}</h4>
                   </Link>
                 ) : (
                   <Link to={`/books/${book.id}`} loggedUserId={loggedUserId}>
-                    <h4>Book Title : {book.title}</h4>
+                    <h4 className="book-title">{book.title}</h4>
                   </Link>
                 )
               ) : (
                 <Link to={`/books/${book.id}`}>
-                  <h4>Book Title : {book.title}</h4>
+                  <h4 className="book-title">{book.title}</h4>
                 </Link>
               )}
 
-              <div>
+              <div className="author">
                 {book.authors.map(
                   (author, idx) =>
                     idx === book.authors.length - 1
@@ -57,12 +54,7 @@ export class AllBooks extends React.Component {
                       : `${author.firstName} ${author.lastName} , `
                 )}
               </div>
-              <div>{book.shortDescription}</div>
-              <div>Genre:{book.category}</div>
-
-              <div>Price: ${book.price / 100}</div>
-
-              <img src={book.imageUrl} />
+              <div className="price">${book.price / 100}</div>
 
               <br />
               {loggedUserId || isLoggedIn ? (
