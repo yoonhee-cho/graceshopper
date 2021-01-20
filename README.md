@@ -1,8 +1,10 @@
-# HYKM Bookstore
+## HYKM Bookstore
 
 _Your Hub for Oxford International Primary School Textbooks_
 
-Whether you're a child, a parent, or you just wanna be a kid again, this is your place to buy textbooks
+HYKM Bookstore is a mock e-commerce website to sell textbooks. Whether you're a child, a parent, or you just wanna be a kid again, this is your place to buy textbooks! Users can browse textbooks, add books to their cart, update their cart, and navigate to a checkout page.
+
+![screenshot](https://github.com/yoonhee-cho/graceshopper?organization=yoonhee-cho&organization=yoonhee-cho/Screen Shot 2021-01-19 at 8.19.16 PM.png)
 
 ## Setup
 

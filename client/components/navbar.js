@@ -13,7 +13,7 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin, userId}) => (
             <h1 className="logo">HYKM BOOKS</h1>
             <ul className="menu">
               <li>
-                <Link to="/home">AllBooks</Link>
+                <Link to="/home">All Books</Link>
               </li>
               <li>
                 <Link to="/admin/users">All Users</Link>
@@ -40,7 +40,7 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin, userId}) => (
               </li>
               <li>
                 <Link className="link" to="/home">
-                  AllBooks
+                  All Books
                 </Link>
               </li>
               <li>

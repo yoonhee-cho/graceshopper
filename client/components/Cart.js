@@ -248,8 +248,8 @@ export class Cart extends React.Component {
             <div className="cart-title-container">
               <h3>Order Summary</h3>
             </div>
+            <div className="order-total">Order Total: $ 62.98 </div>
             <div className="cart-checkout-button-container">
-              <div>Order Total: $ </div>
               <NavLink
                 to={{
                   pathname: '/checkout',

@@ -187,6 +187,7 @@ label {
 }
 /* //----------------------------CART--------------------------------// */
 .cart-container {
+  padding-top: 20px;
   display: flex;
   align-items: flex-start;
 }
@@ -197,16 +198,24 @@ label {
   flex: 2;
 }
 .sub-total-box {
+  display: flex;
+  flex-direction: column;
   border: 1px solid #ccc;
   width: 30vh;
   margin: 200px;
   flex: 1;
+  text-align: center;
 }
 .cart-checkout-button-container {
+  flex: 1;
   display: flex;
   justify-content: center;
   padding-top: 50px;
   padding-bottom: 50px;
+}
+.order-total {
+  padding-top: 30px;
+  margin: 10px;
 }
 .cart-title-container {
   font-family: 'Maven Pro', sans-serif;
