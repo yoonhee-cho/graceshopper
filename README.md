@@ -11,11 +11,22 @@ HYKM Bookstore is a mock e-commerce website to sell textbooks. Whether you're a 
 ## Setup
 
 ```
+git clone https://github.com/yoonhee-cho/graceshopper.git
+//make sure you have psql command line installed createdb graceshopper
+
 npm install
 npm run seed
 npm run start-dev
 ```
+Google OAuth setup:
+- Obtain an OAuth Client Id from Google
+- Create a secrets.js file in the root directory and add your Google info:
 
+```
+process.env.GOOGLE_CLIENT_ID = "YOUR_GOOGLE_CLIENT_ID"
+process.env.GOOGLE_CLIENT_SECRET = "YOUR_GOOGLE_CLIENT_SECRET"
+process.env.GOOGLE_CALLBACK = "YOUR_GOOGLE_CALLBACK"
+```
 ```
 created by :
 
