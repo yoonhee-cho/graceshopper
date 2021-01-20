@@ -6,9 +6,11 @@ Whether you're a child, a parent, or you just wanna be a kid again, this is your
 
 ## Setup
 
+```
 npm install
 npm run seed
 npm run start-dev
+```
 
 ```
 created by :
