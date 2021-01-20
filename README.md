@@ -7,6 +7,13 @@ HYKM Bookstore is a mock e-commerce website to sell textbooks. Whether you're a 
 <img width="1534" alt="Screen Shot 2021-01-19 at 8 37 28 PM" src="https://user-images.githubusercontent.com/42276116/105115201-6588f200-5a96-11eb-93ca-aad5bc1c49b3.png">
 <img width="1537" alt="Screen Shot 2021-01-19 at 8 37 47 PM" src="https://user-images.githubusercontent.com/42276116/105115208-66ba1f00-5a96-11eb-8e31-5bc2677ccf57.png">
 
+## Tech Stack
+
+Frontend: React, Redux
+
+Backend: Node.js, Express, Postgres, Sequelize, Passport.js
+
+Testing: Mocha, Chai
 
 ## Setup
 
