@@ -525,6 +525,8 @@ var AllBooks = /*#__PURE__*/function (_React$Component) {
       var isAdmin = this.props.isAdmin;
       var isLoggedIn = this.props.isLoggedIn;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "book-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "books-list"
       }, this.props.booksInReact.books && this.props.booksInReact.books.map(function (book) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -551,7 +553,7 @@ var AllBooks = /*#__PURE__*/function (_React$Component) {
         }, book.title)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "author"
         }, book.authors.map(function (author, idx) {
-          return idx === book.authors.length - 1 ? "".concat(author.firstName, " ").concat(author.lastName, " ") : "".concat(author.firstName, " ").concat(author.lastName, " , ");
+          return idx === book.authors.length - 1 ? "".concat(author.firstName, " ").concat(author.lastName, " ") : "".concat(author.firstName, " ").concat(author.lastName, ", ");
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "price"
         }, "$", book.price / 100), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), loggedUserId || isLoggedIn ? isAdmin ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AddToCart__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -567,7 +569,7 @@ var AllBooks = /*#__PURE__*/function (_React$Component) {
         }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
           to: "/login"
         }, "Log in to add to cart"));
-      }));
+      })));
     }
   }]);
 
@@ -963,13 +965,52 @@ var Cart = /*#__PURE__*/function (_React$Component) {
         var books = this.props.cart;
         var subtotal = [];
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "books-list"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, books.map(function (book) {
+          className: "cart-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+          className: "cart-box"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "cart-title-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Cart Items")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, books.map(function (book) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            key: book.id
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-            className: "single-book"
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, book.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, book.shortDescription), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Genre:", book.category), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Unit Price: $ ", book.price / 100), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Total Price: $", ' ', _this2.state.quantities.map(function (item) {
+            key: book.id,
+            className: "cart-cell"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "cart-image-container"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+            src: book.imageUrl
+          })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "cart-rest-container"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+            className: "cart-book-title"
+          }, book.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "cart-book-unit-price"
+          }, "$ ", book.price / 100), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "cart-quantity"
+          }, "Qty :", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+            type: "button",
+            className: "minusplus",
+            onClick: _this2.handleClickMinus.bind(_this2, book.id)
+          }, "-"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "qty-input"
+          }, _this2.state.loading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_loadingSpinner__WEBPACK_IMPORTED_MODULE_4__["default"], null) : _this2.state.quantities.map(function (item) {
+            if (Array.isArray(item)) {
+              if (item[0].bookId === book.id) {
+                return item[0].quantity;
+              }
+            } else if (item.bookId === book.id) {
+              return item.quantity;
+            }
+          })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+            type: "button",
+            className: "minusplus",
+            onClick: _this2.handleClick.bind(_this2, book.id)
+          }, ' ', "+"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+            type: "button",
+            className: "update-quantity-button",
+            onClick: _this2.handleUpdate.bind(_this2, book)
+          }, "Update Quantity")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "cart-book-total-price"
+          }, "Total Price: $", ' ', _this2.state.quantities.map(function (item) {
             if (Array.isArray(item)) {
               if (item[0].bookId === book.id) {
                 subtotal.push(item[0].totalPrice / 100);
@@ -979,42 +1020,31 @@ var Cart = /*#__PURE__*/function (_React$Component) {
               subtotal.push(item.totalPrice / 100);
               return item.totalPrice / 100;
             }
-          })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Quantity:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-            className: "minusplus",
-            onClick: _this2.handleClickMinus.bind(_this2, book.id)
-          }, "-"), _this2.state.loading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_loadingSpinner__WEBPACK_IMPORTED_MODULE_4__["default"], null) : _this2.state.quantities.map(function (item) {
-            if (Array.isArray(item)) {
-              if (item[0].bookId === book.id) {
-                return item[0].quantity;
-              }
-            } else if (item.bookId === book.id) {
-              return item.quantity;
-            }
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-            className: "minusplus",
-            onClick: _this2.handleClick.bind(_this2, book.id)
-          }, "+"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-            className: "deleteButton2",
-            onClick: _this2.handleUpdate.bind(_this2, book)
-          }, "Update Quantity"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-            className: "deleteButton2",
+          })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "remove-button-container"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+            type: "button",
+            className: "remove-from-cart-button",
             onClick: _this2.handleRemove(book)
-          }, "Remove from Cart")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-            src: book.imageUrl
-          })));
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["NavLink"], {
+          }, "Remove from Cart"))));
+        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+          className: "sub-total-box"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "cart-title-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Order Summary")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "cart-checkout-button-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Order Total: $ "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["NavLink"], {
           to: {
             pathname: '/checkout',
             prices: subtotal,
             books: books,
             userId: Number(this.props.match.params.userId)
           },
-          className: "minusplus"
+          className: "cart-checkout-button"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          className: "minusplus"
-        }, "Continue to Checkout"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DeleteAllBooksFromCart__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          userId: userId
-        })));
+          type: "button",
+          className: "cart-checkout-button"
+        }, "Continue to Checkout")))));
       }
     }
   }]);
@@ -1840,12 +1870,15 @@ var Navbar = function Navbar(_ref) {
   }, "Logout")))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
     className: "logo"
   }, "HYKM BOOKS"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "menu"
+    className: "menu-container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+    className: "link",
     to: "/home"
   }, "Home")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+    className: "link",
     to: "/home"
   }, "AllBooks")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+    className: "link",
     to: '/' + userId + '/cart'
   }, "Cart")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "#",

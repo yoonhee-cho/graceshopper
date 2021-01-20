@@ -2,7 +2,7 @@
 
 _Your Hub for Oxford International Primary School Textbooks_
 
-Whether you're a child, a parent, or you just wanna be a kid again, this is your place to buy textbooks...
+Whether you're a child, a parent, or you just wanna be a kid again, this is your place to buy textbooks
 
 ## Setup
 

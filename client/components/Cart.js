@@ -150,78 +150,106 @@ export class Cart extends React.Component {
     } else {
       const books = this.props.cart
       const subtotal = []
-      return (
-        <div className="books-list">
-          {/* <h3 className="title">Cart</h3> */}
-          <ul>
-            {books.map(book => (
-              <div key={book.id}>
-                <li className="single-book">
-                  <h4>{book.title}</h4>
 
-                  <div>{book.shortDescription}</div>
-                  <div>Genre:{book.category}</div>
-                  <div>Unit Price: $ {book.price / 100}</div>
-                  <div>
-                    Total Price: ${' '}
-                    {this.state.quantities.map(item => {
-                      if (Array.isArray(item)) {
-                        if (item[0].bookId === book.id) {
-                          subtotal.push(item[0].totalPrice / 100)
-                          return item[0].totalPrice / 100
-                        }
-                      } else if (item.bookId === book.id) {
-                        subtotal.push(item.totalPrice / 100)
-                        return item.totalPrice / 100
-                      }
-                    })}
+      return (
+        <div className="cart-container">
+          <section className="cart-box">
+            <div className="cart-title-container">
+              <h3>Cart Items</h3>
+            </div>
+
+            <div>
+              {books.map(book => (
+                <div key={book.id} className="cart-cell">
+                  <div className="cart-image-container">
+                    <img src={book.imageUrl} />
                   </div>
-                  <div>
-                    Quantity:
-                    <button
-                      className="minusplus"
-                      onClick={this.handleClickMinus.bind(this, book.id)}
-                    >
-                      -
-                    </button>
-                    {this.state.loading ? (
-                      <LoadingSpinner />
-                    ) : (
-                      this.state.quantities.map(item => {
+
+                  <div className="cart-rest-container">
+                    <h4 className="cart-book-title">{book.title}</h4>
+                    <div className="cart-book-unit-price">
+                      $ {book.price / 100}
+                    </div>
+
+                    <div className="cart-quantity">
+                      Qty :
+                      <button
+                        type="button"
+                        className="minusplus"
+                        onClick={this.handleClickMinus.bind(this, book.id)}
+                      >
+                        -
+                      </button>
+                      <div className="qty-input">
+                        {this.state.loading ? (
+                          <LoadingSpinner />
+                        ) : (
+                          this.state.quantities.map(item => {
+                            if (Array.isArray(item)) {
+                              if (item[0].bookId === book.id) {
+                                return item[0].quantity
+                              }
+                            } else if (item.bookId === book.id) {
+                              return item.quantity
+                            }
+                          })
+                        )}
+                      </div>
+                      <button
+                        type="button"
+                        className="minusplus"
+                        onClick={this.handleClick.bind(this, book.id)}
+                      >
+                        {' '}
+                        +
+                      </button>
+                      <button
+                        type="button"
+                        className="update-quantity-button"
+                        onClick={this.handleUpdate.bind(this, book)}
+                      >
+                        Update Quantity
+                      </button>
+                    </div>
+
+                    <div className="cart-book-total-price">
+                      Total Price: ${' '}
+                      {this.state.quantities.map(item => {
                         if (Array.isArray(item)) {
                           if (item[0].bookId === book.id) {
-                            return item[0].quantity
+                            subtotal.push(item[0].totalPrice / 100)
+                            return item[0].totalPrice / 100
                           }
                         } else if (item.bookId === book.id) {
-                          return item.quantity
+                          subtotal.push(item.totalPrice / 100)
+                          return item.totalPrice / 100
                         }
-                      })
-                    )}
-                    <button
-                      className="minusplus"
-                      onClick={this.handleClick.bind(this, book.id)}
-                    >
-                      +
-                    </button>
-                    <button
-                      className="deleteButton2"
-                      onClick={this.handleUpdate.bind(this, book)}
-                    >
-                      Update Quantity
-                    </button>
-                    <button
-                      className="deleteButton2"
-                      onClick={this.handleRemove(book)}
-                    >
-                      Remove from Cart
-                    </button>
-                  </div>
+                      })}
+                    </div>
 
-                  <img src={book.imageUrl} />
-                </li>
-              </div>
-            ))}
-            <div>
+                    <div className="remove-button-container">
+                      <button
+                        type="button"
+                        className="remove-from-cart-button"
+                        onClick={this.handleRemove(book)}
+                      >
+                        Remove from Cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+
+              {/* <DeleteAllBooksFromCart userId={userId} /> */}
+            </div>
+          </section>
+
+          <section className="sub-total-box">
+            <div className="cart-title-container">
+              <h3>Order Summary</h3>
+            </div>
+            <div className="cart-checkout-button-container">
+              <div>Order Total: $ </div>
               <NavLink
                 to={{
                   pathname: '/checkout',
@@ -229,13 +257,14 @@ export class Cart extends React.Component {
                   books: books,
                   userId: Number(this.props.match.params.userId)
                 }}
-                className="minusplus"
+                className="cart-checkout-button"
               >
-                <button className="minusplus">Continue to Checkout</button>
+                <button type="button" className="cart-checkout-button">
+                  Continue to Checkout
+                </button>
               </NavLink>
             </div>
-            <DeleteAllBooksFromCart userId={userId} />
-          </ul>
+          </section>
         </div>
       )
     }

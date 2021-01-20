@@ -32,15 +32,21 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin, userId}) => (
           <header>
             {/* The navbar will show these links after you log in */}
             <h1 className="logo">HYKM BOOKS</h1>
-            <ul className="menu">
+            <ul className="menu-container">
               <li>
-                <Link to="/home">Home</Link>
+                <Link className="link" to="/home">
+                  Home
+                </Link>
               </li>
               <li>
-                <Link to="/home">AllBooks</Link>
+                <Link className="link" to="/home">
+                  AllBooks
+                </Link>
               </li>
               <li>
-                <Link to={'/' + userId + '/cart'}>Cart</Link>
+                <Link className="link" to={'/' + userId + '/cart'}>
+                  Cart
+                </Link>
               </li>
               <li>
                 <a href="#" onClick={handleClick}>
